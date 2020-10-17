@@ -1,20 +1,12 @@
 <template>
   <div id="app">
-    <page-tab-bar/>
-    <!-- <home-tab-bar/> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import PageTabBar from '@/components/content/tabbar/PageTabBar'
-import HomeTabBar from '@/components/content/tabbar/HomeTabBar'
-
 export default {
-  name: 'app',
-  components: {
-    PageTabBar,
-    HomeTabBar
-  }
+  name: 'app'
 }
 </script>
 

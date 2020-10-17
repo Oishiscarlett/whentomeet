@@ -22,6 +22,7 @@ export default {
     box-shadow: 1px 1px 3px rgb(167, 205, 255);
 
     position: fixed;
+    z-index: 100;
   }
 
   #web-icon {

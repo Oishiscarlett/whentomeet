@@ -19,14 +19,14 @@
       <!-- 登录 -->
       <div class="login-in" v-else>
         <tab-bar-item id="use-name" path='/useinfo'>
-          <el-dropdown>
+          <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
               账户名<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>个人中心</el-dropdown-item>
-              <el-dropdown-item divided>我创建的事件</el-dropdown-item>
-              <el-dropdown-item divided>我收到的邀请</el-dropdown-item>
+              <el-dropdown-item command='/useinfo'>个人中心</el-dropdown-item>
+              <el-dropdown-item command='/useinfo' divided>我创建的事件</el-dropdown-item>
+              <el-dropdown-item command='/useinfo' divided>我收到的邀请</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </tab-bar-item>
@@ -48,6 +48,9 @@ export default {
   methods: {
     itemClick (path) {
       this.$router.push(path);
+    },
+    handleCommand(command) {
+        this.$router.push(command);
     }
   }
 }
@@ -67,12 +70,13 @@ export default {
       width: 400px;
       display: flex;
       align-items: center;
-      margin: 0 0 0 150px;
+      margin-left: 200px;
       color: #409EFF;
   }
 
-  #login{
-    margin: 0 0 0 40px;
+  .unlogin {
+    margin-left: 50px;
+    width: 160px;
   }
 
   #sign-up{
@@ -94,8 +98,12 @@ export default {
     text-align: center;
   }
 
+  .login-in {
+    margin-left: 50px;
+    width: 300px;
+  }
+
   #use-name { 
-    margin: 0 0 0 40px;
     color: #409EFF;
   }
 
