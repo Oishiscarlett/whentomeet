@@ -13,15 +13,21 @@ const useinfo = {
 
     // post提交
     resetNickname(params) {
-        return axios.post(base.baseUrl + '/userinfo/nickname', params);
+        return axios.post(base.baseUrl + '/userinfo/nickname', null, {
+            params: params
+        });
     },
     resetPsw(params) {
-        return axios.post(base.baseUrl + '/userinfo/pwd', params);
+        return axios.post(base.baseUrl + '/userinfo/pwd', null, {
+            params: params
+        });
     },
 
     // patch
     resetEmail(params) {
-        return axios.post(base.baseUrl + '/userinfo/email', params);
+        return axios.post(base.baseUrl + '/userinfo/email', null, {
+            params: params
+        });
     }
 }
 

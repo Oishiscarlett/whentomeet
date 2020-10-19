@@ -8,10 +8,14 @@ import axios from '@/utils/axios'; // 导入创建的axios实例
 const login = {    
     // post提交
     loginByPhone(params) {
-        return axios.post(base.baseUrl + '/login/phone', params);
+        return axios.post(base.baseUrl + '/login/phone', null, {
+            params: params
+        });
     },
     loginByEmail(params) {
-        return axios.post(base.baseUrl + '/login/email', params);
+        return axios.post(base.baseUrl + '/login/email', null, {
+            params: params
+        });
     }
 }
 
