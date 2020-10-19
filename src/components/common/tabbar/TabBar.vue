@@ -22,6 +22,7 @@ export default {
     box-shadow: 1px 1px 3px rgb(167, 205, 255);
 
     position: fixed;
+    top: 0;
     z-index: 100;
   }
 

@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1393132",
+      "name": "完成",
+      "font_class": "wancheng",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "16821441",
+      "name": "确认 圆 正确 对勾 提交 成功 完成",
+      "font_class": "querenyuanzhengqueduigoutijiaochenggongwancheng",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "17245708",
+      "name": "确认 圆 正确 对勾 提交 成功 完成 ",
+      "font_class": "querenyuanzhengqueduigoutijiaochenggongwancheng-copy",
+      "unicode": "e506",
+      "unicode_decimal": 58630
+    }
+  ]
+}

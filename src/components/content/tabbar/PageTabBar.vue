@@ -1,5 +1,5 @@
 <template>
-  <tab-bar>
+  <tab-bar class="tab-bar-color">
       <div id="web-name" slot="web-icon">When2Meet</div>
       <div class="page-tab-wrapper">
         <tab-bar-item path='/create'>创建事件</tab-bar-item>
@@ -57,6 +57,10 @@ export default {
 </script>
 
 <style scoped>
+  .tab-bar-color {
+    background-color: white;
+  }
+
   #web-name{
     line-height: 70px;
     text-align: center;
