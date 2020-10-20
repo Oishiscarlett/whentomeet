@@ -7,6 +7,12 @@ const SetPsw = () => import('../views/reset_psw/SetPsw')
 const SetSuccess = () => import('../views/reset_psw/SetSuccess')
 
 Vue.use(VueRouter)
+const originalPush = VueRouter.prototype.push
+// 重写了原型上的push方法，统一的处理了错误信息
+// 解决了路由跳转到相同页面时抛出的错误
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const routes = [
   {

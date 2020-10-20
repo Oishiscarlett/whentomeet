@@ -6,10 +6,13 @@
 import login from '@/api/login';
 // 个人信息模块接口
 import userinfo from '@/api/userinfo';
+// 验证码模块接口
+import verifycode from '@/api/verifycode';
 
 
 // 导出接口
 export default {    
     login,
-    userinfo
+    userinfo,
+    verifycode
 }

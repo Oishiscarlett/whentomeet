@@ -1,11 +1,11 @@
 /**
- * useinfo模块接口列表
+ * userinfo模块接口列表
  */
 
 import base from './base'; // 导入接口域名列表
 import axios from '@/utils/axios'; // 导入创建的axios实例
 
-const useinfo = {  
+const userinfo = {  
     // get
     getUserInfo () {        
         return axios.get(base.baseUrl + '/userinfo');    
@@ -31,4 +31,4 @@ const useinfo = {
     }
 }
 
-export default useinfo;
+export default userinfo;
