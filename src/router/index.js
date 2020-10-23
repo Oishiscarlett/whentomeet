@@ -38,7 +38,15 @@ const routes = [
   {
     path: '/resetpsw/success',
     component: SetSuccess
-  }
+  },
+  {
+    path: '/login',
+    component: Login
+  },
+  {
+    path: '/faqs',
+    component: Faqs
+  },
 ]
 
 const router = new VueRouter({
