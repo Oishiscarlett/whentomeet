@@ -186,21 +186,6 @@ export default {
       this.$router.push(path);
     },
 
-    /* getVCode() {
-      this.checkPhoneNumber();
-
-      //后台需传入的参数
-      let data = {
-        phoneNumber: this.registerForm.phoneNumber,
-        type: this.vCodeType,
-      };
-      this.$ajax.post("/sms/getVerificationCode", data, (res) => {
-        if (res.vCode == 0) {
-          this.registerForm.vCode = res.data.data;
-        }
-      });
-    }, */
-
     // 获取短信验证码
     getVCode() {
       var regPhone = /[0-9]{11}/;
@@ -331,10 +316,10 @@ export default {
 .base {
   border-width: 0px;
   position: absolute;
-  left: 517px;
-  top: 160px;
-  width: 886px;
-  height: 719px;
+  left: 400px;
+  top: 130px;
+  width: 750px;
+  height: 600px;
   display: flex;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
@@ -343,9 +328,9 @@ export default {
 .title1 {
   border-width: 0px;
   position: absolute;
-  left: 573px;
-  top: 194px;
-  width: 390px;
+  left: 450px;
+  top: 150px;
+  width: 310px;
   height: 63px;
   /*  background: inherit;
   background-color: rgba(255, 255, 255, 1); */
@@ -382,9 +367,9 @@ export default {
 .title2 {
   border-width: 0px;
   position: absolute;
-  left: 987px;
-  top: 194px;
-  width: 390px;
+  left: 790px;
+  top: 150px;
+  width: 310px;
   height: 63px;
   box-sizing: border-box;
   //border-bottom-width: 6px;
@@ -462,8 +447,8 @@ export default {
 .register {
   border-width: 0px;
   position: absolute;
-  left: 563px;
-  top: 306px;
+  left: 450px;
+  top: 250px;
   width: 794px;
   height: 467px;
   display: flex;
@@ -478,7 +463,7 @@ export default {
   height: 34px;
   font-family: "Arial Negreta", "Arial Normal", "Arial";
   font-style: normal;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
 }
 
@@ -487,7 +472,7 @@ export default {
   position: absolute;
   left: 200px;
   top: -40px;
-  width: 538px;
+  width: 400px;
   height: 73px;
 }
 
@@ -507,7 +492,7 @@ export default {
   outline: 0;
   padding: 0 15px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  width: 538px;
+  width: 400px;
 }
 
 .phone_email .el-form-item__error,
@@ -542,7 +527,7 @@ export default {
   text-align: right;
   vertical-align: middle;
   float: left;
-  font-size: 30px;
+  font-size: 25px;
   color: #333333;
   line-height: 40px;
   padding: 0 12px 0 0;
@@ -554,7 +539,7 @@ export default {
   position: absolute;
   left: 200px;
   top: -40px;
-  width: 538px;
+  width: 400px;
   height: 73px;
 }
 
@@ -574,7 +559,7 @@ export default {
   outline: 0;
   padding: 0 15px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  width: 538px;
+  width: 400px;
 }
 
 .pwd .el-form-item__error,
@@ -606,21 +591,21 @@ export default {
 .btn_login,
 .btn_register {
   position: absolute;
-  left: 205px;
-  top: 380px;
-  width: 401px;
-  height: 64px;
+  left: 180px;
+  top: 350px;
+  width: 300px;
+  height: 50px;
   font-family: "Arial Negreta", "Arial Normal", "Arial";
   font-style: normal;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
 }
 
 .pwd_forgot {
   border-width: 0px;
   position: absolute;
-  left: 690px;
-  top: 250px;
+  left: 550px;
+  top: 280px;
   width: 125px;
   height: 21px;
   display: flex;
@@ -634,8 +619,8 @@ export default {
 .tip {
   border-width: 0px;
   position: absolute;
-  left: 320px;
-  top: 350px;
+  left: 250px;
+  top: 320px;
   width: 200px;
   height: 21px;
   display: flex;

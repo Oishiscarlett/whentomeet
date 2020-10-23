@@ -64,31 +64,31 @@ export default {
 .title {
   border-width: 0px;
   position: absolute;
-  left: 370px;
-  top: 250px;
+  left: 270px;
+  top: 200px;
   width: 228px;
   height: 40px;
   display: flex;
   font-family: "Arial Negreta", "Arial Normal", "Arial";
   font-weight: 700;
   font-style: normal;
-  font-size: 35px;
+  font-size: 32px;
   letter-spacing: 3px;
   color: #797979;
 }
 
 .qa{
     position: absolute;
-    left: 370px;
-    top: 385px;
+    left: 270px;
+    top: 305px;
     .el-collapse-item__header
     {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
     }
     .el-collapse-item__content {
         padding-bottom: 25px;
-        font-size: 16px;
+        font-size: 15px;
         color: #303133;
         line-height: 1.769230769230769;
     }
