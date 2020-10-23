@@ -9,7 +9,7 @@
 
 <script>
 import PageTabBar from '../components/content/tabbar/PageTabBar'
-import LoginCpn from '../components/logincpn'
+import LoginCpn from '../components/content/logincpn'
 export default {
     name: 'login',
     components: {

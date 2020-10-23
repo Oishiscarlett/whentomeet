@@ -5,6 +5,8 @@ const Home = () => import('../views/Home')
 const ResetPswVerify = () => import('../views/reset_psw/PhoneVerify')
 const SetPsw = () => import('../views/reset_psw/SetPsw')
 const SetSuccess = () => import('../views/reset_psw/SetSuccess')
+const Login = () => import('../views/Login')
+const Faqs = () => import('../views/Faqs')
 
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push

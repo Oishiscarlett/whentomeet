@@ -25,7 +25,7 @@
           <div class="help-more">
             <span>
               更多内容请点击
-              <router-link to='/help'>帮助</router-link>
+              <router-link to='/faqs'>帮助</router-link>
             </span>
           </div>
         </div>

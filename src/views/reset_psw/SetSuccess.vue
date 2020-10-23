@@ -5,7 +5,7 @@
         <div class="success-wrapper">
           <i class="iconfont icon-querenyuanzhengqueduigoutijiaochenggongwancheng-copy"></i>
           <div class="tips">重置成功！</div>
-          <div class="link">点击返回<router-link to="/usercenter">个人中心</router-link></div>
+          <div class="link">点击返回<router-link to="/userinfo">个人中心</router-link></div>
         </div>
       </reset-psw>
     </div>

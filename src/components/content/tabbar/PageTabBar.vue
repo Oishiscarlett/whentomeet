@@ -1,10 +1,12 @@
 <template>
   <tab-bar class="tab-bar-color">
-      <div id="web-name" slot="web-icon">When2Meet</div>
+      <div id="web-name" slot="web-icon">
+        <router-link to="/">When2Meet</router-link>
+      </div>
       <div class="page-tab-wrapper">
         <tab-bar-item path='/create'>创建事件</tab-bar-item>
         <tab-bar-item path='/result'>查看结果</tab-bar-item>
-        <tab-bar-item path='help'>帮助</tab-bar-item>
+        <tab-bar-item path='/faqs'>帮助</tab-bar-item>
       </div>
       <!-- 判断是否登录 -->
       <!-- 未登录 -->
@@ -12,7 +14,7 @@
         <el-button type="primary" size="medium" id="login" @click="itemClick('/login')">
           登录
         </el-button>
-        <el-button size="medium" id="sign-up" @click="itemClick('/signup')">
+        <el-button size="medium" id="sign-up" @click="itemClick('/login')">
           注册
         </el-button>
       </div>
@@ -90,9 +92,13 @@ export default {
     line-height: 70px;
     text-align: center;
 
-    color: #298FEC;
     font-size: 30px;
     font-weight: bold;
+  }
+
+  #web-name a {
+    text-decoration: none;
+    color: #298FEC;
   }
 
   .page-tab-wrapper {

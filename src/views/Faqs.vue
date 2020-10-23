@@ -9,7 +9,7 @@
 
 <script>
 import PageTabBar from '../components/content/tabbar/PageTabBar'
-import FaqCpn from '../components/faqcpn'
+import FaqCpn from '../components/content/faqcpn'
 
 export default {
     name: 'faqs',
