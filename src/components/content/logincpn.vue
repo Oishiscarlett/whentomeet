@@ -471,7 +471,7 @@ export default {
 .phoneNumberInput {
   position: absolute;
   left: 200px;
-  top: -40px;
+  top: 0px;
   width: 400px;
   height: 73px;
 }
@@ -538,7 +538,7 @@ export default {
 .vCodeInput {
   position: absolute;
   left: 200px;
-  top: -40px;
+  top: 0px;
   width: 400px;
   height: 73px;
 }
