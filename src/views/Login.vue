@@ -2,25 +2,23 @@
   <div>
     <page-tab-bar></page-tab-bar>
 
-    <faq-cpn></faq-cpn>    
+    <login-cpn></login-cpn>    
 
   </div>
 </template>
 
 <script>
 import PageTabBar from '../components/content/tabbar/PageTabBar'
-import FaqCpn from '../components/content/faqcpn'
-
+import LoginCpn from '../components/content/logincpn'
 export default {
-    name: 'faqs',
+    name: 'login',
     components: {
       PageTabBar,
-      FaqCpn
+      LoginCpn
     },
 };
 </script>
 
 <style lang="less">
-
 
 </style>
