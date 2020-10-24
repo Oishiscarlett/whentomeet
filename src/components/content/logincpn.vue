@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 框 -->
-    <div class="base"></div>
+    <div class="base">
 
     <!-- 账号密码登录 -->
     <div class="title1" style="cursor: pointer" @click="cur = 0" :class="{ active: cur == 0 }">
@@ -112,6 +112,7 @@
           <span> 未注册手机验证后自动登录 </span>
         </p>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -315,21 +316,23 @@ export default {
 <style lang="less">
 .base {
   border-width: 0px;
-  position: absolute;
-  left: 400px;
-  top: 130px;
+  position: relative;
+  //left: 400px;
+  //top: 130px;
   width: 750px;
   height: 600px;
   display: flex;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
+  margin: 180px auto
 }
 
 .title1 {
   border-width: 0px;
   position: absolute;
-  left: 450px;
-  top: 150px;
+  //left: 450px;
+  //top: 150px;
+  margin: 20px 0px 0px 20px;
   width: 310px;
   height: 63px;
   /*  background: inherit;
@@ -367,8 +370,9 @@ export default {
 .title2 {
   border-width: 0px;
   position: absolute;
-  left: 790px;
-  top: 150px;
+  //left: 790px;
+  //top: 150px;
+  margin: 20px 0px 0px 400px;
   width: 310px;
   height: 63px;
   box-sizing: border-box;
@@ -447,8 +451,9 @@ export default {
 .register {
   border-width: 0px;
   position: absolute;
-  left: 450px;
-  top: 250px;
+  //left: 450px;
+  //top: 250px;
+  margin: 100px 0px 0px 45px;
   width: 794px;
   height: 467px;
   display: flex;

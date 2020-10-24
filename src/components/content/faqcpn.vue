@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="form_box">
 
     <div class="title">
       <p><span>常见问题反馈</span></p>
@@ -38,6 +39,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    </div>
     
 
   </div>
@@ -61,11 +63,17 @@ export default {
 
 <style lang="less">
 
+.form_box{
+  position: relative;
+  width: 1080px;
+  margin: auto;
+}
 .title {
   border-width: 0px;
   position: absolute;
-  left: 270px;
-  top: 200px;
+  //left: 270px;
+  //top: 200px;
+  margin: 180px auto;
   width: 228px;
   height: 40px;
   display: flex;
@@ -79,8 +87,9 @@ export default {
 
 .qa{
     position: absolute;
-    left: 270px;
-    top: 305px;
+    margin: 280px auto;
+    //left: 270px;
+    //top: 305px;
     .el-collapse-item__header
     {
         font-size: 16px;
