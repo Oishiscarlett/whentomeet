@@ -44,14 +44,6 @@ export default {
       resetForm(formName) {
         this.$refs[formName].resetFields(); //消除表单验证提示 + 初始化表单数据
       },
-      openAlert(message,title,formName){
-        this.$alert(message, title, {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.resetForm(formName);
-          }
-        });
-      },
       submitForm(phoneForm) {
         this.$refs[phoneForm].validate((valid) => {
           if (valid) {
@@ -63,8 +55,14 @@ export default {
                 localStorage.setItem('phone',this.phoneForm.phone)
                 this.$router.push('/resetpsw/password');
               }else if(res.data.code === 2013){
-                // 用户尚未登录
-                this.openAlert('请先登录！', '提示', phoneForm);
+                // 用户尚未登录，提示登录并跳转登录页面
+                this.$alert('请先登录！', '提示', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    this.resetForm(phoneForm);
+                    this.$router.push({path:'/login'});
+                  }
+                });
               }
             })
           } else {
