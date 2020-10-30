@@ -111,7 +111,7 @@ export default {
 
   .unlogin {
     margin-left: 50px;
-    width: 160px;
+    width: 200px;
   }
 
   #sign-up{
