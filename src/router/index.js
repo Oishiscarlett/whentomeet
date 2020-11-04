@@ -7,6 +7,8 @@ const SetPsw = () => import('../views/reset_psw/SetPsw')
 const SetSuccess = () => import('../views/reset_psw/SetSuccess')
 const Login = () => import('../views/Login')
 const Faqs = () => import('../views/Faqs')
+const ShareLinks = () => import('../views/create_event/ShareLinks')
+const demo = () => import('../views/calendarDemo')
 
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
@@ -49,6 +51,18 @@ const routes = [
     path: '/faqs',
     component: Faqs
   },
+  {
+    path: '/create',
+    component: ShareLinks
+  },
+  {
+    path: '/create/sharelinks',
+    component: ShareLinks
+  },
+  {
+    path: '/demo',
+    component: demo
+  }
 ]
 
 const router = new VueRouter({
