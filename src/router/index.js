@@ -8,6 +8,8 @@ const SetSuccess = () => import('../views/reset_psw/SetSuccess')
 const Login = () => import('../views/Login')
 const Faqs = () => import('../views/Faqs')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
+const FinalResult = () => import('../views/result/FinalResult')
+
 const demo = () => import('../views/calendarDemo')
 
 Vue.use(VueRouter)
@@ -59,6 +61,16 @@ const routes = [
     path: '/create/sharelinks',
     component: ShareLinks
   },
+  {
+    path: '/result',
+    component: FinalResult
+  },
+  {
+    path: '/result/final',
+    component: FinalResult
+  },
+
+
   {
     path: '/demo',
     component: demo
