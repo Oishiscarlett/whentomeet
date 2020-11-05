@@ -146,7 +146,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 .card-wrapper {
     padding-top: 150px;
     width: 100%;
