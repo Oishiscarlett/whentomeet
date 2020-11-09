@@ -7,6 +7,7 @@ const SetPsw = () => import('../views/reset_psw/SetPsw')
 const SetSuccess = () => import('../views/reset_psw/SetSuccess')
 const Login = () => import('../views/Login')
 const Faqs = () => import('../views/Faqs')
+const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
 const FinalResult = () => import('../views/result/FinalResult')
 
@@ -55,7 +56,7 @@ const routes = [
   },
   {
     path: '/create',
-    component: ShareLinks
+    component: CreateEvent
   },
   {
     path: '/create/sharelinks',

@@ -12,9 +12,9 @@
                   <span>你将无法查看事件的结果</span>
                 </div>
                 <div class="code-card-code">
-                  <span>{{ code }}</span>
+                  <span>{{ eventCode }}</span>
                   <el-button class="copy-btn"
-                        v-clipboard:copy="code"
+                        v-clipboard:copy="eventCode"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                 </div>
@@ -107,10 +107,11 @@ export default {
         return {
             codeChecked: false,
             reminderChecked: false,
-            code: 'code12',
-            shareLink: '邀请链接',
-            resultLink: '结果链接',
-            reeditLink: '重新编辑链接',
+            eventCode: '',
+            hostCode: '',
+            shareLink: '',
+            resultLink: '',
+            reeditLink: '',
             codePhoneForm: {
                 codePhone: ''
             },
@@ -142,6 +143,13 @@ export default {
         onError: function (e) {
             this.$message.error('复制失败');
         }
+    },
+    mounted() {
+      this.eventCode = localStorage.getItem('eventCode');
+      this.hostCode = localStorage.getItem('hostCode');
+      this.shareLink = 'http://localhost:8080/'+ this.eventCode;
+      this.resultLink = 'http://localhost:8080/' + this.eventCode + '/results/' + this.hostCode;
+      this.reeditLink = 'http://localhost:8080/' + this.eventCode + '/edit/' + this.hostCode;
     }
 }
 </script>
