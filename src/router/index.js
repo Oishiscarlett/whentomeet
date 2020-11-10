@@ -10,7 +10,8 @@ const Faqs = () => import('../views/Faqs')
 const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
 const FinalResult = () => import('../views/result/FinalResult')
-
+const ResultCode = () => import('../views/ResultCode')
+// TODO: 删除
 const demo = () => import('../views/calendarDemo')
 
 Vue.use(VueRouter)
@@ -70,8 +71,11 @@ const routes = [
     path: '/result/final',
     component: FinalResult
   },
-
-
+  {
+    path: '/resultcode',
+    component: ResultCode
+  },
+// TODO: 删除
   {
     path: '/demo',
     component: demo
