@@ -12,9 +12,9 @@
                   <span>你将无法查看事件的结果</span>
                 </div>
                 <div class="code-card-code">
-                  <span>{{ eventCode }}</span>
+                  <span>{{ hostCode }}</span>
                   <el-button class="copy-btn"
-                        v-clipboard:copy="eventCode"
+                        v-clipboard:copy="hostCode"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                 </div>

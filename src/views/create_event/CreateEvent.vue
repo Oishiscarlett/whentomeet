@@ -181,11 +181,11 @@ export default {
                         let highlightHour = formatapi.businessHours.startTime + ',' + formatapi.businessHours.endTime;
                         let eventduration = this.eventForm.duration + ',' + this.eventForm.durationUnit;
 
-                        let showDay = '';
+                        let hiddenDay = '';
                         if(formatapi.hiddenDays.length > 0) {
-                            showDay = formatapi.hiddenDays[0];
+                            hiddenDay = formatapi.hiddenDays[0];
                             for (let index = 1; index < formatapi.hiddenDays.length; index++) {
-                                showDay += ',' + formatapi.hiddenDays[index];
+                                hiddenDay += ',' + formatapi.hiddenDays[index];
                             }
                         }
                         
@@ -198,10 +198,10 @@ export default {
                         this.$api.event.creatEvent({
                             startTime: formatapi.validRange.start,
                             endTime: formatapi.validRange.end,
-                            showDays: showDay,
+                            hiddenDays: hiddenDay,
                             showHours: showHour,
                             highlightHours: highlightHour,
-                            timeGap: 1,
+                            timeGap: formatapi.slotDuration,
                             hideDate: 0,
                             timeUnit: eventsId,
                             eventName: this.eventForm.name,
