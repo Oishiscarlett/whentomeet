@@ -14,7 +14,7 @@
         </div>
         <div class="btn-wrapper">
           <el-button @click="itemClick('/create')" round>创建事件</el-button>
-          <el-button @click="itemClick('/rusult')" round>查看结果</el-button>
+          <el-button @click="itemClick('/EnterResults')" round>查看结果</el-button>
         </div>
         <div class="help-wrapper">
           <ul class="help-info">
@@ -44,7 +44,12 @@ export default {
   methods: {
     itemClick (path) {
       this.$router.push(path);
-    }
+    },
+
+    /* resultCheck(){
+
+      this.$router.push({ name: 'result', params: { eventCode: 'ipia2cn',hostCode: 'e7sg8t4' }});
+    } */
   }
 }
 </script>

@@ -5,7 +5,7 @@
       </div>
       <div class="page-tab-wrapper">
         <tab-bar-item path='/create'>创建事件</tab-bar-item>
-        <tab-bar-item path='/result'>查看结果</tab-bar-item>
+        <tab-bar-item path='/EnterResults'>查看结果</tab-bar-item>
         <tab-bar-item path='/faqs'>帮助</tab-bar-item>
       </div>
       <!-- 判断是否登录 -->
