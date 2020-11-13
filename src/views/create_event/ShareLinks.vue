@@ -239,12 +239,7 @@ export default {
 .links-card-links {
     text-align: center;
 }
-.links-card-links a {
-    display: block;
-    margin-top: 30px;
-    text-decoration: none;
-    color: #409EFF;
-}
+
 .reminder-phone-form {
     /* text-align: center; */
     width: 400px;
@@ -261,8 +256,12 @@ export default {
 }
 
 .url{
-  margin-top: 20px;
+  
   color: #69c0ff;
   cursor: pointer;
+  display: block;
+    margin-top: 30px;
+    text-decoration: none;
+   
 }
 </style>

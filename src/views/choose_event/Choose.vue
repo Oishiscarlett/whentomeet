@@ -14,7 +14,7 @@
         </div>
 
         <div class="eventDuration">
-            <p><span>持续时间：{{ eventDuration }}小时</span></p>
+            <p><span>持续时间：{{ eventDuration }}</span></p>
         </div>
     </div>
 
@@ -40,7 +40,8 @@
     </div>
 
     <!-- 日历区 -->
-    <Calendar @getTimeUnit='getTimeUnit' 
+    <Calendar class="demo-app"
+              @getTimeUnit='getTimeUnit' 
               @getTimeUnitId='getTimeUnitId'
               :Datas='datasToCalendar'/>
     <button @click="changeCalendarFormat">try</button>>
@@ -80,7 +81,7 @@
 
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
-import Calendar from "@/components/content/FullCalendar"
+import Calendar from "@/components/content/calendar"
 import { createTimeUnitId,timeUnitIdToTime,timeUnitSpilt } from '@/utils/calendar-utils'
 export default {
   name: 'Choose',
@@ -244,7 +245,7 @@ export default {
             if(eventapi.events[0].groupId === 'inviteeSelect'){
               idTo = eventapi.events[0].id;
             }else{
-              idTo = '';
+              idTo = ''; //传数据时第一个值会是一个未选择的值，所以赋值为空，未解决
             }
             
             for (let index = 0; index < eventapi.events.length; index++) {
@@ -446,6 +447,17 @@ export default {
   border-width: 1px;
   background-color: #ffffff;
   border-radius: 5px;
+}
+
+.demo-app {
+  position: absolute;
+  top: 220px;
+  left: 110px;
+  display: flex;
+  width: 1000px;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .info{

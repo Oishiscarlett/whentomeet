@@ -2,7 +2,7 @@
   <div id="box">
    <div class="base">
     
-
+     <div class="form_wrapper">
      <div class="EnterResults">
       <el-form
         ref="resultsCodeForm"
@@ -31,7 +31,7 @@
       </el-form>
       
     </div>
-
+    </div>
    </div>
  </div>
 </template>
@@ -98,9 +98,32 @@ export default {
   margin: 0 auto;
 }
 
+.form_wrapper{
+  border-width: 0px;
+  position: relative;
+  //left: 400px;
+  //top: 130px;
+  width: 750px;
+  height: 500px;
+  display: flex;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  margin: 180px auto
+}
+
 .EnterResults{
     position: absolute;
-    left: 300px;
-    top: 300px;
+    left: 280px;
+    top: 150px;
+}
+
+.el-form-item__label {
+    
+    font-size: 16px;
+    
+}
+
+.btn_enter{
+  font-size: 20px;
 }
 </style>

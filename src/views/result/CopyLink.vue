@@ -39,7 +39,7 @@ export default {
     },
     data(){
         return{
-          eventChoose: 'http://localhost:8080/' + this.$route.params.eventCode,
+          eventChoose: 'http://localhost:8080/choose/' + this.$route.params.eventCode,
         }
     },
     mounted(){

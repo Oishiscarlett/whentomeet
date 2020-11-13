@@ -67,9 +67,26 @@
       
      </div>
 
-     
+    <!-- tips -->
+    <div class="tips">
+        <div class="timeTips1"></div>
+        <div class="timeTips1_text">
+            <p>
+                <span>发起者选择的时间（右上角数字为未选择该时间的人数）</span>
+            </p>
+        </div>
+        <div class="timeTips2"></div>
+        <div class="timeTips2_text">
+            <p>
+                <span>推荐时间</span>
+            </p>
+        </div>
+        
+    </div>
+    
     <!-- 日历区 -->
-    <Calendar @getTimeUnit='getTimeUnit' 
+    <Calendar class="demo-app"
+              @getTimeUnit='getTimeUnit' 
               @getTimeUnitId='getTimeUnitId'
               :Datas='datasToCalendar'/>
     <button @click="changeCalendarFormat">try</button>>>
@@ -134,8 +151,9 @@
 </template>
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
-import Calendar from "@/components/content/FullCalendar"
+import Calendar from "@/components/content/calendar"
 import { createTimeUnitId,timeUnitIdToTime,timeUnitSpilt } from '@/utils/calendar-utils'
+import { resolve } from 'path'
 export default {
   name: 'Result',
   components: {
@@ -292,20 +310,22 @@ export default {
               }
             }).catch(error => {
                 console.log(error);
-          });
+        });
       },
 
       //页面渲染
       initData(){
+
         let formatapi = this.datasToCalendar.calendarFormat;  
         let eventapi = this.datasToCalendar.calendarFunction;
         
+        //调用/eventinfo/{eventCode}接口，获取事件名称与事件描述信息
         this.$api.event.getResultByCode(this.$route.params.eventCode,
           {
             eventCode: this.$route.params.eventCode
           }
         ).then(res => {
-          console.log(res.data)
+            console.log(res.data)
             if(res.data.code === 200){
               this.eventName = res.data.data.eventName;
               this.eventInfo = res.data.data.eventDescription;
@@ -314,6 +334,7 @@ export default {
                 console.log(error);
         });
         
+        //调用/{eventCode}/result/{hostCode}结果接口，获取hostTime,preferTime,与timeDetail
         this.$api.event.getFinalResult(this.$route.params.eventCode,this.$route.params.hostCode,
             {
               eventCode: this.$route.params.eventCode,
@@ -322,35 +343,36 @@ export default {
           ).then(res => {
             console.log(res.data)
             if(res.data.code === 200){
-               let timeDetail = res.data.data.timeDetail;
-               
-               var tmp = '';
-              
-              if(res.data.data.preferTimeUnit){
-                    let preferTime = res.data.data.preferTimeUnit
-                    let time = res.data.data.hostTimeUnit;
-                   
-                    /* for(var l in oop){
-                      tmp += oop[l].absentNum + ',';
+                         
+              let hostTime = res.data.data.hostTimeUnit;
+              let preferTime = res.data.data.preferTimeUnit;
+              let timeDetail = res.data.data.timeDetail;
+              console.log(hostTime.length)
+              //获取json中的某个属性对应的值
+              /* for(var l in oop){
+                  tmp += oop[l].absentNum + ',';
+                 }
+                 console.log(tmp);
+                 console.log(typeof(tmp)); */
+                for (let index = 0; index < hostTime.length; index++) {
+                  var nowEvent = {}
+                  nowEvent.id = hostTime[index];
+                  nowEvent.start = timeUnitIdToTime(hostTime[index]);
+                  nowEvent.groupId = 'hostSelect';
+                  for(var k in timeDetail){
+                    if(timeDetail[k].timeUnit == hostTime[index]){
+                      nowEvent.title = timeDetail[k].absentNum;
                     }
-                    console.log(tmp);
-                    console.log(typeof(tmp)); */
-
-                    for (let index = 0; index < time.length; index++) {
-                        var nowEvent = {}
-                          nowEvent.id = time[index];
-                          nowEvent.start = timeUnitIdToTime(time[index]);
-                          nowEvent.groupId = 'hostSelect';
-                          for(var k in timeDetail){
-                            if(timeDetail[k].timeUnit == time[index]){
-                              nowEvent.title = timeDetail[k].absentNum;
-                            }
-                          }
-                          eventapi.events.push(nowEvent);
-                    }
-                    //console.log(eventapi.events);
-
-                    for(let i = 0; i<eventapi.events.length; i++){
+                  }
+                  eventapi.events.push(nowEvent);
+                }
+                  //调用封装的方法，数组获取不到最后一个值
+                  //this.addBlueBlock(hostTime,preferTime,timeDetail);
+                if(preferTime.length >= 1){
+                  this.addOrangeBlock(preferTime);
+                    
+                    //将普通时间块移除，新建推荐时间块，有问题
+                    /* for(let i = 0; i<eventapi.events.length; i++){
                       for(let j = 0; j<preferTime.length; j++){
                         
                         if(eventapi.events[i].id == preferTime[j]){
@@ -366,8 +388,8 @@ export default {
                           eventapi.events.push(preferEvent);
                         }
                       }
-                    }
-                    //console.log(eventapi.events);  
+                    } */
+                    
               }  
               
             }
@@ -375,6 +397,40 @@ export default {
                 console.log(error);
           });
           this.box = true;
+      },
+
+      //创建普通时间块
+      addBlueBlock(preferTime,hostTime,timeDetail) {
+        let eventapi = this.datasToCalendar.calendarFunction;
+        for (let index = 0; index < hostTime.length; index++) {
+          var nowEvent = {}
+          nowEvent.id = hostTime[index];
+          nowEvent.start = timeUnitIdToTime(hostTime[index]);
+          nowEvent.groupId = 'hostSelect';
+          for(var k in timeDetail){
+            if(timeDetail[k].timeUnit == hostTime[index]){
+              nowEvent.title = timeDetail[k].absentNum;
+            }
+          }
+          //console.log(hostTime[index])
+          eventapi.events.push(nowEvent);
+        }
+        //console.log(hostTime.length);
+      },
+
+      //创建推荐时间块
+      addOrangeBlock(preferTime){
+        let eventapi = this.datasToCalendar.calendarFunction;
+        for(let i = 0; i<eventapi.events.length; i++){
+          for(let j = 0; j<preferTime.length; j++){
+            if(eventapi.events[i].id == preferTime[j]){
+              eventapi.events[i].backgroundColor = '#FAAD14';
+              eventapi.events[i].borderColor = '#FAAD14';
+              eventapi.events[i].title = '';
+            }
+          }
+        }
+        console.log(preferTime)
       },
 
       allElectionFun() { // 获取需要默认显示的数据
@@ -555,6 +611,62 @@ export default {
   font-style: normal;
   font-size: 18px;
   color: #333333;
+}
+
+.tips{
+  position: absolute;
+  top: 130px;
+  left: 860px;
+}
+
+.timeTips1 {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #3788d8;
+}
+
+.timeTips1_text {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333333;
+  line-height: 15px;
+}
+
+.timeTips2 {
+  border-width: 0px;
+  position: absolute;
+  top: 32px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  background-color: #FAAD14;
+}
+
+.timeTips2_text {
+  position: absolute;
+  top: 32px;
+  left: 25px;
+  width: 220px;
+  height: 22px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333333;  
+}
+
+.demo-app {
+  position: absolute;
+  top: 220px;
+  left: 110px;
+  display: flex;
+  width: 1000px;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .left_wrapper{
