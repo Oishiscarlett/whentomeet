@@ -149,7 +149,7 @@ export default {
             groupId: 'inviteeSelect',
             backgroundColor: '#003399',
             borderColor: '#003399',
-            title: '2'
+            //title: '2'
           }),
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
@@ -161,7 +161,7 @@ export default {
             groupId: 'hostSelect',
             backgroundColor: '#3788d8',
             borderColor: '#3788d8',
-            title: '1'
+            //title: '1'
           })
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);

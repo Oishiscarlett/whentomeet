@@ -91,6 +91,7 @@
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
+
 export default {
     name: 'CreateEvent',
     components:{
@@ -179,11 +180,12 @@ export default {
                         let showHour = formatapi.slotMinTime + ',' + formatapi.slotMaxTime;
                         let highlightHour = formatapi.businessHours.startTime + ',' + formatapi.businessHours.endTime;
                         let eventduration = this.eventForm.duration + ',' + this.eventForm.durationUnit;
-                        let showDay = '';
+
+                        let hiddenDay = '';
                         if(formatapi.hiddenDays.length > 0) {
-                            showDay = formatapi.hiddenDays[0];
+                            hiddenDay = formatapi.hiddenDays[0];
                             for (let index = 1; index < formatapi.hiddenDays.length; index++) {
-                                showDay += ',' + formatapi.hiddenDays[index];
+                                hiddenDay += ',' + formatapi.hiddenDays[index];
                             }
                         }
                         
@@ -191,14 +193,15 @@ export default {
                         for (let index = 1; index < eventapi.events.length; index++) {
                             eventsId += ',' + eventapi.events[index].id;
                         }
+
                         // 请求上传数据
                         this.$api.event.creatEvent({
                             startTime: formatapi.validRange.start,
                             endTime: formatapi.validRange.end,
-                            showDays: showDay,
+                            hiddenDays: hiddenDay,
                             showHours: showHour,
                             highlightHours: highlightHour,
-                            timeGap: 1,
+                            timeGap: formatapi.slotDuration,
                             hideDate: 0,
                             timeUnit: eventsId,
                             eventName: this.eventForm.name,
@@ -234,60 +237,72 @@ export default {
 .content-wrapper {
     padding-top: 100px;
 }
+
 .form-wrapper {
     margin: 0 auto 100px auto;
     width: 1100px;
     background-color: #E8F8FF;
 }
-.el-collapse-item__header {
+
+.calendar-form-wrapper >>> .el-collapse-item__header {
     background-color: #E8F8FF;
     font-size: 30px;
     font-weight: bold;
     margin: 0 60px;
     color: black;
 }
-.el-collapse-item__arrow {
-    margin: 0 10px;
-}
-.el-collapse-item__content {
+
+.calendar-form-wrapper >>> .el-collapse-item__content {
     background-color: #E8F8FF;
 }
+
 .calendar-form {
     padding: 30px 50px;
 }
+
 .calendar-form .date {
     width: 450px;
     display: inline-block;
 }
+
 .calendar-form .date .el-form-item__content {
     margin-left: 0px!important;
+
 }
+
 .event-form-wrapper {
     padding: 30px 50px;
 }
+
 .event-form-title {
     margin-bottom: 30px;
     margin-left: 10px;
     font-size: 30px;
     font-weight: bold;
 }
+
 .name-box {
     width: 300px;
     display: inline-block;
 }
+
 .duration-box {
     display: inline-block;
     margin-left: 50px;
 }
+
 .duration-unit-box {
     display: inline-block;
 }
+
 .duration-unit-box .el-form-item__content {
     margin-left: 20px!important;
 }
+
 .desc-box {
     width: 860px;
 }
+
 .submit-btn {
     margin-top: 50px;
     margin-left: 300px;
