@@ -233,7 +233,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .content-wrapper {
     padding-top: 100px;
 }
@@ -244,7 +244,7 @@ export default {
     background-color: #E8F8FF;
 }
 
-.el-collapse-item__header {
+.calendar-form-wrapper >>> .el-collapse-item__header {
     background-color: #E8F8FF;
     font-size: 30px;
     font-weight: bold;
@@ -252,11 +252,7 @@ export default {
     color: black;
 }
 
-.el-collapse-item__arrow {
-    margin: 0 10px;
-}
-
-.el-collapse-item__content {
+.calendar-form-wrapper >>> .el-collapse-item__content {
     background-color: #E8F8FF;
 }
 
