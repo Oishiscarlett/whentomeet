@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .form_box{
   position: relative;
   width: 1080px;

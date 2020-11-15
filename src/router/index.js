@@ -102,7 +102,7 @@ const routes = [
     component: CopyLink
   },
   {
-    path: '/:eventCode/final/:hostCode',
+    path: '/:eventCode/final',
     name: 'finalresult',
     component: FinalResult
   }

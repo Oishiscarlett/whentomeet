@@ -335,7 +335,7 @@ export default {
         });
         
         //调用/{eventCode}/result/{hostCode}结果接口，获取hostTime,preferTime,与timeDetail
-        this.$api.event.getFinalResult(this.$route.params.eventCode,this.$route.params.hostCode,
+        this.$api.event.getTimeDetail(this.$route.params.eventCode,this.$route.params.hostCode,
             {
               eventCode: this.$route.params.eventCode,
               hostCode: this.$route.params.hostCode
@@ -513,7 +513,7 @@ export default {
         let formatapi = this.datasToCalendar.calendarFormat;  
         let eventapi = this.datasToCalendar.calendarFunction;
         
-        this.$api.event.getFinalResult(this.$route.params.eventCode,this.$route.params.hostCode,
+        this.$api.event.getTimeDetail(this.$route.params.eventCode,this.$route.params.hostCode,
             {
               eventCode: this.$route.params.eventCode,
               hostCode: this.$route.params.hostCode
@@ -586,7 +586,7 @@ export default {
 .title{
   position: absolute;
   top: 130px;
-  left: 550px;
+  left: 150px;
 }
 
 .eventName {

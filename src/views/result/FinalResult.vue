@@ -55,23 +55,50 @@ export default {
     },
     data() {
         return {
-            title: '全体会议',
-            description: '11月第一次全体会议',
-            date: '2020.11.11',
-            time: '15：00',
-            duration: '2小时',
+            title: '',
+            description: '',
+            date: '',
+            time: '',
+            duration: '',
             attendance: {
-                num: '10人',
-                percentage: '（50%）',
-                peopleList: [ '小城', '小单', '小黑', '小白', '小黄', '小城', '小单', '小黑', '小白', '小黄']
+                num: '',
+                percentage: '',
+                peopleList: []
             },
             nonAttendance: {
-                num: '10人',
-                percentage: '（50%）',
-                peopleList: [ '小城', '小单', '小黑', '小白', '小黄', '小城', '小单', '小黑', '小白', '小黄']
+                num: '',
+                percentage: '',
+                peopleList: []
             }
         }
     },
+    mounted() {
+        this.$api.event.getFinalResult(this.$route.params.eventCode,{
+              eventCode: this.$route.params.eventCode
+            }).then(res => {
+                this.title = res.data.data.eventName;
+                this.description = res.data.data.eventDescription;
+                this.date = res.data.data.finalTimeUnit.substring(0,10);
+                this.time = res.data.data.finalTimeUnit.substring(11,19);
+
+                let time =  res.data.data.eventDuration.split(',');
+                if(time[1] === 'minutes'){
+                    this.duration = time[0] + "分钟";
+                }else if(time[1] === 'hours'){
+                    this.duration = time[0] + "小时";
+                }else{
+                    this.duration = time[0] + "天";
+                }
+                
+                this.attendance.num = res.data.data.attendNum;
+                this.attendance.percentage = '（' + res.data.data.attendPro + '%）';
+                this.attendance.peopleList = res.data.data.attendName.split(',');
+
+                this.nonAttendance.num = res.data.data.absentNum;
+                this.nonAttendance.percentage = '（' + res.data.data.absentPro + '%）';
+                this.nonAttendance.peopleList = res.data.data.absentName.split(',');
+            })
+    }
 }
 </script>
 

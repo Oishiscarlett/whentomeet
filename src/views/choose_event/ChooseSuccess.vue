@@ -4,6 +4,9 @@
         <div class="base">
             <img class="logo" src="@/assets/img/success.png" alt="">
             <p class="finish"><span>提交成功！</span></p>
+            <p class="link-tips">
+                <span>您可以点击下列链接修改您的选择</span>
+            </p>
             <p class="link">
                 <span @click="link()">http://localhost:8080/{{ eventCode }}/update/{{ idCode }}</span>
                <!-- <router-link to="{ name: 'update', params: { eventCode: 'ipia2cn',idCode: 'pgadf27a' }}">http://localhost:8080/{{ eventCode }}/update/{{ idCode }}</router-link> -->       
@@ -75,7 +78,8 @@ export default {
     }
 }
 </script>
-<style lang="less">
+
+<style lang="less" scoped>
 #box{
     width: 100%;
     height: 100%;
@@ -95,7 +99,7 @@ export default {
 .logo{
     position: absolute;
     left: 570px;
-    top: 270px;
+    top: 200px;
     width: 50px;
     height: 50px;
 }
@@ -103,7 +107,7 @@ export default {
 .finish{
     position: absolute;
     left: 540px;
-    top: 350px;
+    top: 280px;
     width: 200px;
     height: 50px;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
@@ -112,9 +116,16 @@ export default {
     letter-spacing: 5px;
 }
 
+.link-tips {
+    position: absolute;
+    left: 480px;
+    top: 350px;
+    color: #69c0ff;
+}
+
 .link{
     position: absolute;
-    left: 430px;
+    left: 410px;
     top: 400px;
     width: 100px;
     height: 50px;

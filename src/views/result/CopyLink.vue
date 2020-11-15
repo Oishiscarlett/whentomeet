@@ -59,6 +59,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 #box{
     width: 100%;

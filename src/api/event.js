@@ -68,16 +68,22 @@ const event = {
             params: params
         });
     },
+    getTimeDetail(eventCode,hostCode,params) {
+        return axios.post(base.baseUrl + `/${eventCode}/result/${hostCode}`, null, {
+            params: params
+        });
+    },
+
 
     /**
      *  最终结果页面相关
      */
     // 获取最终结果
-    getFinalResult(eventCode,hostCode,params) {
-        return axios.post(base.baseUrl + `/${eventCode}/result/${hostCode}`, null, {
+    getFinalResult(eventCode,params) {
+        return axios.get(base.baseUrl + `/${eventCode}/final`, {
             params: params
         });
-    }   
+    }
 }
 
 export default event;

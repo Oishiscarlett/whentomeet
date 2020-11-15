@@ -192,22 +192,7 @@ export default {
 }
 </script>
 
-<style lang='css'>
-h2 {
-  margin: 0;
-  font-size: 16px;
-}
-ul {
-  margin: 0;
-  padding: 0 0 0 1.5em;
-}
-li {
-  margin: 1.5em 0;
-  padding: 0;
-}
-b { /* used for event dates/times */
-  margin-right: 3px;
-}
+<style>
 .demo-app {
   display: flex;
   min-height: 100%;
