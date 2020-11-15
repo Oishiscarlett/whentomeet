@@ -1,0 +1,58 @@
+{
+  "id": "2166418",
+  "name": "resultCheck",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "确认结果页面使用图标",
+  "glyphs": [
+    {
+      "icon_id": "17994954",
+      "name": "完成",
+      "font_class": "wancheng",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "2667327",
+      "name": "邮件",
+      "font_class": "youjian",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "2668420",
+      "name": "删除2",
+      "font_class": "shanchu",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "2668430",
+      "name": "可见",
+      "font_class": "kejian",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "2668431",
+      "name": "不可见",
+      "font_class": "bukejian",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "7699193",
+      "name": "不可见",
+      "font_class": "yincangbukejian",
+      "unicode": "e88b",
+      "unicode_decimal": 59531
+    },
+    {
+      "icon_id": "7699194",
+      "name": "可见",
+      "font_class": "xianshikejian",
+      "unicode": "e88c",
+      "unicode_decimal": 59532
+    }
+  ]
+}

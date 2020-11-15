@@ -89,8 +89,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import PageTabBar from 'components/content/tabbar/PageTabBar'
 import Calendar from 'components/content/calendar'
+=======
+import PageTabBar from '@/components/content/tabbar/PageTabBar'
+import Calendar from '@/components/content/calendar'
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 
 export default {
     name: 'CreateEvent',
@@ -214,7 +219,11 @@ export default {
                                 console.log(res.data);
                                 localStorage.setItem('eventCode',res.data.data.eventCode);
                                 localStorage.setItem('hostCode',res.data.data.hostCode);
+<<<<<<< HEAD
                                 this.$router.push('/create/sharelinks');
+=======
+                                this.$router.push({ name: 'sharelinks', params: { eventCode: res.data.data.eventCode, hostCode: res.data.data.hostCode}});
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
                             }
                         })
                     }else {

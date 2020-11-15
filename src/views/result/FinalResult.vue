@@ -47,8 +47,12 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import PageTabBar from 'components/content/tabbar/PageTabBar'
 
+=======
+import PageTabBar from '@/components/content/tabbar/PageTabBar'
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 export default {
     name: 'FinalResult',
     components: {
@@ -81,29 +85,42 @@ export default {
     width: 800px;
     margin: 150px auto 0 auto;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-title {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
     margin: 20px 0;
 }
+<<<<<<< HEAD
 
 .result-description {
     text-align: center;
 }
 
+=======
+.result-description {
+    text-align: center;
+}
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-description span {
     display: block;
     line-height: 25px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-time {
     margin: 30px;
     line-height: 35px;
     font-size: 20px;
     font-weight: bold;
 }
+<<<<<<< HEAD
 
 .result-time .date-time {
     display: flex;
@@ -117,42 +134,72 @@ export default {
     display: block;
 }
 
+=======
+.result-time .date-time {
+    display: flex;
+}
+.result-time .date-time span {
+    flex: 1;
+}
+.result-time .duration {
+    display: block;
+}
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-personnel {
     margin: 50px 30px;
     display: flex;
     line-height: 25px;
 }
+<<<<<<< HEAD
 
 .result-personnel .blank {
     flex: 0.3;
 }
 
+=======
+.result-personnel .blank {
+    flex: 0.3;
+}
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-personnel .attendance {
     display: inline-block;
     /* padding-right: 40px; */
     flex: 1;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-personnel .non-attendance {
     display: inline-block;
     flex: 1;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-personnel .title {
     font-size: 18px;
     font-weight: bold;
     display: block;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-personnel .people {
     /* display: block; */
     margin: 10px 10px 0 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .result-button {
     margin: 80px 50px 20px 30px;
     display: flex;
 }
+<<<<<<< HEAD
 
 .result-button span {
     flex: 1;
@@ -170,3 +217,18 @@ export default {
     text-align: right;
 }
 </style>
+=======
+.result-button span {
+    flex: 1;
+}
+.result-button .left {
+    text-align: left;
+}
+.result-button .center {
+    text-align: center;
+}
+.result-button .right {
+    text-align: right;
+}
+</style>
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e

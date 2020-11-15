@@ -53,4 +53,13 @@ export function createTimeUnitId(Time) {
 export function timeUnitIdToTime(id) {
   let time = id.substring(0, 10) + 'T' + id.substring(11, 19);
   return time;
+<<<<<<< HEAD
+=======
+}
+
+// 将传回来的timeUnit解析为字符串数组
+export function timeUnitSplit(timeUnit) {
+  let timeStr = timeUnit.toString().split(",");
+  return timeStr;
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 }

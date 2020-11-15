@@ -20,7 +20,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { createTimeUnitId,timeUnitIdToTime } from '@/utils/calendar-utils'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 export default {
   name: 'Calendar',
   components: {
@@ -79,7 +82,10 @@ export default {
         selectOverlap: false,
         // 是否显示周末
         weekends: true,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
         /***************************
         *     用户可调整的属性
         *  与调整日历格式相关功能有关
@@ -98,7 +104,10 @@ export default {
         hiddenDays: this.Datas.calendarFormat.hiddenDays, 
         // 日历开始与结束的时间
         validRange: this.Datas.calendarFormat.validRange,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
         /***************************
         *     开发者根据页面功能
         *      需要调整的属性
@@ -107,7 +116,10 @@ export default {
         selectable: this.Datas.calendarFunction.selectable,
         // 背景时间：用于显示发起者未选择的时间
         events: this.Datas.calendarFunction.events,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
         /***************************
         *         回调函数
         ***************************/ 
@@ -153,7 +165,11 @@ export default {
             groupId: 'inviteeSelect',
             backgroundColor: '#003399',
             borderColor: '#003399',
+<<<<<<< HEAD
             title: '2'
+=======
+            //title: '2'
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
           }),
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
@@ -165,7 +181,11 @@ export default {
             groupId: 'hostSelect',
             backgroundColor: '#3788d8',
             borderColor: '#3788d8',
+<<<<<<< HEAD
             title: '1'
+=======
+            //title: '1'
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
           })
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
@@ -226,30 +246,49 @@ b { /* used for event dates/times */
   max-width: 1100px;
   margin: 0 auto;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .fc-timegrid-slot-lane {
   text-align: center;
   display: flex;
 }
+<<<<<<< HEAD
 
 .fc-timegrid-slot-lane span {
   flex: 1;
 }
 
+=======
+.fc-timegrid-slot-lane span {
+  flex: 1;
+}
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .fc-event-main span i{
   float: right;
   margin-right: 10px;
   color: #CC0000;
   font-weight: bold;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .fc-button-primary {
     background-color: white!important;
     border: 2px solid #DCDFE6!important;
     color: #298FEC!important;
 }
+<<<<<<< HEAD
 
 .fc-icon {
     font-weight: bold!important;
 }
 </style>
+=======
+.fc-icon {
+    font-weight: bold!important;
+}
+</style>
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e

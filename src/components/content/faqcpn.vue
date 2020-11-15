@@ -62,7 +62,6 @@ export default {
 </script>
 
 <style lang="less">
-
 .form_box{
   position: relative;
   width: 1080px;
@@ -84,7 +83,6 @@ export default {
   letter-spacing: 3px;
   color: #797979;
 }
-
 .qa{
     position: absolute;
     margin: 280px auto;
@@ -102,9 +100,7 @@ export default {
         line-height: 1.769230769230769;
     }
 }
-
 .el-collapse-item{
     width: 1000px;
 }
-
 </style>

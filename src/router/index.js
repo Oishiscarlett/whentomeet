@@ -12,6 +12,19 @@ const ShareLinks = () => import('../views/create_event/ShareLinks')
 const FinalResult = () => import('../views/result/FinalResult')
 const ResultCode = () => import('../views/ResultCode')
 
+const CreateEvent = () => import('../views/create_event/CreateEvent')
+const ShareLinks = () => import('../views/create_event/ShareLinks')
+const Edit = () => import('../views/create_event/Edit')
+
+const Choose = () => import('../views/choose_event/Choose')
+const ChooseSuccess = () => import('../views/choose_event/ChooseSuccess')
+
+const EnterResults = () => import('../views/result/EnterResults')
+const Result = () => import('../views/result/Result')
+const CopyLink = () => import('../views/result/CopyLink')
+const FinalResult = () => import('../views/result/FinalResult')
+
+
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
 // 重写了原型上的push方法，统一的处理了错误信息
@@ -53,11 +66,16 @@ const routes = [
     path: '/faqs',
     component: Faqs
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
   {
     path: '/create',
     component: CreateEvent
   },
   {
+<<<<<<< HEAD
     path: '/create/sharelinks',
     component: ShareLinks
   },
@@ -73,6 +91,49 @@ const routes = [
     path: '/resultcode',
     component: ResultCode
   }
+=======
+    path: '/:eventCode/sharelinks/:hostCode',
+    name: 'sharelinks',
+    component: ShareLinks
+  },
+  {
+    path: '/:eventCode/edit/:hostCode',
+    name: 'edit',
+    component: Edit
+  },
+
+  {
+    path: '/choose/:eventCode',
+    name: 'choose',
+    component: Choose
+  },
+  {
+    path: '/:eventCode/thanks/:idCode',
+    name: 'Success',
+    component: ChooseSuccess
+  },
+
+  {
+    path: '/EnterResults',
+    component: EnterResults
+  },
+  {
+    path: '/:eventCode/result/:hostCode',
+    name: 'result',
+    component: Result
+  },
+  {
+    path: '/:eventCode/copylink',
+    name: 'copylink',
+    component: CopyLink
+  },
+  {
+    path: '/:eventCode/final/:hostCode',
+    name: 'finalresult',
+    component: FinalResult
+  }
+
+>>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 ]
 
 const router = new VueRouter({
