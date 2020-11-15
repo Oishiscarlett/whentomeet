@@ -7,12 +7,8 @@ import "./assets/iconfont2/iconfont.css";
 import axios from 'axios';
 import api from './api' // 导入api接口
 import VueCookies from 'vue-cookies'
-<<<<<<< HEAD
-import VueClipboard from 'vue-clipboard2' //剪贴板功能
-=======
 import clipboard from 'clipboard'
 import VueClipboard from 'vue-clipboard2'
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 
 
 Vue.config.productionTip = false

@@ -10,10 +10,6 @@ const Faqs = () => import('../views/Faqs')
 const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
 const FinalResult = () => import('../views/result/FinalResult')
-const ResultCode = () => import('../views/ResultCode')
-
-const CreateEvent = () => import('../views/create_event/CreateEvent')
-const ShareLinks = () => import('../views/create_event/ShareLinks')
 const Edit = () => import('../views/create_event/Edit')
 
 const Choose = () => import('../views/choose_event/Choose')
@@ -22,7 +18,6 @@ const ChooseSuccess = () => import('../views/choose_event/ChooseSuccess')
 const EnterResults = () => import('../views/result/EnterResults')
 const Result = () => import('../views/result/Result')
 const CopyLink = () => import('../views/result/CopyLink')
-const FinalResult = () => import('../views/result/FinalResult')
 
 
 Vue.use(VueRouter)
@@ -66,32 +61,11 @@ const routes = [
     path: '/faqs',
     component: Faqs
   },
-<<<<<<< HEAD
-=======
-
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
   {
     path: '/create',
     component: CreateEvent
   },
   {
-<<<<<<< HEAD
-    path: '/create/sharelinks',
-    component: ShareLinks
-  },
-  {
-    path: '/result',
-    component: FinalResult
-  },
-  {
-    path: '/result/final',
-    component: FinalResult
-  },
-  {
-    path: '/resultcode',
-    component: ResultCode
-  }
-=======
     path: '/:eventCode/sharelinks/:hostCode',
     name: 'sharelinks',
     component: ShareLinks
@@ -133,7 +107,6 @@ const routes = [
     component: FinalResult
   }
 
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 ]
 
 const router = new VueRouter({

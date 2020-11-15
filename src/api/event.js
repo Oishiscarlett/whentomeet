@@ -27,15 +27,10 @@ const event = {
         选择时间页面相关
     */
     // 获取事件的相关信息
-<<<<<<< HEAD
-    getEvent(params) {
-        return axios.post(base.baseUrl + `/${eventCode}`, null, {
-=======
     //提交参与者选择的时间与填写的信息
     //attendEvent
     attendEvent(eventCode,params) {
         return axios.post(base.baseUrl + `/${eventCode}/`, null, {
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
             params: params
         });
     },
@@ -61,25 +56,15 @@ const event = {
      *  结果页面相关
      */
     // 获取结果页面的相关信息
-<<<<<<< HEAD
-    getResultByCode(params) {
-        return axios.post(base.baseUrl + `/eventinfo/${hostCode}`, null, {
-=======
     //参与者填写页面日历渲染
     getResultByCode(eventCode,params) {
         return axios.post(base.baseUrl + `/eventinfo/${eventCode}`, null, {
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
             params: params
         });
     },
     // 提交最终时间
-<<<<<<< HEAD
-    selectFinalTime(params) {
-        return axios.post(base.baseUrl + `${eventCode}/final/${hostCode}`, null, {
-=======
     selectFinalTime(eventCode,hostCode,params) {
         return axios.post(base.baseUrl + `/${eventCode}/final/${hostCode}`, null, {
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
             params: params
         });
     },
@@ -88,13 +73,8 @@ const event = {
      *  最终结果页面相关
      */
     // 获取最终结果
-<<<<<<< HEAD
-    getFinalResult(params) {
-        return axios.post(base.baseUrl + `${eventCode}/result/${hostCode}`, null, {
-=======
     getFinalResult(eventCode,hostCode,params) {
         return axios.post(base.baseUrl + `/${eventCode}/result/${hostCode}`, null, {
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
             params: params
         });
     }   

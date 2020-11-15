@@ -14,11 +14,7 @@
                 <div class="code-card-code">
                   <span>{{ hostCode }}</span>
                   <el-button class="copy-btn"
-<<<<<<< HEAD
                         v-clipboard:copy="hostCode"
-=======
-                        v-clipboard:copy="eventCode"
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                 </div>
@@ -47,13 +43,9 @@
                     <span>发送该链接给你的被邀请人：</span>
                   </div>
                   <div class="links-card-links">
-<<<<<<< HEAD
-                    <a href="">{{ shareLink }}</a>
-=======
                     <span class="url" @click="share()">{{ shareLink }}</span>
                     <br>
                   <!--   <a href="" >{{ shareLink }}</a> -->
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
                     <el-button class="copy-btn"
                         v-clipboard:copy="shareLink"
                         v-clipboard:success="onCopy"
@@ -76,13 +68,9 @@
                     <span>查看事件结果链接：</span>
                   </div>
                   <div class="links-card-links">
-<<<<<<< HEAD
-                    <a href="">{{ resultLink }}</a>
-=======
                     <span class="url" @click="result()">{{ resultLink }}</span>
                     <br>
                     <!-- <a href="">{{ resultLink }}</a> -->
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
                     <el-button class="copy-btn"
                         v-clipboard:copy="resultLink"
                         v-clipboard:success="onCopy"
@@ -94,17 +82,11 @@
                     <span>重新编辑事件链接：</span>
                   </div>
                   <div class="links-card-links">
-<<<<<<< HEAD
-                    <a href="">{{ reeditLink }}</a>
-                    <el-button class="copy-btn"
-                        v-clipboard:copy="reeditLink"
-=======
                     <span class="url" @click="edit()">{{ editLink }}</span>
                     <br>
                     <!-- <a href="">{{ reeditLink }}</a> -->
                     <el-button class="copy-btn"
                         v-clipboard:copy="editLink"
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                   </div>
@@ -120,12 +102,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import PageTabBar from 'components/content/tabbar/PageTabBar'
-
-=======
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 export default {
     name: "ShareLinks",
     components: {
@@ -135,19 +112,11 @@ export default {
         return {
             codeChecked: false,
             reminderChecked: false,
-<<<<<<< HEAD
-            eventCode: '',
-            hostCode: '',
-            shareLink: '',
-            resultLink: '',
-            reeditLink: '',
-=======
             eventCode: this.$route.params.eventCode,
             hostCode: this.$route.params.hostCode,
             shareLink: 'http://localhost:8080/choose/' + this.$route.params.eventCode,
             resultLink: 'http://localhost:8080/' + this.$route.params.eventCode + '/result/' + this.$route.params.hostCode,
             editLink: 'http://localhost:8080/' + this.$route.params.eventCode + '/edit/' + this.$route.params.hostCode,
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
             codePhoneForm: {
                 codePhone: ''
             },
@@ -178,16 +147,6 @@ export default {
         },
         onError: function (e) {
             this.$message.error('复制失败');
-<<<<<<< HEAD
-        }
-    },
-    mounted() {
-      this.eventCode = localStorage.getItem('eventCode');
-      this.hostCode = localStorage.getItem('hostCode');
-      this.shareLink = 'http://localhost:8080/'+ this.eventCode;
-      this.resultLink = 'http://localhost:8080/' + this.eventCode + '/results/' + this.hostCode;
-      this.reeditLink = 'http://localhost:8080/' + this.eventCode + '/edit/' + this.hostCode;
-=======
         },
 
         share(){
@@ -199,14 +158,6 @@ export default {
         edit(){
             this.$router.push({ name: 'edit', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
         },
-    },
-    mounted() {
-      /* this.eventCode = localStorage.getItem('eventCode');
-      this.hostCode = localStorage.getItem('hostCode');
-      this.shareLink = 'http://localhost:8080/'+ this.$route.params.eventCode;
-      this.resultLink = 'http://localhost:8080/' + this.$route.params.eventCode + '/results/' + this.$route.params.hostCode;
-      this.reeditLink = 'http://localhost:8080/' + this.$route.params.eventCode + '/edit/' + this.$route.params.hostCode; */
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
     }
 }
 </script>
@@ -217,172 +168,85 @@ export default {
     width: 100%;
     height: 100%;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-wrapper {
     margin: 0px auto;
     width: 800px;
     margin-bottom: 100px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-title {
     font-size: 30px;
     font-weight: bold;
     margin: 20px 0 40px 50px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-content {
     width: 400px;
     margin: 30px auto;
     text-align: center;
-<<<<<<< HEAD
-
 }
-
-=======
-}
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-tips span {
     display: block;
     line-height: 25px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-phone a {
     text-decoration: none;
     color: #409EFF;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-code {
     margin: 30px auto;
     width: 200px;
 }
-<<<<<<< HEAD
-
 .code-card-code span {
     display: block;
 }
-
-=======
-.code-card-code span {
-    display: block;
-}
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .copy-btn {
     margin-top: 10px;
     width: 50px;
     padding: 5px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-card-phone-tips {
     display: block;
     line-height: 25px;
 }
-<<<<<<< HEAD
-
 .code-phone-form {
     margin-top: 20px;
 }
-
-=======
-.code-phone-form {
-    margin-top: 20px;
-}
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .code-phone-form .phone-btn {
     margin-top: 5px;
     width: 100px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .links-card-wrapper {
     margin: 0 auto 100px auto;
     width: 800px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .links-card-contents-wrapper {
     width: 700px;
     margin: 20px auto;
 }
-<<<<<<< HEAD
-
 .links-card-contents {
     margin: 20px 0;
 }
-
-=======
-.links-card-contents {
-    margin: 20px 0;
-}
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .links-card-titles {
     font-size: 18px;
     font-weight: bold;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .links-card-links {
     text-align: center;
 }
 
-<<<<<<< HEAD
-.links-card-links a {
-    display: block;
-    margin-top: 30px;
-    text-decoration: none;
-    color: #409EFF;
-}
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .reminder-phone-form {
     /* text-align: center; */
     width: 400px;
     margin-top: 20px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .reminder-phone-form .phone-btn {
     margin-left: 100px;
     width: 60px;
     padding: 10px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e
 .finish-btn {
     margin-top: 10px;
     margin-left: 600px;
 }
-<<<<<<< HEAD
-</style>
-=======
 
 .url{
   
@@ -394,4 +258,3 @@ export default {
    
 }
 </style>
->>>>>>> 95e71ba98592bfb6908bc1f5a64e56a616ebd05e

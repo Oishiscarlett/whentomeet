@@ -11,8 +11,6 @@ import verifycode from '@/api/verifycode';
 // 事件模块接口
 import event from '@/api/event';
 
-import event from '@/api/event';
-
 
 // 导出接口
 export default {    

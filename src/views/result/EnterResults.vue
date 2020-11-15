@@ -50,7 +50,6 @@ export default {
                         rCode = res.data.code
                         // 验证验证码是否正确
                         if(res.data.code === 200) {
-                            // TODO: 设置动态路由
                             this.$router.push({ name: 'result', params: { eventCode: res.data.data.eventCode, hostCode: this.codeForm.code }})
                         } else {
                             // 结果码错误
@@ -66,7 +65,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .card-wrapper {
     margin-top: 200px;
 }
@@ -102,5 +101,4 @@ export default {
 .code-form .el-button {
     margin-top: 20px;
 }
-
 </style>
