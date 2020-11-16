@@ -14,7 +14,7 @@
                 <div class="code-card-code">
                   <span>{{ hostCode }}</span>
                   <el-button class="copy-btn"
-                        v-clipboard:copy="eventCode"
+                        v-clipboard:copy="hostCode"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                 </div>
