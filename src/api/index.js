@@ -8,7 +8,7 @@ import login from '@/api/login';
 import userinfo from '@/api/userinfo';
 // 验证码模块接口
 import verifycode from '@/api/verifycode';
-
+// 事件模块接口
 import event from '@/api/event';
 
 

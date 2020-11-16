@@ -7,9 +7,9 @@ const SetPsw = () => import('../views/reset_psw/SetPsw')
 const SetSuccess = () => import('../views/reset_psw/SetSuccess')
 const Login = () => import('../views/Login')
 const Faqs = () => import('../views/Faqs')
-
 const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
+const FinalResult = () => import('../views/result/FinalResult')
 const Edit = () => import('../views/create_event/Edit')
 
 const Choose = () => import('../views/choose_event/Choose')
@@ -18,7 +18,6 @@ const ChooseSuccess = () => import('../views/choose_event/ChooseSuccess')
 const EnterResults = () => import('../views/result/EnterResults')
 const Result = () => import('../views/result/Result')
 const CopyLink = () => import('../views/result/CopyLink')
-const FinalResult = () => import('../views/result/FinalResult')
 
 
 Vue.use(VueRouter)
@@ -62,7 +61,6 @@ const routes = [
     path: '/faqs',
     component: Faqs
   },
-
   {
     path: '/create',
     component: CreateEvent
@@ -104,7 +102,7 @@ const routes = [
     component: CopyLink
   },
   {
-    path: '/:eventCode/final/:hostCode',
+    path: '/:eventCode/final',
     name: 'finalresult',
     component: FinalResult
   }

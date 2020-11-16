@@ -14,6 +14,7 @@ import VueClipboard from 'vue-clipboard2'
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.prototype.$api = api; // 将api挂载到vue的原型上复制代码
+Vue.use(VueClipboard)
 
 Vue.use(VueCookies)
 Vue.prototype.clipboard = clipboard

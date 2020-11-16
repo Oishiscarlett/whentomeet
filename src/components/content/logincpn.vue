@@ -301,7 +301,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .base {
   border-width: 0px;
   position: relative;
