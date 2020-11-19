@@ -128,7 +128,6 @@ export default {
         start: selectInfo.start,
         groupId: 'hostSelect',
       })
-      console.log(selectInfo.start);
       // 更新父组件中的时间块
       this.$emit('getTimeUnit',this.selectTime);
     },

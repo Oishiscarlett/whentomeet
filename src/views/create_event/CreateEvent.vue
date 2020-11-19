@@ -98,7 +98,7 @@
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
-import { calendarMaxTime } from '@/utils/calendar-utils'
+import { calendarMaxTime,dateFormat } from '@/utils/calendar-utils'
 
 export default {
     name: 'CreateEvent',
@@ -176,14 +176,17 @@ export default {
         },
         // 设置日历默认显示的范围
         getTodayDate(today){
-            this.datasToCalendar.calendarFormat.validRange.start = today;
-            this.calendarForm.validRange.start = today;
-            let end = new Date();
+            this.datasToCalendar.calendarFormat.validRange.start = dateFormat(today);
+            this.calendarForm.validRange.start = dateFormat(today);
+            let endCalendar = new Date();
+            let endForm = new Date();
             // 默认的时间间隔是35天（5周）
-            let add = today.getTime() + 3024000000
-            end.setTime(add);
-            this.datasToCalendar.calendarFormat.validRange.end = end;
-            this.calendarForm.validRange.end = end;
+            let add1 = today.getTime() + 3024000000
+            let add2 = today.getTime() + 3110400000
+            endForm.setTime(add1);
+            endCalendar.setTime(add2);
+            this.datasToCalendar.calendarFormat.validRange.end = dateFormat(endCalendar);
+            this.calendarForm.validRange.end = dateFormat(endForm);
         },
         // 动态调整日历的格式
         changeCalendarFormat() {
@@ -217,7 +220,7 @@ export default {
             let end = new Date()
             let add = this.calendarForm.validRange.end.getTime() + 86400000;
             end.setTime(add);
-            formatapi.validRange.end = end;
+            formatapi.validRange.end = dateFormat(end);
         },
         // 创建事件
         onSubmit(eventForm){

@@ -61,6 +61,7 @@ export function timeUnitSplit(timeUnit) {
   return timeStr;
 }
 
+// 适应日历最大时间不包含的问题
 export function calendarMaxTime(time, duration) {
   let secondDuration = 0;
   let secondTime = 0;
@@ -83,4 +84,13 @@ export function calendarMaxTime(time, duration) {
     min = String(min);
   }
   return hour + ':' + min;
+}
+
+// 将date转换为2020-11-01格式
+export function dateFormat(time) {
+  let year = time.getFullYear();
+  let month = String(Number(time.getMonth()) + 1);
+  let date = String(time.getDate());
+
+  return year + '-' + month + '-' + date;
 }
