@@ -5,53 +5,60 @@
           <div class="calendar-wrapper">
               <Calendar @getTimeUnit='getTimeUnit' 
                         @getTimeUnitId='getTimeUnitId'
+                        @getTodayDate='getTodayDate'
                         :Datas='datasToCalendar'/>
           </div>
           <div class="form-wrapper">
               <div class="calendar-form-wrapper">
                   <el-collapse>
                     <el-collapse-item title="调整日历格式" name="1">
-                      <el-form :model="datasToCalendar" :rules="rules" ref="datasToCalendar" label-width="100px" class="calendar-form">
+                      <el-form :model="calendarForm" :rules="rules" ref="calendarForm" label-width="100px" class="calendar-form">
                           <el-form-item label="开始日期：" class="date">
                             <el-col :span="11">
-                              <el-date-picker type="date" placeholder="选择日期" v-model="datasToCalendar.calendarFormat.validRange.start" style="width: 100%;"></el-date-picker>
+                              <el-date-picker type="date" placeholder="选择日期" v-model="calendarForm.validRange.start" style="width: 100%;"></el-date-picker>
                             </el-col>
                           </el-form-item>
                           <el-form-item label="结束日期：" class="date">
                             <el-col :span="11">
-                              <el-date-picker type="date" placeholder="选择日期" v-model="datasToCalendar.calendarFormat.validRange.end" style="width: 100%;"></el-date-picker>
+                              <el-date-picker type="date" placeholder="选择日期" v-model="calendarForm.validRange.end" style="width: 100%;"></el-date-picker>
                             </el-col>
                           </el-form-item>
                           <el-form-item label="每周隐藏：">
-                            <el-checkbox-group v-model="datasToCalendar.calendarFormat.hiddenDays">
-                                <el-checkbox label="星期日" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期一" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期二" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期三" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期四" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期五" name="hiddenDays"></el-checkbox>
-                                <el-checkbox label="星期六" name="hiddenDays"></el-checkbox>
+                            <el-checkbox-group v-model="calendarForm.hiddenDays">
+                                <el-checkbox label="星期一"></el-checkbox>
+                                <el-checkbox label="星期二"></el-checkbox>
+                                <el-checkbox label="星期三"></el-checkbox>
+                                <el-checkbox label="星期四"></el-checkbox>
+                                <el-checkbox label="星期五"></el-checkbox>
+                                <el-checkbox label="星期六"></el-checkbox>
+                                <el-checkbox label="星期日"></el-checkbox>
                             </el-checkbox-group>
                           </el-form-item>
                           <el-form-item label="展示时间：" class="time">
-                            <el-time-select placeholder="开始时间" v-model="datasToCalendar.calendarFormat.slotMinTime" 
-                                            :picker-options="{ start: '08:30', step: '01:00', end: '18:30' }"></el-time-select>
+                            <el-time-select placeholder="开始时间" v-model="calendarForm.slotMinTime" 
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45' }"></el-time-select>
                             <span> 至 </span>
-                            <el-time-select  placeholder="结束时间" v-model="datasToCalendar.calendarFormat.slotMaxTime" 
-                                            :picker-options="{ start: '08:30', step: '01:00',  end: '18:30', minTime: datasToCalendar.calendarFormat.slotMinTime }"></el-time-select>
+                            <el-time-select  placeholder="结束时间" v-model="calendarForm.slotMaxTime" 
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', 
+                                                                minTime: calendarForm.slotMinTime }"></el-time-select>
                           </el-form-item>
                           <el-form-item label="高亮时间：" class="time">
-                              <el-time-select placeholder="开始时间" v-model="datasToCalendar.calendarFormat.businessHours.startTime" 
-                                            :picker-options="{ start: '08:30', step: '01:00', end: '18:30' }"></el-time-select>
+                              <el-time-select placeholder="开始时间" v-model="calendarForm.businessHours.startTime" 
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', }"></el-time-select>
                               <span> 至 </span>
-                              <el-time-select  placeholder="结束时间" v-model="datasToCalendar.calendarFormat.businessHours.endTime" 
-                                            :picker-options="{ start: '08:30', step: '01:00',  end: '18:30', minTime: datasToCalendar.calendarFormat.businessHours.startTime }"></el-time-select>
+                              <el-time-select  placeholder="结束时间" v-model="calendarForm.businessHours.endTime" 
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', 
+                                                                minTime: calendarForm.businessHours.startTime,}"></el-time-select>
                           </el-form-item>
                           <el-form-item label="时间间隔：">
-                            <el-select v-model="datasToCalendar.calendarFormat.slotDuration" placeholder="请选择时间间隔">
+                            <el-select v-model="calendarForm.slotDuration" placeholder="请选择时间间隔">
+                            <el-option label="15分钟" value="00:15"></el-option>
+                            <el-option label="30分钟" value="00:30"></el-option>
                             <el-option label="1小时" value="01:00"></el-option>
-                            <el-option label="2小时" value="02:00"></el-option>
                             </el-select>
+                          </el-form-item>
+                          <el-form-item class="change-btn">
+                            <el-button type="primary" @click="changeCalendarFormat">更改</el-button>
                           </el-form-item>
                       </el-form>
                     </el-collapse-item>
@@ -91,6 +98,7 @@
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
+import { calendarMaxTime } from '@/utils/calendar-utils'
 
 export default {
     name: 'CreateEvent',
@@ -105,18 +113,18 @@ export default {
                 calendarFormat: {
                     slotDuration: '01:00', 
                     defaultTimedEventDuration: '01:00',
-                    slotMinTime: "06:00",
-                    slotMaxTime: "22:00",
+                    slotMinTime: "07:00",
+                    slotMaxTime: "23:00",
                     businessHours: {
                         daysOfWeek: [ 1, 2, 3, 4, 5, 6, 0], 
-                        startTime: '08:00', 
-                        endTime: '20:00',
+                        startTime: '09:00', 
+                        endTime: '21:00',
                     },
-                    hiddenDays: [  ], 
+                    hiddenDays: [], 
                     validRange: {
-                        start: '2020-10-20',
-                        end: '2020-12-20'
-                    },
+                        start: '',
+                        end: ''
+                    }
                 },
                 calendarFunction: {
                     selectable: true,
@@ -126,6 +134,23 @@ export default {
             },
             // 结果页面点击的时间块的id
             idOfSelectTime: '',
+            // 日历格式表单
+            calendarForm: {
+                slotDuration: '01:00', 
+                defaultTimedEventDuration: '01:00',
+                slotMinTime: "07:00",
+                slotMaxTime: "22:00",
+                businessHours: {
+                    daysOfWeek: [ 1, 2, 3, 4, 5, 6, 0], 
+                    startTime: '09:00', 
+                    endTime: '20:00',
+                },
+                hiddenDays: [], 
+                validRange: {
+                    start: '',
+                    end: ''
+                }
+            },
             // 事件相关表单
             eventForm: {
                 name: '',
@@ -149,24 +174,50 @@ export default {
         getTimeUnitId(id) {
             this.idOfSelectTime = id;
         },
-        // 动态调整日历的格式：实现的时候与表单进行绑定（第三期任务）
+        // 设置日历默认显示的范围
+        getTodayDate(today){
+            this.datasToCalendar.calendarFormat.validRange.start = today;
+            this.calendarForm.validRange.start = today;
+            let end = new Date();
+            // 默认的时间间隔是35天（5周）
+            let add = today.getTime() + 3024000000
+            end.setTime(add);
+            this.datasToCalendar.calendarFormat.validRange.end = end;
+            this.calendarForm.validRange.end = end;
+        },
+        // 动态调整日历的格式
         changeCalendarFormat() {
             let formatapi = this.datasToCalendar.calendarFormat;
         
-            formatapi.slotDuration = '00:30' 
-            formatapi.defaultTimedEventDuration = '00:30'
-            formatapi.slotMinTime = "10:00:00"
-            formatapi.slotMaxTime = "20:00:00"
-            formatapi.businessHours = {
-                daysOfWeek: [ 1, 2, 3, 5, 6, 0],
-                startTime: '11:00',
-                endTime: '19:00', 
-            }
-            formatapi.hiddenDays = [1,4]
-            formatapi.validRange = {
-                start: '2020-11-11',
-                end: '2020-11-19'
-            }
+            formatapi.slotDuration = this.calendarForm.slotDuration
+            formatapi.defaultTimedEventDuration = this.calendarForm.slotDuration
+            formatapi.slotMinTime = this.calendarForm.slotMinTime
+            formatapi.slotMaxTime = calendarMaxTime(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration)
+            formatapi.businessHours.startTime = this.calendarForm.businessHours.startTime
+            formatapi.businessHours.endTime = calendarMaxTime(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
+            formatapi.hiddenDays = []
+            this.calendarForm.hiddenDays.forEach(element => {
+                if(element === "星期一"){
+                    formatapi.hiddenDays.push(1);
+                }else if(element === "星期二"){
+                    formatapi.hiddenDays.push(2);
+                }else if(element === "星期三"){
+                    formatapi.hiddenDays.push(3);
+                }else if(element === "星期四"){
+                    formatapi.hiddenDays.push(4);
+                }else if(element === "星期五"){
+                    formatapi.hiddenDays.push(5);
+                }else if(element === "星期六"){
+                    formatapi.hiddenDays.push(6);
+                }else if(element === "星期日"){
+                    formatapi.hiddenDays.push(0);
+                }
+            })
+            formatapi.validRange.start = this.calendarForm.validRange.start
+            let end = new Date()
+            let add = this.calendarForm.validRange.end.getTime() + 86400000;
+            end.setTime(add);
+            formatapi.validRange.end = end;
         },
         // 创建事件
         onSubmit(eventForm){
@@ -295,7 +346,7 @@ export default {
     display: inline-block;
 }
 
-.duration-unit-box .el-form-item__content {
+.duration-unit-box >>> .el-form-item__content {
     margin-left: 20px!important;
 }
 

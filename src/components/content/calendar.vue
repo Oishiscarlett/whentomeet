@@ -4,6 +4,7 @@
       <FullCalendar
         class='demo-app-calendar'
         :options='calendarOptions'
+        ref="fullCalendar" 
       >
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
@@ -71,13 +72,11 @@ export default {
         // 全天选项
         allDaySlot: false,
         // 日历的宽高比例：宽：高
-        aspectRatio: 3,
+        // aspectRatio: 3,
         // 日历内容的高度
         contentHeight: "auto",
         // 不允许用户选择已经选择过的时间点
         selectOverlap: false,
-        // 是否显示周末
-        weekends: true,
         /***************************
         *     用户可调整的属性
         *  与调整日历格式相关功能有关
@@ -129,6 +128,7 @@ export default {
         start: selectInfo.start,
         groupId: 'hostSelect',
       })
+      console.log(selectInfo.start);
       // 更新父组件中的时间块
       this.$emit('getTimeUnit',this.selectTime);
     },
@@ -149,7 +149,6 @@ export default {
             groupId: 'inviteeSelect',
             backgroundColor: '#003399',
             borderColor: '#003399',
-            //title: '2'
           }),
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
@@ -161,7 +160,6 @@ export default {
             groupId: 'hostSelect',
             backgroundColor: '#3788d8',
             borderColor: '#3788d8',
-            //title: '1'
           })
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
@@ -189,6 +187,14 @@ export default {
       return { domNodes: arrayOfDomNodes };
     }
   },
+  mounted() {
+    if(this.pages === 'create'){
+      let calendarApi = this.$refs.fullCalendar.getApi()
+      this.$emit('getTodayDate', calendarApi.getDate());
+      calendarApi.next()
+      calendarApi.prev()
+    }
+  }
 }
 </script>
 
@@ -227,5 +233,9 @@ export default {
 }
 .fc-icon {
     font-weight: bold!important;
+}
+
+.fc-day-disabled {
+  background-color: rgba(100,100,100,0.3)!important;
 }
 </style>
