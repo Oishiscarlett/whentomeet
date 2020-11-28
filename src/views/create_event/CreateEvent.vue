@@ -98,7 +98,7 @@
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
-import { calendarMaxTime,dateFormat } from '@/utils/calendar-utils'
+import { calendarMaxTime,dateToString,stringToDate } from '@/utils/calendar-utils'
 
 export default {
     name: 'CreateEvent',
@@ -176,8 +176,8 @@ export default {
         },
         // 设置日历默认显示的范围
         getTodayDate(today){
-            this.datasToCalendar.calendarFormat.validRange.start = dateFormat(today);
-            this.calendarForm.validRange.start = dateFormat(today);
+            this.datasToCalendar.calendarFormat.validRange.start = dateToString(today);
+            this.calendarForm.validRange.start = dateToString(today);
             let endCalendar = new Date();
             let endForm = new Date();
             // 默认的时间间隔是35天（5周）
@@ -185,8 +185,8 @@ export default {
             let add2 = today.getTime() + 3110400000
             endForm.setTime(add1);
             endCalendar.setTime(add2);
-            this.datasToCalendar.calendarFormat.validRange.end = dateFormat(endCalendar);
-            this.calendarForm.validRange.end = dateFormat(endForm);
+            this.datasToCalendar.calendarFormat.validRange.end = dateToString(endCalendar);
+            this.calendarForm.validRange.end = dateToString(endForm);
         },
         // 动态调整日历的格式
         changeCalendarFormat() {
@@ -216,11 +216,12 @@ export default {
                     formatapi.hiddenDays.push(0);
                 }
             })
-            formatapi.validRange.start = this.calendarForm.validRange.start
-            let end = new Date()
-            let add = this.calendarForm.validRange.end.getTime() + 86400000;
+            formatapi.validRange.start = dateToString(this.calendarForm.validRange.start);
+            let end = new Date();
+            let calendarFormEnd = stringToDate(this.calendarForm.validRange.end);
+            let add = calendarFormEnd.getTime() + 86400000;
             end.setTime(add);
-            formatapi.validRange.end = dateFormat(end);
+            formatapi.validRange.end = dateToString(end);
         },
         // 创建事件
         onSubmit(eventForm){

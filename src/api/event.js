@@ -16,7 +16,7 @@ const event = {
         });
     },
     // 重新编辑事件
-    editEvent(params) {
+    editEvent(eventCode,hostCode,params) {
         return axios.post(base.baseUrl + `/${eventCode}/edit/${hostCode}`, null, {
             params: params
         });
