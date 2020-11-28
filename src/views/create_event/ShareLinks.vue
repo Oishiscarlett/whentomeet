@@ -59,7 +59,7 @@
                       <el-form-item label="手机号码" prop="reminderPhone" >
                         <el-input  v-model.trim="reminderPhoneForm.reminderPhone" placeholder="请输入手机号码" maxlength=11></el-input>
                       </el-form-item>
-                      <el-button class="phone-btn">发送</el-button>
+                      <el-button class="phone-btn">确定</el-button>
                     </el-form>
                   </div>
                 </div>
