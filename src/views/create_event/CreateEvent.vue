@@ -85,6 +85,12 @@
                       <el-form-item label="活动形式：" prop="desc" class="desc-box">
                         <el-input type="textarea" v-model="eventForm.desc" :rows="7"></el-input>
                       </el-form-item>
+                      <el-form-item prop="public">
+                          <el-tooltip placement="bottom-start">
+                            <div slot="content">选中后，每个时间选择的人数<br/>将会以颜色深浅的方式展示给所有人</div>
+                            <el-checkbox v-model="eventForm.public">公开所有人的选项</el-checkbox>
+                          </el-tooltip>
+                      </el-form-item>
                       <el-form-item class="submit-btn">
                         <el-button type="primary" @click="onSubmit('eventForm')">创建事件</el-button>
                       </el-form-item>
@@ -156,7 +162,8 @@ export default {
                 name: '',
                 duration: '1',
                 durationUnit: 'hours',
-                desc: ''
+                desc: '',
+                public: true
             },
             rules: {
                 name: [
@@ -262,7 +269,7 @@ export default {
                             eventName: this.eventForm.name,
                             eventDuration: eventduration,
                             eventDescription: this.eventForm.desc,
-                            isTimePublic: 1
+                            isTimePublic: Number(this.eventForm.public)
                         }).then(res => {
                             // 创建事件成功并跳转分享链接页面
                             if(res.data.code === 200){
