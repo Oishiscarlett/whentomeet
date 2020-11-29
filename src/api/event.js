@@ -16,7 +16,7 @@ const event = {
         });
     },
     // 重新编辑事件
-    editEvent(params) {
+    editEvent(eventCode,hostCode,params) {
         return axios.post(base.baseUrl + `/${eventCode}/edit/${hostCode}`, null, {
             params: params
         });
@@ -34,9 +34,15 @@ const event = {
             params: params
         });
     },
+    // 重新选择时间获取上一次的信息
+    getPartnerInfo(idCode,params) {
+        return axios.get(base.baseUrl + `/eventinfo/partner/${idCode}`, {
+            params: params
+        });
+    },
     // 重新选择时间
-    updateTimeSelected(params) {
-        return axios.post(base.baseUrl + `${eventCode}/update/${idCode}`, null, {
+    updateTimeSelected(eventCode,idCode,params) {
+        return axios.post(base.baseUrl + `/${eventCode}/update/${idCode}`, null, {
             params: params
         });
     },
@@ -73,7 +79,12 @@ const event = {
             params: params
         });
     },
-
+    //删除回应
+    deletePartnerResponse(eventCode,hostCode,params) {
+        return axios.post(base.baseUrl + `/${eventCode}/result/${hostCode}/delete`, null, {
+            params: params
+        });
+    },
 
     /**
      *  最终结果页面相关

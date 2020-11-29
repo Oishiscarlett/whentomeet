@@ -5,7 +5,9 @@ function resolve (dir) {
 }
 
 module.exports = {
-  publicPath: './',
+  publicPath: '/',
+  /* 放置生成的静态文件目录（js css img） */
+  assetsDir: "static",
   devServer: {
     // can be overwritten by process.env.HOST
     host: '0.0.0.0',

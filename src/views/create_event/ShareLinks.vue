@@ -59,7 +59,7 @@
                       <el-form-item label="手机号码" prop="reminderPhone" >
                         <el-input  v-model.trim="reminderPhoneForm.reminderPhone" placeholder="请输入手机号码" maxlength=11></el-input>
                       </el-form-item>
-                      <el-button class="phone-btn">发送</el-button>
+                      <el-button class="phone-btn">确定</el-button>
                     </el-form>
                   </div>
                 </div>
@@ -148,7 +148,6 @@ export default {
         onError: function (e) {
             this.$message.error('复制失败');
         },
-
         share(){
             this.$router.push({ name: 'choose', params: { eventCode: this.$route.params.eventCode}});
         },
@@ -232,7 +231,6 @@ export default {
 .links-card-links {
     text-align: center;
 }
-
 .reminder-phone-form {
     /* text-align: center; */
     width: 400px;
@@ -247,7 +245,6 @@ export default {
     margin-top: 10px;
     margin-left: 600px;
 }
-
 .url{
   
   color: #69c0ff;

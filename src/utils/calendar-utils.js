@@ -60,3 +60,75 @@ export function timeUnitSplit(timeUnit) {
   let timeStr = timeUnit.toString().split(",");
   return timeStr;
 }
+
+// 适应日历最大时间不包含的问题
+export function calendarMaxTime(time, duration) {
+  let secondDuration = 0;
+  let secondTime = 0;
+  if (duration === '00:15') {
+    secondDuration = 15 * 60;
+  } else if (duration === '00:30'){
+    secondDuration = 30 * 60;
+  } else {
+    secondDuration = 60 * 60;
+  }
+
+  secondTime = Number(time.substring(0, 2)) * 3600 + Number(time.substring(3, 5)) * 60;
+  
+  secondTime += secondDuration
+  let hour = String(Math.floor(secondTime / 3600));
+  let min = (secondTime % 3600) / 60;
+  if (min === 0) {
+    min = '00';
+  } else {
+    min = String(min);
+  }
+  return hour + ':' + min;
+}
+
+// 将后端传回来的最大数据进行格式调整并显示在日历格式的表格中
+export function calendarFormMaxTime(time, duration) {
+  let secondDuration = 0;
+  let secondTime = 0;
+  if (duration === '00:15') {
+    secondDuration = 15 * 60;
+  } else if (duration === '00:30'){
+    secondDuration = 30 * 60;
+  } else {
+    secondDuration = 60 * 60;
+  }
+
+  secondTime = Number(time.substring(0, 2)) * 3600 + Number(time.substring(3, 5)) * 60;
+  
+  secondTime -= secondDuration
+  let hour = String(Math.floor(secondTime / 3600));
+  let min = (secondTime % 3600) / 60;
+  if (min === 0) {
+    min = '00';
+  } else {
+    min = String(min);
+  }
+  return hour + ':' + min;
+}
+
+// 将date转换为2020-11-01格式
+export function dateToString(time) {
+  if(typeof(time) != 'string') {
+    let year = time.getFullYear();
+    let month = String(Number(time.getMonth()) + 1);
+    let date = String(time.getDate());
+    return year + '-' + month + '-' + date;
+  } else {
+    return time;
+  }
+}
+
+// 将2020-11-01格式转换为Date
+export function stringToDate(time) {
+  if (typeof (time) === 'string') {
+    let newTime = new Date(Date.parse(time.replace(/-/g,  "/")));
+    return newTime;
+  } else {
+    return time;
+  }
+}
