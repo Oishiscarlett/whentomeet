@@ -4,6 +4,7 @@
       <FullCalendar
         class='demo-app-calendar'
         :options='calendarOptions'
+        ref="fullCalendar"
       >
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
@@ -76,8 +77,7 @@ export default {
         contentHeight: "auto",
         // 不允许用户选择已经选择过的时间点
         selectOverlap: false,
-        // 是否显示周末
-        weekends: true,
+        
         /***************************
         *     用户可调整的属性
         *  与调整日历格式相关功能有关
@@ -203,6 +203,14 @@ export default {
       return { domNodes: arrayOfDomNodes };
     }
   },
+  mounted() {
+    if(this.pages === 'create'){
+      let calendarApi = this.$refs.fullCalendar.getApi()
+      this.$emit('getTodayDate', calendarApi.getDate());
+      calendarApi.next()
+      calendarApi.prev()
+    }
+  }
 }
 </script>
 
@@ -241,5 +249,8 @@ export default {
 }
 .fc-icon {
     font-weight: bold!important;
+}
+.fc-day-disabled {
+  background-color: rgba(100,100,100,0.3)!important;
 }
 </style>
