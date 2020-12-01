@@ -44,12 +44,7 @@ export default {
   methods: {
     itemClick (path) {
       this.$router.push(path);
-    },
-
-    /* resultCheck(){
-
-      this.$router.push({ name: 'result', params: { eventCode: 'ipia2cn',hostCode: 'e7sg8t4' }});
-    } */
+    }
   }
 }
 </script>
@@ -99,11 +94,11 @@ export default {
 .btn-wrapper{
     position: absolute;
     top: 180px;
-    right: 130px;
+    right: 50px;
 }
 
 .btn-wrapper .el-button{
-    margin: 0 10px;
+    margin: 0 20px;
 
     font-size: 25px;
     color: white;
