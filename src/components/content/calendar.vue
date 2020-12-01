@@ -4,7 +4,7 @@
       <FullCalendar
         class='demo-app-calendar'
         :options='calendarOptions'
-        ref="fullCalendar" 
+        ref="fullCalendar"
       >
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
@@ -137,9 +137,10 @@ export default {
       if (this.pages === 'create') {
         clickInfo.event.remove();
         this.$emit('getTimeUnit',this.selectTime);
-      }else if(this.pages === 'select'){
+      }else if(this.pages === 'select' || this.pages === 'update'){
         // 如果是填写事件页面
         // 先判断当前时间是 inviteeSelect 或者 hostSelect
+        
         if(clickInfo.event.groupId === 'hostSelect'){
           clickInfo.event.remove();
           clickInfo.view.calendar.addEvent({
@@ -151,7 +152,7 @@ export default {
           }),
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
-        }else{
+        }else if(clickInfo.event.groupId === 'inviteeSelect'){
           clickInfo.event.remove();
           clickInfo.view.calendar.addEvent({
             id: clickInfo.event.id,
@@ -162,7 +163,20 @@ export default {
           })
           // 更新父组件中的时间块
           this.$emit('getTimeUnit',this.selectTime);
+        }else{
+          clickInfo.event.remove();
+          clickInfo.view.calendar.addEvent({
+            id: clickInfo.event.id,
+            start: clickInfo.event.start,
+            groupId: 'inviteeSelect',
+            backgroundColor: '#003399',
+            borderColor: '#003399',
+            //title: '1'
+          })
+          // 更新父组件中的时间块
+          this.$emit('getTimeUnit',this.selectTime);
         }
+
       }else if(this.pages === 'result' ){
         // 若是结果页面，返回点击时间的id，根据id查找数据，渲染
         this.$emit('getTimeUnitId', clickInfo.event.id);
@@ -233,7 +247,6 @@ export default {
 .fc-icon {
     font-weight: bold!important;
 }
-
 .fc-day-disabled {
   background-color: rgba(100,100,100,0.3)!important;
 }

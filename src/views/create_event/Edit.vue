@@ -106,7 +106,6 @@ import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
 import { calendarMaxTime,dateToString,stringToDate,timeUnitIdToTime,calendarFormMaxTime } from '@/utils/calendar-utils'
 import { formatDate } from '@fullcalendar/vue'
-
 export default {
     name: 'Edit',
     components:{
@@ -195,13 +194,11 @@ export default {
                     formatapi.slotMaxTime = slotTime[1];
                     this.calendarForm.slotMinTime = slotTime[0];
                     this.calendarForm.slotMaxTime = calendarFormMaxTime(slotTime[1],resapi.calendar.timeGap);
-
                     let highlightHour = resapi.calendar.highlightHours.split(',');
                     formatapi.businessHours.startTime = highlightHour[0];
                     formatapi.businessHours.endTime = highlightHour[1];
                     this.calendarForm.businessHours.startTime = highlightHour[0];
                     this.calendarForm.businessHours.endTime = calendarFormMaxTime(highlightHour[1],resapi.calendar.timeGap);
-
                     let hiddenDay = resapi.calendar.hiddenDays.split(',');
                     hiddenDay.forEach(element => {
                         switch (element) {
@@ -230,7 +227,6 @@ export default {
                                     break;
                         }
                     });
-
                     formatapi.validRange.start = resapi.calendar.startTime;
                     formatapi.validRange.end = resapi.calendar.endTime;
                     this.calendarForm.validRange.start = resapi.calendar.startTime;
@@ -239,7 +235,6 @@ export default {
                     let sub = endTime.getTime() - 86400000;
                     end.setTime(sub);
                     this.calendarForm.validRange.end = dateToString(end);
-
                     // 事件相关数据渲染与存储
                     this.eventForm.name = resapi.createInfo.eventName;
                     this.eventForm.desc = resapi.createInfo.eventDescription;
@@ -335,7 +330,6 @@ export default {
                         let showHour = formatapi.slotMinTime + ',' + formatapi.slotMaxTime;
                         let highlightHour = formatapi.businessHours.startTime + ',' + formatapi.businessHours.endTime;
                         let eventduration = this.eventForm.duration + ',' + this.eventForm.durationUnit;
-
                         let hiddenDay = '';
                         if(formatapi.hiddenDays.length > 0) {
                             hiddenDay = formatapi.hiddenDays[0];
@@ -348,7 +342,6 @@ export default {
                         for (let index = 1; index < eventapi.events.length; index++) {
                             eventsId += ',' + eventapi.events[index].id;
                         }
-
                         // 请求上传数据
                         this.$api.event.editEvent(this.$route.params.eventCode,this.$route.params.hostCode,{
                             eventCode: this.$route.params.eventCode,
@@ -396,13 +389,11 @@ export default {
 .content-wrapper {
     padding-top: 100px;
 }
-
 .form-wrapper {
     margin: 0 auto 100px auto;
     width: 1100px;
     background-color: #E8F8FF;
 }
-
 .calendar-form-wrapper >>> .el-collapse-item__header {
     background-color: #E8F8FF;
     font-size: 30px;
@@ -439,12 +430,10 @@ export default {
     font-size: 30px;
     font-weight: bold;
 }
-
 .name-box {
     width: 300px;
     display: inline-block;
 }
-
 .duration-box {
     display: inline-block;
     margin-left: 50px;

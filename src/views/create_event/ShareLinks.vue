@@ -148,7 +148,6 @@ export default {
         onError: function (e) {
             this.$message.error('复制失败');
         },
-
         share(){
             this.$router.push({ name: 'choose', params: { eventCode: this.$route.params.eventCode}});
         },
@@ -232,7 +231,6 @@ export default {
 .links-card-links {
     text-align: center;
 }
-
 .reminder-phone-form {
     /* text-align: center; */
     width: 400px;
@@ -247,7 +245,6 @@ export default {
     margin-top: 10px;
     margin-left: 600px;
 }
-
 .url{
   
   color: #69c0ff;

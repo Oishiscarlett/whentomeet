@@ -11,6 +11,7 @@ const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
 const FinalResult = () => import('../views/result/FinalResult')
 const Edit = () => import('../views/create_event/Edit')
+const Update = () => import('../views/choose_event/UpdateChoose')
 
 const Choose = () => import('../views/choose_event/Choose')
 const ChooseSuccess = () => import('../views/choose_event/ChooseSuccess')
@@ -18,6 +19,7 @@ const ChooseSuccess = () => import('../views/choose_event/ChooseSuccess')
 const EnterResults = () => import('../views/result/EnterResults')
 const Result = () => import('../views/result/Result')
 const CopyLink = () => import('../views/result/CopyLink')
+const SendRequest = () => import('../views/result/SendRequest')
 
 
 Vue.use(VueRouter)
@@ -86,6 +88,11 @@ const routes = [
     name: 'Success',
     component: ChooseSuccess
   },
+  {
+    path: '/:eventCode/update/:idCode',
+    name: 'update',
+    component: Update
+  },
 
   {
     path: '/EnterResults',
@@ -100,6 +107,11 @@ const routes = [
     path: '/:eventCode/copylink',
     name: 'copylink',
     component: CopyLink
+  },
+  {
+    path: '/:eventCode/sendrequest',
+    name: 'sendrequest',
+    component: SendRequest
   },
   {
     path: '/:eventCode/final',

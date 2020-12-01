@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         link(){
-            this.$router.push({ name: 'update', params: { eventCode: 'ipia2cn',idCode: 'pgadf27a' }});
+            this.$router.push({ name: 'update', params: { eventCode: this.$route.params.eventCode,idCode: this.$route.params.idCode }});
         },
         itemClick(path){
             this.$router.push(path);
