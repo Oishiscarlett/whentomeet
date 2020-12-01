@@ -25,13 +25,13 @@
                           </el-form-item>
                           <el-form-item label="每周隐藏：">
                             <el-checkbox-group v-model="calendarForm.hiddenDays">
-                                <el-checkbox label="星期一"></el-checkbox>
-                                <el-checkbox label="星期二"></el-checkbox>
-                                <el-checkbox label="星期三"></el-checkbox>
-                                <el-checkbox label="星期四"></el-checkbox>
-                                <el-checkbox label="星期五"></el-checkbox>
-                                <el-checkbox label="星期六"></el-checkbox>
-                                <el-checkbox label="星期日"></el-checkbox>
+                                <el-checkbox label='1'>星期一</el-checkbox>
+                                <el-checkbox label='2'>星期二</el-checkbox>
+                                <el-checkbox label='3'>星期三</el-checkbox>
+                                <el-checkbox label='4'>星期四</el-checkbox>
+                                <el-checkbox label='5'>星期五</el-checkbox>
+                                <el-checkbox label='6'>星期六</el-checkbox>
+                                <el-checkbox label='0'>星期日</el-checkbox>
                             </el-checkbox-group>
                           </el-form-item>
                           <el-form-item label="展示时间：" class="time">
@@ -199,34 +199,15 @@ export default {
                     formatapi.businessHours.endTime = highlightHour[1];
                     this.calendarForm.businessHours.startTime = highlightHour[0];
                     this.calendarForm.businessHours.endTime = calendarFormMaxTime(highlightHour[1],resapi.calendar.timeGap);
-                    let hiddenDay = resapi.calendar.hiddenDays.split(',');
-                    hiddenDay.forEach(element => {
-                        switch (element) {
-                            case '1':
-                                this.calendarForm.hiddenDays.push('星期一');
-                                break;
-                            case '2':
-                                this.calendarForm.hiddenDays.push('星期二');
-                                break;
-                            case '3':
-                                this.calendarForm.hiddenDays.push('星期三');
-                                break;
-                            case '4':
-                                this.calendarForm.hiddenDays.push('星期四');
-                                break;    
-                            case '5':
-                                this.calendarForm.hiddenDays.push('星期五');
-                                break;
-                            case '6':
-                                this.calendarForm.hiddenDays.push('星期六');
-                                break;
-                            case '0':
-                                this.calendarForm.hiddenDays.push('星期日');
-                                break;    
-                            default:
-                                    break;
-                        }
-                    });
+                    if(resapi.calendar.hiddenDays[0] != null){
+                        let hiddenDay = resapi.calendar.hiddenDays.split(',');
+                        formatapi.hiddenDays = [];
+                        console.log(hiddenDay);
+                        hiddenDay.forEach(element => {
+                            this.calendarForm.hiddenDays.push(element);
+                            formatapi.hiddenDays.push(Number(element));
+                        });
+                    }                    
                     formatapi.validRange.start = resapi.calendar.startTime;
                     formatapi.validRange.end = resapi.calendar.endTime;
                     this.calendarForm.validRange.start = resapi.calendar.startTime;
@@ -295,21 +276,7 @@ export default {
             formatapi.businessHours.endTime = calendarMaxTime(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
             formatapi.hiddenDays = []
             this.calendarForm.hiddenDays.forEach(element => {
-                if(element === "星期一"){
-                    formatapi.hiddenDays.push(1);
-                }else if(element === "星期二"){
-                    formatapi.hiddenDays.push(2);
-                }else if(element === "星期三"){
-                    formatapi.hiddenDays.push(3);
-                }else if(element === "星期四"){
-                    formatapi.hiddenDays.push(4);
-                }else if(element === "星期五"){
-                    formatapi.hiddenDays.push(5);
-                }else if(element === "星期六"){
-                    formatapi.hiddenDays.push(6);
-                }else if(element === "星期日"){
-                    formatapi.hiddenDays.push(0);
-                }
+                formatapi.hiddenDays.push(Number(element));
             })
             formatapi.validRange.start = dateToString(this.calendarForm.validRange.start);
             let end = new Date();

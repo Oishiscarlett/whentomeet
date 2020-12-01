@@ -111,19 +111,25 @@ export function calendarFormMaxTime(time, duration) {
   return hour + ':' + min;
 }
 
-// 将date转换为2020-11-01格式
+// 将date转换为2020-01-01格式
 export function dateToString(time) {
   if(typeof(time) != 'string') {
     let year = time.getFullYear();
     let month = String(Number(time.getMonth()) + 1);
     let date = String(time.getDate());
+    if (month.length === 1) {
+      month = '0' + month;
+    }
+    if (date.length === 1) {
+      date = '0' + date;
+    }
     return year + '-' + month + '-' + date;
   } else {
     return time;
   }
 }
 
-// 将2020-11-01格式转换为Date
+// 将2020-01-01格式转换为Date
 export function stringToDate(time) {
   if (typeof (time) === 'string') {
     let newTime = new Date(Date.parse(time.replace(/-/g,  "/")));
