@@ -4,7 +4,7 @@
       <div class="card-wrapper">
           <div class="code-card-wrapper">
             <el-card class="code-card">
-              <div class="code-card-title">注意！</div>
+              <div class="code-card-title">注意</div>
               <div class="code-card-content">
                 <div class="code-card-tips">
                   <span>请保存你的事件密钥</span>
@@ -19,8 +19,6 @@
                         v-clipboard:error="onError">复制</el-button>
                 </div>
                 <div class="code-card-phone">
-                  <span class="code-card-phone-tips">您也可以选择 <router-link to="/login">登录</router-link> 保存事件</span>
-                  <span class="code-card-phone-tips">或</span>
                   <el-checkbox class="code-card-phone-tips" v-model="codeChecked">将密钥发送至您的手机</el-checkbox>
                   <div class="code-phone-form" v-if="codeChecked">
                       <el-form ref="codePhoneForm" size="medium" label-position="right" :model="codePhoneForm" :rules="rules" label-width="100px">
@@ -32,7 +30,6 @@
                   </div>
                 </div>
               </div>
-              
             </el-card>
           </div>
           <div class="links-card-wrapper">
@@ -40,32 +37,20 @@
               <div class="links-card-contents-wrapper">
                 <div class="links-card-contents">
                   <div class="links-card-titles">
-                    <span>发送该链接给你的被邀请人：</span>
+                    <span>邀请链接</span>
                   </div>
                   <div class="links-card-links">
                     <span class="url" @click="share()">{{ shareLink }}</span>
                     <br>
-                  <!--   <a href="" >{{ shareLink }}</a> -->
                     <el-button class="copy-btn"
                         v-clipboard:copy="shareLink"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError">复制</el-button>
                   </div>
                 </div>
-                <div class="links-card-phone">
-                  <el-checkbox class="links-card-phone-tips" v-model="reminderChecked">有回应时 给您提醒：</el-checkbox>
-                  <div class="reminder-phone-form" v-if="reminderChecked">
-                    <el-form ref="reminderPhoneForm" size="medium" label-position="right" :model="reminderPhoneForm" :rules="rules" label-width="100px">
-                      <el-form-item label="手机号码" prop="reminderPhone" >
-                        <el-input  v-model.trim="reminderPhoneForm.reminderPhone" placeholder="请输入手机号码" maxlength=11></el-input>
-                      </el-form-item>
-                      <el-button class="phone-btn">确定</el-button>
-                    </el-form>
-                  </div>
-                </div>
                 <div class="links-card-contents">
                   <div class="links-card-titles">
-                    <span>查看事件结果链接：</span>
+                    <span>查看事件结果链接</span>
                   </div>
                   <div class="links-card-links">
                     <span class="url" @click="result()">{{ resultLink }}</span>
@@ -79,7 +64,7 @@
                 </div>
                 <div class="links-card-contents">
                   <div class="links-card-titles">
-                    <span>重新编辑事件链接：</span>
+                    <span>重新编辑事件链接</span>
                   </div>
                   <div class="links-card-links">
                     <span class="url" @click="edit()">{{ editLink }}</span>
@@ -91,12 +76,12 @@
                         v-clipboard:error="onError">复制</el-button>
                   </div>
                 </div>
-                <div class="finish-box">
-                    <el-button class="finish-btn" type="primary" @click="toHome">完成</el-button>
-                </div>
               </div>
             </el-card>
           </div>
+      </div>
+      <div class="btn-wrapper"> 
+        <el-button class="finish-btn" type="primary" @click="toHome">完成</el-button>
       </div>
     </div>
 </template>
@@ -111,7 +96,6 @@ export default {
     data() {
         return {
             codeChecked: false,
-            reminderChecked: false,
             eventCode: this.$route.params.eventCode,
             hostCode: this.$route.params.hostCode,
             shareLink: 'http://localhost:8080/choose/' + this.$route.params.eventCode,
@@ -120,15 +104,8 @@ export default {
             codePhoneForm: {
                 codePhone: ''
             },
-            reminderPhoneForm: {
-                reminderPhone: ''
-            },
             rules: {
                 codePhone: [
-                    { required: true, message: '请输入手机号码', trigger: 'blur' },
-                    { pattern: /^((1[3,5,8][0-9])|(14[5,7])|(17[0,5,6,7,8])|(19[7]))\d{8}$/, message: '请检查手机号是否正确', trigger: 'blur' },
-                ],
-                reminderPhone: [
                     { required: true, message: '请输入手机号码', trigger: 'blur' },
                     { pattern: /^((1[3,5,8][0-9])|(14[5,7])|(17[0,5,6,7,8])|(19[7]))\d{8}$/, message: '请检查手机号是否正确', trigger: 'blur' },
                 ]
@@ -163,24 +140,33 @@ export default {
 
 <style scoped>
 .card-wrapper {
-    padding-top: 150px;
-    width: 100%;
+    margin: 50px 100px;
+    padding: 70px 100px 0 100px;
     height: 100%;
+    display: flex;
+}
+.btn-wrapper {
+    text-align: center;
+}
+.btn-wrapper .finish-btn {
+  width: 150px;
+  font-weight: bold;
+}
+.el-card {
+  height: 500px;
 }
 .code-card-wrapper {
-    margin: 0px auto;
-    width: 800px;
-    margin-bottom: 100px;
+    text-align: center;
+    flex: 1;
 }
 .code-card-title {
     font-size: 30px;
     font-weight: bold;
-    margin: 20px 0 40px 50px;
+    margin: 30px;
 }
 .code-card-content {
-    width: 400px;
+    width: 300px;
     margin: 30px auto;
-    text-align: center;
 }
 .code-card-tips span {
     display: block;
@@ -196,6 +182,9 @@ export default {
 }
 .code-card-code span {
     display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .copy-btn {
     margin-top: 10px;
@@ -214,44 +203,26 @@ export default {
     width: 100px;
 }
 .links-card-wrapper {
-    margin: 0 auto 100px auto;
-    width: 800px;
+    margin-left: 100px;
+    flex: 1;
 }
 .links-card-contents-wrapper {
-    width: 700px;
+    width: 400px;
     margin: 20px auto;
+    text-align: center;
 }
 .links-card-contents {
-    margin: 20px 0;
+    margin: 30px 0;
 }
 .links-card-titles {
     font-size: 18px;
     font-weight: bold;
 }
-.links-card-links {
-    text-align: center;
-}
-.reminder-phone-form {
-    /* text-align: center; */
-    width: 400px;
-    margin-top: 20px;
-}
-.reminder-phone-form .phone-btn {
-    margin-left: 100px;
-    width: 60px;
-    padding: 10px;
-}
-.finish-btn {
-    margin-top: 10px;
-    margin-left: 600px;
-}
 .url{
-  
   color: #69c0ff;
   cursor: pointer;
   display: block;
-    margin-top: 30px;
-    text-decoration: none;
-   
+  margin-top: 30px;
+  text-decoration: none; 
 }
 </style>
