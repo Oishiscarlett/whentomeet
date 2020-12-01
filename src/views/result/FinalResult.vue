@@ -37,7 +37,7 @@
                         <el-button type="primary">导入日历</el-button>
                     </span>
                     <span class="right">
-                        <el-button type="primary">重新选择时间</el-button>
+                        <el-button type="primary" @click="renewFinal()">重新选择时间</el-button>
                     </span>
                 </div>
             </div>
@@ -98,6 +98,11 @@ export default {
                 this.nonAttendance.percentage = '（' + res.data.data.absentPro + '%）';
                 this.nonAttendance.peopleList = res.data.data.absentName.split(',');
             })
+    },
+    methods:{
+        renewFinal(){
+            this.$router.push({ name: 'result', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
+        },
     }
 }
 </script>

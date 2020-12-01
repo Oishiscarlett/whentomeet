@@ -29,7 +29,7 @@
         <div class="timeTips2"></div>
         <div class="timeTips2_text">
             <p>
-                <span>您选择的时间</span>
+                <span>您以及其他参与者选择的时间</span>
             </p>
         </div>
 
@@ -54,8 +54,6 @@
               @getTimeUnitId='getTimeUnitId'
               :Datas='datasToCalendar'/>
     <button @click="changeCalendarFormat">try</button>
-
-    
 
     <!-- 填写信息区 -->
     <div class="info">
@@ -116,7 +114,7 @@ export default {
         name: "",
         comment: "",
       },
-      checked: true,
+      checked: false,
         //表单规则验证对象
         info_content_rules: {
           name: [
@@ -178,7 +176,7 @@ export default {
               title: '1' 
             } */
           ],
-          pages: 'select',   // 这里有三个选项：create、select、result 对应3个页面
+          pages: 'update',   // 这里有三个选项：create、select、result 对应3个页面
         }
       },
       // 结果页面被选中的时间块的id
@@ -262,11 +260,43 @@ export default {
             this.publicBox = true; //“公开自己的选择”框是否可见
           }
           //console.log(eventapi.events)
+          this.getPartnerInfo();
+          
         }
       }).catch(error => {
           console.log(error);
       });
       this.box = true;
+    },
+
+    //调用获取上一次提交的信息接口
+    getPartnerInfo(){
+      this.$api.event.getPartnerInfo(this.$route.params.idCode,
+        {
+          idCode: this.$route.params.idCode
+        }
+      ).then(res => {
+        console.log(res.data)
+        if(res.data.code === 200){
+          if(res.data.data.partnerInfo.isTimePublic == 1){
+            this.checked = true;
+          }else{
+            this.checked = false;
+          }
+
+          this.info_content.name = res.data.data.partnerInfo.name;
+          this.info_content.comment = res.data.data.partnerInfo.comment;
+
+          //将传回的数据调整成日历所需格式
+          let inviteeTime = res.data.data.partnerInfo.timeUnit;
+          let inviteeTimeStr = inviteeTime.split(",");
+          this.addPartnerBlock(inviteeTimeStr);
+          
+
+        }
+      }).catch(error => {
+          console.log(error);
+      });
     },
 
     //点击“提交”，将数据传给后端
@@ -293,9 +323,10 @@ export default {
             }
             
             //调用接口传数据
-            this.$api.event.attendEvent(this.$route.params.eventCode,{
+            this.$api.event.updateTimeSelected(this.$route.params.eventCode,this.$route.params.idCode,{
               
                 eventCode: this.$route.params.eventCode,
+                idCode: this.$route.params.idCode,
                 timeUnit: idTo,
                 name: this.info_content.name,
                 comment: this.info_content.comment,
@@ -305,7 +336,7 @@ export default {
               if (res.data.code == 200) {
                 console.log(idTo)
                 //跳转到“提交成功”页面
-                this.$router.push({ name: 'Success', params: { eventCode: this.$route.params.eventCode,idCode: res.data.data }});
+                this.$router.push({ name: 'Success', params: { eventCode: this.$route.params.eventCode,idCode: this.$route.params.idCode }});
               }else{
                 alert('请求失败')
               }
@@ -326,7 +357,31 @@ export default {
         
       });
     },
-    
+       
+    /* changeBtn(){
+      this.isShow = !this.isShow
+        if(this.isShow){
+          this.btnText = "屏蔽其他参与者选择的时间";
+        }else{
+          this.btnText = "显示其他参与者选择的时间";
+        }
+    }, */
+
+    //创建参与者上一次选择的时间块
+    addPartnerBlock(inviteeTimeStr){
+      let eventapi = this.datasToCalendar.calendarFunction;
+      for(let i = 0; i<eventapi.events.length; i++){
+        for(let j = 0; j<inviteeTimeStr.length; j++){
+          if(eventapi.events[i].id == inviteeTimeStr[j]){
+            eventapi.events[i].backgroundColor = '#003399';
+            eventapi.events[i].borderColor = '#003399';
+            eventapi.events[i].title = '';
+            eventapi.events[i].groupId = 'inviteeSelect';
+          }
+        }
+      }  
+    },
+
     //将颜色替换成colorRange
     addrangeOneBlock(rangeOneStr){
       let eventapi = this.datasToCalendar.calendarFunction;
@@ -335,7 +390,6 @@ export default {
           if(eventapi.events[i].id == rangeOneStr[j]){
             eventapi.events[i].backgroundColor = '#91d5ff';
             eventapi.events[i].borderColor = '#91d5ff';
-            eventapi.events[i].groupId = 'rangeOne';
             eventapi.events[i].title = '';
           }
         }
@@ -349,7 +403,6 @@ export default {
           if(eventapi.events[i].id == rangeTwoStr[j]){
             eventapi.events[i].backgroundColor = '#69c0ff';
             eventapi.events[i].borderColor = '#69c0ff';
-            eventapi.events[i].groupId = 'rangeTwo';
             eventapi.events[i].title = '';
           }
         }
@@ -363,20 +416,11 @@ export default {
           if(eventapi.events[i].id == rangeThreeStr[j]){
             eventapi.events[i].backgroundColor = '#40a9ff';
             eventapi.events[i].borderColor = '#40a9ff';
-            eventapi.events[i].groupId = 'rangeThree';
             eventapi.events[i].title = '';
           }
         }
       }  
     },
-    /* changeBtn(){
-      this.isShow = !this.isShow
-        if(this.isShow){
-          this.btnText = "屏蔽其他参与者选择的时间";
-        }else{
-          this.btnText = "显示其他参与者选择的时间";
-        }
-    }, */
 
     /* 日历相关 */
     // 与日历组件通信，时时更新this.datasToCalendar.calendarFunction.events
