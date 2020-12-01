@@ -213,11 +213,17 @@ export default {
           formatapi.slotMaxTime = showHours[1] + ":00"
           let highlightHours = res.data.data.calendar.highlightHours.split(",")
           formatapi.businessHours = {
-            daysOfWeek: [ 1, 2, 3, 5, 6, 0],
+            //daysOfWeek: [ 1, 2, 3, 5, 6, 0],
             startTime: highlightHours[0],
             endTime: highlightHours[1], 
           }
-          formatapi.hiddenDays = [],
+          let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
+          formatapi.hiddenDays = []
+          for(var i = 0; i<hiddenDay.length; i++){
+              formatapi.hiddenDays.push(Number(hiddenDay[i]));
+              
+          }
+          
           formatapi.validRange = {
             start: res.data.data.calendar.startTime,
             end: res.data.data.calendar.endTime
@@ -255,9 +261,9 @@ export default {
           let rangeThreeStr = rangeThree.split(",");
           this.addrangeTwoBlock(rangeThreeStr);
 
-          if(res.data.data.isTimePublic == 1){
+          /* if(res.data.data.isTimePublic == 1){
             this.publicBox = true; //“公开自己的选择”框是否可见
-          }
+          } */
           //console.log(eventapi.events)
           this.getPartnerInfo();
           
@@ -329,7 +335,7 @@ export default {
                 timeUnit: idTo,
                 name: this.info_content.name,
                 comment: this.info_content.comment,
-                isTimePublic: this.checked ? 1 : 0
+                isTimePublic: 1
             }).then(res => {
               //console.log(res.data)
               if (res.data.code == 200) {

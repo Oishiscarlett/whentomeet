@@ -220,10 +220,10 @@ export default {
           let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
           formatapi.hiddenDays = []
           for(var i = 0; i<hiddenDay.length; i++){
-              formatapi.hiddenDays.push(hiddenDay[i]);
+              formatapi.hiddenDays.push(Number(hiddenDay[i]));
               
           }
-          console.log(formatapi.hiddenDays);
+          //console.log(formatapi.hiddenDays);
           formatapi.validRange = {
             start: res.data.data.calendar.startTime,
             end: res.data.data.calendar.endTime
@@ -261,9 +261,9 @@ export default {
           let rangeThreeStr = rangeThree.split(",");
           this.addrangeTwoBlock(rangeThreeStr);
 
-          if(res.data.data.isTimePublic == 1){
+          /* if(res.data.data.isTimePublic == 1){
             this.publicBox = true; //“公开自己的选择”框是否可见
-          }
+          } */
           //console.log(eventapi.events)
         }
       }).catch(error => {
