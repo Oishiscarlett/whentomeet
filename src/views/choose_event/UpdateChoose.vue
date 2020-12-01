@@ -38,7 +38,7 @@
         <div class="cr3"></div>
         <div class="timeTips3_text">
             <p>
-                <span>其他参与者选择的时间</span>
+                <span>其他参与者选择的时间<br>（颜色越深，选择该时间的人数越多）</span>
             </p>
         </div>
         <!-- <div>
@@ -53,8 +53,7 @@
               @getTimeUnit='getTimeUnit' 
               @getTimeUnitId='getTimeUnitId'
               :Datas='datasToCalendar'/>
-    <button @click="changeCalendarFormat">try</button>
-
+    
     <!-- 填写信息区 -->
     <div class="info">
       <div class="info_title">
@@ -73,8 +72,8 @@
           <el-input class="info_comment_edit" type="textarea" v-model="info_content.comment"></el-input>
         </el-form-item>
 
-        <el-checkbox v-if="publicBox" class="info_content_public" v-model="checked">公开我的选择（勾选后，您的时间将会被其他参与者所查看）</el-checkbox>
-
+        <!-- <el-checkbox v-if="publicBox" class="info_content_public" v-model="checked">公开我的选择（勾选后，您的时间将会被其他参与者所查看）</el-checkbox>
+ -->
         <el-form-item>
           <el-button class="btn_submit" type="primary" @click="choose('info_content');" style="font-size:30px;">
             提交
@@ -459,7 +458,7 @@ export default {
 #box{
     width: 100%;
     height: 100%;
-    /* position: fixed; */
+    /* position: fixed; 
     top: 0px;
     bottom: 0px;
     /* overflow: scroll; */
@@ -470,12 +469,13 @@ export default {
   height: 100%;
   position: relative;
   margin: 0 auto;
+  padding-top: 100px;
 }
 
 .title{
   position: absolute;
   top: 130px;
-  left: 150px;
+  left: 110px;
 }
 
 .eventName {
@@ -594,180 +594,86 @@ export default {
   position: absolute;
   top: 60px;
   left: 60px;
-  width: 220px;
-  height: 22px;
+  width: 250px;
+  height: 30px;
   font-weight: 600;
   font-size: 14px;
-  color: #333333;  
-}
-
-.btn_pb {
-  position: absolute;
-  top: 60px;
-  width: 160px;
-  height: 30px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 12px;
-  border-style: solid;
-  border-width: 1px;
-  background-color: #ffffff;
-  border-radius: 5px;
+  color: #333333; 
+  line-height: 15px;
 }
 
 .demo-app {
-  position: absolute;
+  /* position: absolute;
   top: 220px;
   left: 110px;
   display: flex;
   width: 1000px;
   min-height: 100%;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 14px; */
+  padding-top: 150px;
 }
 
 .info{
-  position: absolute;
-  top: 750px;
-  left: 450px;
+  margin: 0 auto;
+  width: 700px;
+  text-align: center;
 }
 
 .info_title {
-    position: absolute;
+    /* position: absolute; */
+    margin-left: 150px;
     width: 350px;
     height: 34px;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 23px;
     letter-spacing: 3px;
     text-align: center;
 }
 
 .info_content {
-    border-width: 0px;
-    position: absolute;
-    top: 10px;
-    left: -90px;
-    width: 700px;
-    height: 500px;
+  padding-top: 50px;
 }
 
-.info_content_name {
-  position: absolute;
-  top: 40px;
-  width: 126px;
-  height: 26px;
-}
-
-/* .info_content_name .el-form-item__label{
-  font-size: 20px;
-  top: 10px;
-  left: 20px;
+.info_content >>> .el-form-item__label{
+  font-size: 18px;
   text-align: center;
   font-weight: 700;
   letter-spacing: 3px;
-} */
+  padding-bottom: 30px;
+}
 
-.info_name_edit {
-  position: absolute;
-  left: 150px;
-  top: 0px;
-  width: 350px;
+.info_content >>> .el-form-item__content{
+  font-size: 18px;
+  padding-left: 200px;
+  width: 450px;
   height: 50px;
 }
 
-/* .info_name_edit .el-input__inner {
-    -webkit-appearance: none;
-    background-color: #FFF;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #DCDFE6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 30px;
-    line-height: 40px;
-    outline: 0;
-    padding: 0 15px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 480px;
-} */
-
-.el-form-item__error {
-    color: #F56C6C;
-    font-size: 13px;
-    line-height: 1;
-    padding-top: 4px;
-    position: absolute;
-    top: 55px;
-    left: 200px;
-    width: 150px;
+.info_content >>> .el-form-item__error{
+  padding-left: 200px;
+  margin-bottom: 30px;
+  font-size: 16px;
 }
 
-.info_content_comment {
-  position: absolute;
-  
-  top: 120px;
-  width: 90px;
-  height: 34px;
+.info_content_comment >>> .info_comment_edit{
+    height: 300px;
 }
 
-/* .info_content_comment .el-form-item__label{
-  font-size: 20px;
-  font-family: "Arial Negreta", "Arial Normal", "Arial";
-  font-style: normal;
-  font-size: 20px;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 3px;
-} */
-
-.info_comment_edit {
-  position: absolute;
-  left: 150px;
-  top: 0px;
-  width: 350px;
-  height: 100px;
-}
-
-/* .info_comment_edit .el-textarea__inner {
-    -webkit-appearance: none;
-    background-color: #FFF;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #DCDFE6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: 0;
-    padding: 0 15px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 480px;
-    height: 200px;
-} */
-
-.info_content_public {
+/* .info_content_public {
   position: absolute;
   left: 105px;
   top: 200px;
   width: 400px;
   height: 60px;
   color: #333333;
-}
+} */
 
 .btn_submit {
-  position: absolute;
-  left: 150px;
-  top: 250px;
   width: 250px;
   height: 50px;
   font-size: 22px;
   text-align: center;
+  margin-right: 150px;
 }
-
-
-
 </style>
