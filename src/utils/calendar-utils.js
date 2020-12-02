@@ -62,7 +62,7 @@ export function timeUnitSplit(timeUnit) {
 }
 
 // 适应日历最大时间不包含的问题
-export function calendarMaxTime(time, duration) {
+export function addDuration(time, duration) {
   let secondDuration = 0;
   let secondTime = 0;
   if (duration === '00:15') {
@@ -87,7 +87,7 @@ export function calendarMaxTime(time, duration) {
 }
 
 // 将后端传回来的最大数据进行格式调整并显示在日历格式的表格中
-export function calendarFormMaxTime(time, duration) {
+export function subDuration(time, duration) {
   let secondDuration = 0;
   let secondTime = 0;
   if (duration === '00:15') {
