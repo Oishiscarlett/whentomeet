@@ -11,11 +11,13 @@
                 <span @click="link()">http://localhost:8080/{{ eventCode }}/update/{{ idCode }}</span>
                <!-- <router-link to="{ name: 'update', params: { eventCode: 'ipia2cn',idCode: 'pgadf27a' }}">http://localhost:8080/{{ eventCode }}/update/{{ idCode }}</router-link> -->       
             </p>
-            <p class="p1">
+            <!-- <p class="p1">
                 <span>您可以<span class="login" @click="itemClick('/login')">登录</span>保存您的事件</span>
-            </p>
+            </p> -->
             <p class="p2">
-                <span>或<span class="sendToPhone" type="text" @click="dialogFormVisible = true">发送到手机</span>以保存您的事件</span>
+                <!-- <span>或 -->
+                    <span class="sendToPhone" type="text" @click="dialogFormVisible = true">发送到手机</span>
+                    以保存您的事件<!-- </span> -->
             </p>
 
             <el-dialog title="发送到手机" :visible.sync="dialogFormVisible">

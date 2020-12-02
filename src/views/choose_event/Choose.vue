@@ -220,8 +220,9 @@ export default {
           let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
           formatapi.hiddenDays = []
           for(var i = 0; i<hiddenDay.length; i++){
+            if(typeof(hiddenDay[i]) == "number" ){
               formatapi.hiddenDays.push(Number(hiddenDay[i]));
-              
+            }
           }
           //console.log(formatapi.hiddenDays);
           formatapi.validRange = {
@@ -372,14 +373,6 @@ export default {
         }
       }  
     },
-    /* changeBtn(){
-      this.isShow = !this.isShow
-        if(this.isShow){
-          this.btnText = "屏蔽其他参与者选择的时间";
-        }else{
-          this.btnText = "显示其他参与者选择的时间";
-        }
-    }, */
 
     /* 日历相关 */
     // 与日历组件通信，时时更新this.datasToCalendar.calendarFunction.events

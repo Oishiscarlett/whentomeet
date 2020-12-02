@@ -117,6 +117,12 @@ export function dateToString(time) {
     let year = time.getFullYear();
     let month = String(Number(time.getMonth()) + 1);
     let date = String(time.getDate());
+    if (month.length === 1) {
+      month = '0' + month;
+    }
+    if (date.length === 1) {
+      date = '0' + date;
+    }
     return year + '-' + month + '-' + date;
   } else {
     return time;

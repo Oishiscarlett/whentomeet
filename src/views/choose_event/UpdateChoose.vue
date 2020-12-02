@@ -218,12 +218,14 @@ export default {
             endTime: highlightHours[1], 
           }
           let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
+          //console.log(hiddenDay);
           formatapi.hiddenDays = []
           for(var i = 0; i<hiddenDay.length; i++){
-              formatapi.hiddenDays.push(Number(hiddenDay[i]));
-              
+              if(typeof(hiddenDay[i]) == "number" ){
+                formatapi.hiddenDays.push(Number(hiddenDay[i]));
+              }
           }
-          
+          //console.log(formatapi.hiddenDays);
           formatapi.validRange = {
             start: res.data.data.calendar.startTime,
             end: res.data.data.calendar.endTime

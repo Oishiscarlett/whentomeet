@@ -197,7 +197,7 @@ export default {
                     formatapi.businessHours.endTime = highlightHour[1];
                     this.calendarForm.businessHours.startTime = highlightHour[0];
                     this.calendarForm.businessHours.endTime = calendarFormMaxTime(highlightHour[1],resapi.calendar.timeGap);
-                    let hiddenDay = resapi.calendar.hiddenDays.split(',');
+                    /* let hiddenDay = resapi.calendar.hiddenDays.split(',');
                     hiddenDay.forEach(element => {
                         switch (element) {
                             case '1':
@@ -224,7 +224,15 @@ export default {
                             default:
                                     break;
                         }
-                    });
+                    }); */
+                    let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
+                    formatapi.hiddenDays = []
+                    for(var i = 0; i<hiddenDay.length; i++){
+                        if(typeof(hiddenDay[i]) == "number" ){
+                            formatapi.hiddenDays.push(Number(hiddenDay[i]));
+                        }
+                    }
+                    //console.log(formatapi.hiddenDays);
                     formatapi.validRange.start = resapi.calendar.startTime;
                     formatapi.validRange.end = resapi.calendar.endTime;
                     this.calendarForm.validRange.start = resapi.calendar.startTime;
