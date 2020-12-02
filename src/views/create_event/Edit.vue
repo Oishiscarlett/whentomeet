@@ -225,13 +225,16 @@ export default {
                                     break;
                         }
                     }); */
+                    if(res.data.data.calendar.hiddenDays){
                     let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
+                    
                     formatapi.hiddenDays = []
                     for(var i = 0; i<hiddenDay.length; i++){
-                        if(typeof(hiddenDay[i]) == "number" ){
+                        
                             formatapi.hiddenDays.push(Number(hiddenDay[i]));
-                        }
+                        
                     }
+                }
                     //console.log(formatapi.hiddenDays);
                     formatapi.validRange.start = resapi.calendar.startTime;
                     formatapi.validRange.end = resapi.calendar.endTime;

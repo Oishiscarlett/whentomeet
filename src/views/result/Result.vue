@@ -281,6 +281,7 @@ export default {
       kjIsShow: true, //可见图标
       bkjIsShow: false, //不可见图标
       selectedResponse: '',
+      titleStr: [],
 
       /* 日历相关 */
       /***************************
@@ -548,6 +549,14 @@ export default {
                 this.responseList.push(invitee);
               }
               //console.log(this.responseList);
+
+              //存储所有单元格的title，点击时标记时使用
+              for(let i = 0; i<eventapi.events.length; i++){
+                var num = {}
+                num.id = eventapi.events[i].id;
+                num.title = eventapi.events[i].title;
+                this.titleStr.push(num);
+              }
                
               this.allElectionFun();
               this.DefaultFullSelection();
@@ -669,10 +678,10 @@ export default {
 
       //获取需要默认显示的数据
       allElectionFun() { 
-           this.allElection = [];
-             for (var i = 0; i < this.responseList.length; i++) {
-               this.allElection.push(this.responseList[i].name)
-           }
+        this.allElection = [];
+        for (var i = 0; i < this.responseList.length; i++) {
+          this.allElection.push(this.responseList[i].name)
+        }
       },
 
       // 初始化 默认全部选中
@@ -686,14 +695,14 @@ export default {
 
       // 获取选中的对象
       selectionFun(selectionArr) { 
-                this.selectionArr = [];
-                for (var i = 0; i < this.responseList.length; i++) {
-                  for (var j = 0; j < selectionArr.length; j++) {
-                          if (selectionArr[j] === this.responseList[i].name) {
-                            this.selectionArr.push(this.responseList[i])
-                      }
-                  }
-                }
+        this.selectionArr = [];
+        for (var i = 0; i < this.responseList.length; i++) {
+          for (var j = 0; j < selectionArr.length; j++) {
+            if (selectionArr[j] === this.responseList[i].name) {
+              this.selectionArr.push(this.responseList[i])
+            }
+          }
+        }
       },
 
       // 全选
@@ -701,9 +710,7 @@ export default {
         this.allElectionFun();
         this.checkedPeople = val ? this.allElection : [];
         this.isIndeterminate = false;
-          // console.log(this.checkedCities);
         this.selectionFun(this.checkedPeople);
-          //console.log(this.selectionArr)
       },
 
       // 选中
@@ -741,13 +748,19 @@ export default {
           }
         }
         
-        //添加点击时遮罩
-        /* for(let i = 0; i<eventapi.events.length; i++){
+        //添加点击时标记
+        for(let i = 0; i<eventapi.events.length; i++){
+          if(eventapi.events[i].title === '✔'){
+            for(let k = 0; k<this.titleStr.length; k++){
+              if(eventapi.events[i].id === this.titleStr[k].id){
+                eventapi.events[i].title = this.titleStr[k].title;
+              }
+            }
+          }
           if(eventapi.events[i].id === eventapi.idOfSelectTime){
-            eventapi.events[i].backgroundColor = '#333333';
+            eventapi.events[i].title = '✔';
           }
         }
-        console.log(eventapi.idOfSelectTime); */
       },
 
       // 动态调整日历的格式：实现的时候与表单进行绑定（第三期任务）
@@ -790,6 +803,9 @@ export default {
 
 /* .fc-event-main :hover{
   border: 2px solid #333333;
+} */
+/* .fc-timegrid-event-harness >>> a :active{
+  border-color: #333333;
 } */
 
 .title{
