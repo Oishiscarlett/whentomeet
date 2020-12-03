@@ -8,6 +8,14 @@
                         @getTodayDate='getTodayDate'
                         :Datas='datasToCalendar'/>
           </div>
+          <div class="tips-box">
+              <el-alert
+                title="您在日历上选择的时间为事件的开始时间点"
+                :closable="false"
+                type="info"
+                show-icon>
+              </el-alert>
+          </div>
           <div class="form-wrapper">
               <div class="calendar-form-wrapper">
                   <el-collapse>
@@ -15,40 +23,42 @@
                       <el-form :model="calendarForm" :rules="rules" ref="calendarForm" label-width="100px" class="calendar-form">
                           <el-form-item label="开始日期：" class="date">
                             <el-col :span="11">
-                              <el-date-picker type="date" placeholder="选择日期" v-model="calendarForm.validRange.start" style="width: 100%;"></el-date-picker>
+                              <el-date-picker type="date" placeholder="选择日期" :picker-options="pickerOptionsStart" v-model="calendarForm.validRange.start" style="width: 100%;"></el-date-picker>
                             </el-col>
                           </el-form-item>
                           <el-form-item label="结束日期：" class="date">
                             <el-col :span="11">
-                              <el-date-picker type="date" placeholder="选择日期" v-model="calendarForm.validRange.end" style="width: 100%;"></el-date-picker>
+                              <el-date-picker type="date" placeholder="选择日期" :picker-options="pickerOptionsEnd" v-model="calendarForm.validRange.end" style="width: 100%;"></el-date-picker>
                             </el-col>
                           </el-form-item>
                           <el-form-item label="每周隐藏：">
                             <el-checkbox-group v-model="calendarForm.hiddenDays">
-                                <el-checkbox label="星期一"></el-checkbox>
-                                <el-checkbox label="星期二"></el-checkbox>
-                                <el-checkbox label="星期三"></el-checkbox>
-                                <el-checkbox label="星期四"></el-checkbox>
-                                <el-checkbox label="星期五"></el-checkbox>
-                                <el-checkbox label="星期六"></el-checkbox>
-                                <el-checkbox label="星期日"></el-checkbox>
+                                <el-checkbox label='1'>星期一</el-checkbox>
+                                <el-checkbox label='2'>星期二</el-checkbox>
+                                <el-checkbox label='3'>星期三</el-checkbox>
+                                <el-checkbox label='4'>星期四</el-checkbox>
+                                <el-checkbox label='5'>星期五</el-checkbox>
+                                <el-checkbox label='6'>星期六</el-checkbox>
+                                <el-checkbox label='0'>星期日</el-checkbox>
                             </el-checkbox-group>
                           </el-form-item>
                           <el-form-item label="展示时间：" class="time">
                             <el-time-select placeholder="开始时间" v-model="calendarForm.slotMinTime" 
-                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45' }"></el-time-select>
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45',
+                                                                maxTime: showMaxTime }"></el-time-select>
                             <span> 至 </span>
                             <el-time-select  placeholder="结束时间" v-model="calendarForm.slotMaxTime" 
                                             :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', 
-                                                                minTime: calendarForm.slotMinTime }"></el-time-select>
+                                                                minTime: showMinTime }"></el-time-select>
                           </el-form-item>
                           <el-form-item label="高亮时间：" class="time">
                               <el-time-select placeholder="开始时间" v-model="calendarForm.businessHours.startTime" 
-                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', }"></el-time-select>
+                                            :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45',
+                                                                maxTime: highlightMaxTime }"></el-time-select>
                               <span> 至 </span>
                               <el-time-select  placeholder="结束时间" v-model="calendarForm.businessHours.endTime" 
                                             :picker-options="{ start: '00:00', step: calendarForm.slotDuration, end: '23:45', 
-                                                                minTime: calendarForm.businessHours.startTime,}"></el-time-select>
+                                                                minTime: highlightMinTime }"></el-time-select>
                           </el-form-item>
                           <el-form-item label="时间间隔：">
                             <el-select v-model="calendarForm.slotDuration" placeholder="请选择时间间隔">
@@ -85,12 +95,6 @@
                       <el-form-item label="活动形式：" prop="desc" class="desc-box">
                         <el-input type="textarea" v-model="eventForm.desc" :rows="7"></el-input>
                       </el-form-item>
-                      <el-form-item prop="public">
-                          <el-tooltip placement="bottom-start">
-                            <div slot="content">选中后，每个时间选择的人数<br/>将会以颜色深浅的方式展示给所有人</div>
-                            <el-checkbox v-model="eventForm.public">公开所有人的选项</el-checkbox>
-                          </el-tooltip>
-                      </el-form-item>
                       <el-form-item class="submit-btn">
                         <el-button type="primary" @click="onSubmit('eventForm')">更新事件</el-button>
                       </el-form-item>
@@ -104,7 +108,7 @@
 <script>
 import PageTabBar from '@/components/content/tabbar/PageTabBar'
 import Calendar from '@/components/content/calendar'
-import { calendarMaxTime,dateToString,stringToDate,timeUnitIdToTime,calendarFormMaxTime } from '@/utils/calendar-utils'
+import { addDuration,dateToString,stringToDate,timeUnitIdToTime,subDuration } from '@/utils/calendar-utils'
 import { formatDate } from '@fullcalendar/vue'
 export default {
     name: 'Edit',
@@ -168,6 +172,21 @@ export default {
                 name: [
                     { required: true, message: '请输入活动名称', trigger: 'blur' }
                 ],
+            },
+            // 开始结束日期限制
+            pickerOptionsStart: {
+                disabledDate: time => {
+                    if (this.calendarForm.validRange.end) {
+                        return time.getTime() > stringToDate(this.calendarForm.validRange.end).getTime() || time.getTime() < Date.now()- 86400000;
+                    }
+                }
+            },
+            pickerOptionsEnd: {
+                disabledDate: time => {
+                    if (this.calendarForm.validRange.start) {
+                        return time.getTime() < stringToDate(this.calendarForm.validRange.start).getTime();
+                    }
+                }
             }
         }
     },
@@ -191,51 +210,21 @@ export default {
                     formatapi.slotMinTime = slotTime[0];
                     formatapi.slotMaxTime = slotTime[1];
                     this.calendarForm.slotMinTime = slotTime[0];
-                    this.calendarForm.slotMaxTime = calendarFormMaxTime(slotTime[1],resapi.calendar.timeGap);
+                    this.calendarForm.slotMaxTime = subDuration(slotTime[1],resapi.calendar.timeGap);
                     let highlightHour = resapi.calendar.highlightHours.split(',');
                     formatapi.businessHours.startTime = highlightHour[0];
                     formatapi.businessHours.endTime = highlightHour[1];
                     this.calendarForm.businessHours.startTime = highlightHour[0];
-                    this.calendarForm.businessHours.endTime = calendarFormMaxTime(highlightHour[1],resapi.calendar.timeGap);
-                    /* let hiddenDay = resapi.calendar.hiddenDays.split(',');
-                    hiddenDay.forEach(element => {
-                        switch (element) {
-                            case '1':
-                                this.calendarForm.hiddenDays.push('星期一');
-                                break;
-                            case '2':
-                                this.calendarForm.hiddenDays.push('星期二');
-                                break;
-                            case '3':
-                                this.calendarForm.hiddenDays.push('星期三');
-                                break;
-                            case '4':
-                                this.calendarForm.hiddenDays.push('星期四');
-                                break;    
-                            case '5':
-                                this.calendarForm.hiddenDays.push('星期五');
-                                break;
-                            case '6':
-                                this.calendarForm.hiddenDays.push('星期六');
-                                break;
-                            case '0':
-                                this.calendarForm.hiddenDays.push('星期日');
-                                break;    
-                            default:
-                                    break;
-                        }
-                    }); */
-                    if(res.data.data.calendar.hiddenDays){
-                    let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
-                    
-                    formatapi.hiddenDays = []
-                    for(var i = 0; i<hiddenDay.length; i++){
-                        
-                            formatapi.hiddenDays.push(Number(hiddenDay[i]));
-                        
+                    this.calendarForm.businessHours.endTime = subDuration(highlightHour[1],resapi.calendar.timeGap);
+                    if(resapi.calendar.hiddenDays[0] != null){
+                        let hiddenDay = resapi.calendar.hiddenDays.split(',');
+                        formatapi.hiddenDays = [];
+                        hiddenDay.forEach(element => {
+                            this.calendarForm.hiddenDays.push(element);
+                            formatapi.hiddenDays.push(Number(element));
+                        });
                     }
-                }
-                    //console.log(formatapi.hiddenDays);
+                    formatapi.validRange = {};                   
                     formatapi.validRange.start = resapi.calendar.startTime;
                     formatapi.validRange.end = resapi.calendar.endTime;
                     this.calendarForm.validRange.start = resapi.calendar.startTime;
@@ -297,26 +286,12 @@ export default {
             formatapi.slotDuration = this.calendarForm.slotDuration
             formatapi.defaultTimedEventDuration = this.calendarForm.slotDuration
             formatapi.slotMinTime = this.calendarForm.slotMinTime
-            formatapi.slotMaxTime = calendarMaxTime(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration)
+            formatapi.slotMaxTime = addDuration(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration)
             formatapi.businessHours.startTime = this.calendarForm.businessHours.startTime
-            formatapi.businessHours.endTime = calendarMaxTime(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
+            formatapi.businessHours.endTime = addDuration(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
             formatapi.hiddenDays = []
             this.calendarForm.hiddenDays.forEach(element => {
-                if(element === "星期一"){
-                    formatapi.hiddenDays.push(1);
-                }else if(element === "星期二"){
-                    formatapi.hiddenDays.push(2);
-                }else if(element === "星期三"){
-                    formatapi.hiddenDays.push(3);
-                }else if(element === "星期四"){
-                    formatapi.hiddenDays.push(4);
-                }else if(element === "星期五"){
-                    formatapi.hiddenDays.push(5);
-                }else if(element === "星期六"){
-                    formatapi.hiddenDays.push(6);
-                }else if(element === "星期日"){
-                    formatapi.hiddenDays.push(0);
-                }
+                formatapi.hiddenDays.push(Number(element));
             })
             formatapi.validRange.start = dateToString(this.calendarForm.validRange.start);
             let end = new Date();
@@ -388,6 +363,24 @@ export default {
     },
     created() {
         this.initData()
+    },
+    computed: {
+        showMinTime: function(){
+            let Time = subDuration(this.calendarForm.slotMinTime,this.calendarForm.slotDuration);
+            return Time;
+        },
+        showMaxTime: function(){
+            let Time = addDuration(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration);
+            return Time;
+        },
+        highlightMinTime: function(){
+            let Time = subDuration(this.calendarForm.businessHours.startTime,this.calendarForm.slotDuration);
+            return Time;
+        },
+        highlightMaxTime: function(){
+            let Time = addDuration(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration);
+            return Time;
+        }
     }
 }
 </script>
@@ -395,6 +388,13 @@ export default {
 <style scoped>
 .content-wrapper {
     padding-top: 100px;
+}
+.tips-box {
+    width: 1100px;
+    margin: -40px auto 40px auto;
+}
+.tips-box >>> .el-alert--info.is-light {
+    background-color: white!important;
 }
 .form-wrapper {
     margin: 0 auto 100px auto;

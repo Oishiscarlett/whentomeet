@@ -142,7 +142,7 @@ export default {
         // 如果是填写事件页面
         // 先判断当前时间是 inviteeSelect 或者 hostSelect
         
-        if(clickInfo.event.groupId === 'hostSelect'){
+        /* if(clickInfo.event.groupId === 'hostSelect'){
           clickInfo.event.remove();
           clickInfo.view.calendar.addEvent({
             id: clickInfo.event.id,
@@ -177,8 +177,9 @@ export default {
             //title: '1'
           })
           // 更新父组件中的时间块
-          this.$emit('getTimeUnit',this.selectTime);
-        }
+          this.$emit('getTimeUnit',this.selectTime); 
+        }*/
+          this.$emit('getTimeUnitId', clickInfo.event.id);
 
       }else if(this.pages === 'result' ){
         // 若是结果页面，返回点击时间的id，根据id查找数据，渲染

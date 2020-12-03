@@ -62,7 +62,7 @@ export function timeUnitSplit(timeUnit) {
 }
 
 // 适应日历最大时间不包含的问题
-export function calendarMaxTime(time, duration) {
+export function addDuration(time, duration) {
   let secondDuration = 0;
   let secondTime = 0;
   if (duration === '00:15') {
@@ -87,7 +87,7 @@ export function calendarMaxTime(time, duration) {
 }
 
 // 将后端传回来的最大数据进行格式调整并显示在日历格式的表格中
-export function calendarFormMaxTime(time, duration) {
+export function subDuration(time, duration) {
   let secondDuration = 0;
   let secondTime = 0;
   if (duration === '00:15') {
@@ -111,7 +111,7 @@ export function calendarFormMaxTime(time, duration) {
   return hour + ':' + min;
 }
 
-// 将date转换为2020-11-01格式
+// 将date转换为2020-01-01格式
 export function dateToString(time) {
   if(typeof(time) != 'string') {
     let year = time.getFullYear();
@@ -129,7 +129,7 @@ export function dateToString(time) {
   }
 }
 
-// 将2020-11-01格式转换为Date
+// 将2020-01-01格式转换为Date
 export function stringToDate(time) {
   if (typeof (time) === 'string') {
     let newTime = new Date(Date.parse(time.replace(/-/g,  "/")));

@@ -121,6 +121,8 @@ export default {
           ]
         },
 
+      color:[],
+
       responseData:'',
       /* 日历相关 */
       /***************************
@@ -235,38 +237,32 @@ export default {
           this.eventName = res.data.data.createInfo.eventName;
           this.eventInfo = res.data.data.createInfo.eventDescription;
           this.eventDuration = res.data.data.createInfo.eventDuration;
+
+          //时间块渲染
+          if(res.data.data.colorRange.range_zero){
+            let rangeZeroStr = res.data.data.colorRange.range_zero.split(",");
+            this.addrangeZeroBlock(rangeZeroStr);
+          }
           
-          //将传回的数据调整成日历所需格式
-          let time = res.data.data.createInfo.timeUnit;
-
-          let timeStr = time.split(",");
-
-          //日历中显示发起者所选的时间
-          for (let index = 0; index < timeStr.length; index++) {
-              var nowEvent = {}
-              nowEvent.id = timeStr[index];
-              nowEvent.start = timeUnitIdToTime(timeStr[index]);
-              nowEvent.groupId = 'hostSelect';
-              eventapi.events.push(nowEvent);
+          if(res.data.data.colorRange.range_one){
+            let rangeOneStr = res.data.data.colorRange.range_one.split(",");
+            this.addrangeOneBlock(rangeOneStr);
           }
 
-          //将事件颜色替换成colorRange
-          let rangeOne = res.data.data.colorRange.range_one;
-          let rangeOneStr = rangeOne.split(",");
-          this.addrangeOneBlock(rangeOneStr);
+          if(res.data.data.colorRange.range_two){
+            let rangeTwoStr = res.data.data.colorRange.range_two.split(",");
+            this.addrangeTwoBlock(rangeTwoStr);
+          }
 
-          let rangeTwo = res.data.data.colorRange.range_two;
-          let rangeTwoStr = rangeTwo.split(",");
-          this.addrangeTwoBlock(rangeTwoStr);
+          if(res.data.data.colorRange.range_three){
+            let rangeThreeStr = res.data.data.colorRange.range_three.split(",");
+            this.addrangeThreeBlock(rangeThreeStr);
+          }
 
-          let rangeThree = res.data.data.colorRange.range_three;
-          let rangeThreeStr = rangeThree.split(",");
-          this.addrangeTwoBlock(rangeThreeStr);
-
-          /* if(res.data.data.isTimePublic == 1){
-            this.publicBox = true; //“公开自己的选择”框是否可见
+          /* for(let m = 0; m<this.color.length; m++){
+            console.log(this.color[m].id+"&"+this.color[m].groupId)
           } */
-          //console.log(eventapi.events)
+          //获取上一次提交的信息
           this.getPartnerInfo();
           
         }
@@ -291,15 +287,15 @@ export default {
             this.checked = false;
           }
 
+          //渲染上一次填写的信息
           this.info_content.name = res.data.data.partnerInfo.name;
           this.info_content.comment = res.data.data.partnerInfo.comment;
 
           //将传回的数据调整成日历所需格式
           let inviteeTime = res.data.data.partnerInfo.timeUnit;
           let inviteeTimeStr = inviteeTime.split(",");
+          //渲染上一次的选择
           this.addPartnerBlock(inviteeTimeStr);
-          
-
         }
       }).catch(error => {
           console.log(error);
@@ -364,15 +360,6 @@ export default {
         
       });
     },
-       
-    /* changeBtn(){
-      this.isShow = !this.isShow
-        if(this.isShow){
-          this.btnText = "屏蔽其他参与者选择的时间";
-        }else{
-          this.btnText = "显示其他参与者选择的时间";
-        }
-    }, */
 
     //创建参与者上一次选择的时间块
     addPartnerBlock(inviteeTimeStr){
@@ -389,44 +376,94 @@ export default {
       }  
     },
 
-    //将颜色替换成colorRange
+    //colorRange相关
+    addrangeZeroBlock(rangeZeroStr){
+      let eventapi = this.datasToCalendar.calendarFunction;
+      //将时间块存入本地color数组
+      for (let index = 0; index < rangeZeroStr.length; index++) {
+                var zero = {}
+                zero.id = rangeZeroStr[index];
+                zero.groupId = 'hostSelect';
+                this.color.push(zero);
+            }
+      
+      //将时间块存入events数组
+      for (let index = 0; index < rangeZeroStr.length; index++) {
+              var zero = {}
+              zero.id = rangeZeroStr[index];
+              zero.start = timeUnitIdToTime(rangeZeroStr[index]);
+              zero.groupId = 'hostSelect';
+              zero.backgroundColor = '#3788d8';
+              zero.borderColor = '#3788d8';
+              eventapi.events.push(zero);
+      }
+    },
+
     addrangeOneBlock(rangeOneStr){
       let eventapi = this.datasToCalendar.calendarFunction;
-      for(let i = 0; i<eventapi.events.length; i++){
-        for(let j = 0; j<rangeOneStr.length; j++){
-          if(eventapi.events[i].id == rangeOneStr[j]){
-            eventapi.events[i].backgroundColor = '#91d5ff';
-            eventapi.events[i].borderColor = '#91d5ff';
-            eventapi.events[i].title = '';
+      //将时间块存入本地color数组
+      for (let index = 0; index < rangeOneStr.length; index++) {
+              var one = {}
+              one.id = rangeOneStr[index];
+              one.groupId = 'rangeOne';
+              this.color.push(one);
           }
-        }
-      }  
+
+      //将时间块存入events数组
+      for (let index = 0; index < rangeOneStr.length; index++) {
+              var one = {}
+              one.id = rangeOneStr[index];
+              one.start = timeUnitIdToTime(rangeOneStr[index]);
+              one.groupId = 'hostSelect';
+              one.backgroundColor = '#91d5ff';
+              one.borderColor = '#91d5ff';
+              eventapi.events.push(one);
+      }
     },
 
     addrangeTwoBlock(rangeTwoStr){
       let eventapi = this.datasToCalendar.calendarFunction;
-      for(let i = 0; i<eventapi.events.length; i++){
-        for(let j = 0; j<rangeTwoStr.length; j++){
-          if(eventapi.events[i].id == rangeTwoStr[j]){
-            eventapi.events[i].backgroundColor = '#69c0ff';
-            eventapi.events[i].borderColor = '#69c0ff';
-            eventapi.events[i].title = '';
-          }
-        }
-      }  
+      //将时间块存入本地color数组
+      for (let index = 0; index < rangeTwoStr.length; index++) {
+              var two = {}
+              two.id = rangeTwoStr[index];
+              two.groupId = 'rangeTwo';
+              this.color.push(two);
+      }
+
+      //将时间块存入events数组
+      for (let index = 0; index < rangeTwoStr.length; index++) {
+              var two = {}
+              two.id = rangeTwoStr[index];
+              two.start = timeUnitIdToTime(rangeTwoStr[index]);
+              two.groupId = 'hostSelect';
+              two.backgroundColor = '#69c0ff';
+              two.borderColor = '#69c0ff';
+              eventapi.events.push(two);
+      }
     },
 
     addrangeThreeBlock(rangeThreeStr){
       let eventapi = this.datasToCalendar.calendarFunction;
-      for(let i = 0; i<eventapi.events.length; i++){
-        for(let j = 0; j<rangeThreeStr.length; j++){
-          if(eventapi.events[i].id == rangeThreeStr[j]){
-            eventapi.events[i].backgroundColor = '#40a9ff';
-            eventapi.events[i].borderColor = '#40a9ff';
-            eventapi.events[i].title = '';
-          }
-        }
-      }  
+
+      //将时间块存入本地color数组
+      for (let index = 0; index < rangeThreeStr.length; index++) {
+              var three = {}
+              three.id = rangeThreeStr[index];
+              three.groupId = 'rangeThree';
+              this.color.push(three);
+      }
+
+      //将时间块存入events数组
+      for (let index = 0; index < rangeThreeStr.length; index++) {
+              var three = {}
+              three.id = rangeThreeStr[index];
+              three.start = timeUnitIdToTime(rangeThreeStr[index]);
+              three.groupId = 'hostSelect';
+              three.backgroundColor = '#40a9ff';
+              three.borderColor = '#40a9ff';
+              eventapi.events.push(three);
+      }
     },
 
     /* 日历相关 */
@@ -434,9 +471,47 @@ export default {
     getTimeUnit(timeUnit) {
       this.datasToCalendar.calendarFunction.events = timeUnit;
     },
-    // 结果页面点击时间块的时候，子组件发送时间块的id给父组件
+    // 更新选择时间页面点击时间块的时候，子组件发送时间块的id给父组件
     getTimeUnitId(id) {
-      this.idOfSelectTime = id;
+      this.datasToCalendar.calendarFunction.idOfSelectTime = id;
+      let formatapi = this.datasToCalendar.calendarFormat;  
+      let eventapi = this.datasToCalendar.calendarFunction;
+      for(let i = 0; i<eventapi.events.length; i++){
+          if(eventapi.events[i].id === eventapi.idOfSelectTime){
+            if(eventapi.events[i].groupId === 'hostSelect'){
+              eventapi.events[i].groupId = 'inviteeSelect';
+              eventapi.events[i].backgroundColor = '#003399';
+              eventapi.events[i].borderColor = '#003399';
+            }
+            else if(eventapi.events[i].groupId === 'inviteeSelect'){
+                    for(let j = 0; j<this.color.length; j++){
+                      if(this.color[j].id === eventapi.idOfSelectTime){
+                        if(this.color[j].groupId === 'hostSelect'){
+                          eventapi.events[i].groupId = 'hostSelect';
+                          eventapi.events[i].backgroundColor = '#3788d8';
+                          eventapi.events[i].borderColor = '#3788d8';
+                          
+                        }else if(this.color[j].groupId === 'rangeOne'){
+                          eventapi.events[i].groupId = 'hostSelect';
+                          eventapi.events[i].backgroundColor = '#91d5ff';
+                          eventapi.events[i].borderColor = '#91d5ff';
+                                          
+                        }else if(this.color[j].groupId === 'rangeTwo'){
+                          eventapi.events[i].groupId = 'hostSelect';
+                          eventapi.events[i].backgroundColor = '#69c0ff';
+                          eventapi.events[i].borderColor = '#69c0ff';
+                                                   
+                        }else if(this.color[j].groupId === 'rangeThree'){
+                          eventapi.events[i].groupId = 'hostSelect';
+                          eventapi.events[i].backgroundColor = '#40a9ff';
+                          eventapi.events[i].borderColor = '#40a9ff';
+                                                    
+                        }
+                      }
+                    }
+                 }
+          }
+      } 
     },
     // 动态调整日历的格式：实现的时候与表单进行绑定（第三期任务）
     changeCalendarFormat() {
