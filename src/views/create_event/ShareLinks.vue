@@ -126,13 +126,16 @@ export default {
             this.$message.error('复制失败');
         },
         share(){
-            this.$router.push({ name: 'choose', params: { eventCode: this.$route.params.eventCode}});
+            let routeData = this.$router.resolve({ name: 'choose', params: { eventCode: this.$route.params.eventCode}});
+            window.open(routeData.href, '_blank')
         },
         result(){
-            this.$router.push({ name: 'result', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
+            let routeData = this.$router.resolve({ name: 'result', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
+            window.open(routeData.href, '_blank')
         },
         edit(){
-            this.$router.push({ name: 'edit', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
+            let routeData = this.$router.resolve({ name: 'edit', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
+            window.open(routeData.href, '_blank')
         },
     }
 }

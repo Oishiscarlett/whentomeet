@@ -26,7 +26,6 @@ export default {
   .tab-bar-color {
     background-color: white;
   }
-
   #web-name{
     line-height: 70px;
     text-align: center;
@@ -34,7 +33,6 @@ export default {
     font-size: 30px;
     font-weight: bold;
   }
-
   #web-name a {
     text-decoration: none;
     color: #298FEC;
