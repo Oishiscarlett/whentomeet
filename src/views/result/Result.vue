@@ -571,7 +571,7 @@ export default {
       addInviteeBlock(i,partners,responseList) {
         let eventapi = this.datasToCalendar.calendarFunction;
         for(var l = 0; l<partners.length; l++){
-          if(this.partners[l].name === responseList[i].name){
+          if(this.partners[l].idCode === responseList[i].idCode){
             for (let index = 0; index < partners[l].timeUnit.length; index++) {
               var oneEvent = {}
               oneEvent.id = partners[l].timeUnit[index];
