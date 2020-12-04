@@ -119,7 +119,7 @@
         <div class="timeTips1"></div>
         <div class="timeTips1_text">
             <p>
-                <span>发起者选择的时间（右上角数字为未选择该时间的人数）</span>
+                <span>发起者选择的时间（右侧数字为未选择该时间的人数）</span>
             </p>
         </div>
         <div class="timeTips2"></div>
@@ -577,8 +577,8 @@ export default {
               oneEvent.id = partners[l].timeUnit[index];
               oneEvent.start = timeUnitIdToTime(partners[l].timeUnit[index]);
               oneEvent.groupId = 'one';
-              oneEvent.backgroundColor = '#95de64';
-              oneEvent.borderColor = '#95de64'
+              oneEvent.backgroundColor = '#3788d8';
+              oneEvent.borderColor = '#3788d8'
               eventapi.events.push(oneEvent);
             }
           }
@@ -610,8 +610,8 @@ export default {
         for(let i = 0; i<eventapi.events.length; i++){
           for(let j = 0; j<preferTime.length; j++){
             if(eventapi.events[i].id == preferTime[j]){
-              eventapi.events[i].backgroundColor = '#FAAD14';
-              eventapi.events[i].borderColor = '#FAAD14';
+              eventapi.events[i].backgroundColor = '#95de64';
+              eventapi.events[i].borderColor = '#95de64';
               eventapi.events[i].title = '';
             }
           }
@@ -624,8 +624,8 @@ export default {
         let eventapi = this.datasToCalendar.calendarFunction;
         for(let i = 0; i<eventapi.events.length; i++){
             if(eventapi.events[i].id == finalTime){
-              eventapi.events[i].backgroundColor = '#171972';
-              eventapi.events[i].borderColor = '#171972';
+              eventapi.events[i].backgroundColor = '#002d70';
+              eventapi.events[i].borderColor = '#002d70';
               eventapi.events[i].title = '';
             }
         }
@@ -869,7 +869,7 @@ export default {
   width: 15px;
   height: 15px;
   display: flex;
-  background-color: #FAAD14;
+  background-color: #95de64;
 }
 
 .timeTips2_text {
@@ -890,7 +890,7 @@ export default {
   width: 15px;
   height: 15px;
   display: flex;
-  background-color: #171972;
+  background-color: #002d70;
 }
 
 .timeTips3_text {

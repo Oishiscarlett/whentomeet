@@ -20,12 +20,15 @@
 
     <!-- tips -->
     <div class="tips">
-        <div class="timeTips1"></div>
+        <div class="cr1"></div>
+        <div class="cr2"></div>
+        <div class="cr3"></div>
         <div class="timeTips1_text">
             <p>
-                <span>发起者选择的时间</span>
+                <span>颜色越深，选择该时间的人数越多</span>
             </p>
         </div>
+
         <div class="timeTips2"></div>
         <div class="timeTips2_text">
             <p>
@@ -33,14 +36,7 @@
             </p>
         </div>
 
-        <div class="cr1"></div>
-        <div class="cr2"></div>
-        <div class="cr3"></div>
-        <div class="timeTips3_text">
-            <p>
-                <span>其他参与者选择的时间<br>（颜色越深，选择该时间的人数越多）</span>
-            </p>
-        </div>
+        
         <!-- <div>
             <button class="btn_pb" @click="changeBtn" v-text="btnText"></button>
             <div class="test" v-show="isShow"></div>
@@ -352,8 +348,8 @@ export default {
               zero.id = rangeZeroStr[index];
               zero.start = timeUnitIdToTime(rangeZeroStr[index]);
               zero.groupId = 'hostSelect';
-              zero.backgroundColor = '#3788d8';
-              zero.borderColor = '#3788d8';
+              zero.backgroundColor = '#8ad0ff';
+              zero.borderColor = '#8ad0ff';
               eventapi.events.push(zero);
       }
     },
@@ -374,8 +370,8 @@ export default {
               one.id = rangeOneStr[index];
               one.start = timeUnitIdToTime(rangeOneStr[index]);
               one.groupId = 'hostSelect';
-              one.backgroundColor = '#91d5ff';
-              one.borderColor = '#91d5ff';
+              one.backgroundColor = '#8ad0ff';
+              one.borderColor = '#8ad0ff';
               eventapi.events.push(one);
       }
     },
@@ -396,8 +392,8 @@ export default {
               two.id = rangeTwoStr[index];
               two.start = timeUnitIdToTime(rangeTwoStr[index]);
               two.groupId = 'hostSelect';
-              two.backgroundColor = '#69c0ff';
-              two.borderColor = '#69c0ff';
+              two.backgroundColor = '#3598f0';
+              two.borderColor = '#3598f0';
               eventapi.events.push(two);
       }
     },
@@ -419,8 +415,8 @@ export default {
               three.id = rangeThreeStr[index];
               three.start = timeUnitIdToTime(rangeThreeStr[index]);
               three.groupId = 'hostSelect';
-              three.backgroundColor = '#40a9ff';
-              three.borderColor = '#40a9ff';
+              three.backgroundColor = '#0259bd';
+              three.borderColor = '#0259bd';
               eventapi.events.push(three);
       }
     },
@@ -439,31 +435,31 @@ export default {
           if(eventapi.events[i].id === eventapi.idOfSelectTime){
             if(eventapi.events[i].groupId === 'hostSelect'){
               eventapi.events[i].groupId = 'inviteeSelect';
-              eventapi.events[i].backgroundColor = '#003399';
-              eventapi.events[i].borderColor = '#003399';
+              eventapi.events[i].backgroundColor = '#002d70';
+              eventapi.events[i].borderColor = '#002d70';
             }
             else if(eventapi.events[i].groupId === 'inviteeSelect'){
                     for(let j = 0; j<this.color.length; j++){
                       if(this.color[j].id === eventapi.idOfSelectTime){
                         if(this.color[j].groupId === 'hostSelect'){
                           eventapi.events[i].groupId = 'hostSelect';
-                          eventapi.events[i].backgroundColor = '#3788d8';
-                          eventapi.events[i].borderColor = '#3788d8';
+                          eventapi.events[i].backgroundColor = '#8ad0ff';
+                          eventapi.events[i].borderColor = '#8ad0ff';
                           
                         }else if(this.color[j].groupId === 'rangeOne'){
                           eventapi.events[i].groupId = 'hostSelect';
-                          eventapi.events[i].backgroundColor = '#91d5ff';
-                          eventapi.events[i].borderColor = '#91d5ff';
+                          eventapi.events[i].backgroundColor = '#8ad0ff';
+                          eventapi.events[i].borderColor = '#8ad0ff';
                                           
                         }else if(this.color[j].groupId === 'rangeTwo'){
                           eventapi.events[i].groupId = 'hostSelect';
-                          eventapi.events[i].backgroundColor = '#69c0ff';
-                          eventapi.events[i].borderColor = '#69c0ff';
+                          eventapi.events[i].backgroundColor = '#3598f0';
+                          eventapi.events[i].borderColor = '#3598f0';
                                                    
                         }else if(this.color[j].groupId === 'rangeThree'){
                           eventapi.events[i].groupId = 'hostSelect';
-                          eventapi.events[i].backgroundColor = '#40a9ff';
-                          eventapi.events[i].borderColor = '#40a9ff';
+                          eventapi.events[i].backgroundColor = '#0259bd';
+                          eventapi.events[i].borderColor = '#0259bd';
                                                     
                         }
                       }
@@ -562,21 +558,48 @@ export default {
   left: 860px;
 }
 
-.timeTips1 {
+.cr1 {
+  border-width: 0px;
   position: absolute;
+  top: 60px;
   width: 15px;
   height: 15px;
-  background-color: #3788d8;
+  display: flex;
+  background-color: #8ad0ff;
+}
+
+.cr2 {
+  border-width: 0px;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  background-color: #3598f0;
+}
+
+.cr3 {
+  border-width: 0px;
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  background-color: #0259bd;
 }
 
 .timeTips1_text {
   position: absolute;
-  width: 144px;
-  height: 22px;
-  left: 25px;
+  top: 60px;
+  left: 65px;
+  width: 250px;
+  height: 30px;
   font-weight: 600;
   font-size: 14px;
-  color: #333333;  
+  color: #333333; 
+  line-height: 15px;
 }
 
 .timeTips2 {
@@ -586,7 +609,7 @@ export default {
   width: 15px;
   height: 15px;
   display: flex;
-  background-color: #003399;
+  background-color: #002d70;
 }
 
 .timeTips2_text {
@@ -598,50 +621,6 @@ export default {
   font-weight: 600;
   font-size: 14px;
   color: #333333;  
-}
-
-.cr1 {
-  border-width: 0px;
-  position: absolute;
-  top: 60px;
-  width: 15px;
-  height: 15px;
-  display: flex;
-  background-color: #91d5ff;
-}
-
-.cr2 {
-  border-width: 0px;
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  width: 15px;
-  height: 15px;
-  display: flex;
-  background-color: #69c0ff;
-}
-
-.cr3 {
-  border-width: 0px;
-  position: absolute;
-  top: 60px;
-  left: 40px;
-  width: 15px;
-  height: 15px;
-  display: flex;
-  background-color: #40a9ff;
-}
-
-.timeTips3_text {
-  position: absolute;
-  top: 60px;
-  left: 60px;
-  width: 250px;
-  height: 30px;
-  font-weight: 600;
-  font-size: 14px;
-  color: #333333; 
-  line-height: 15px;
 }
 
 .demo-app {

@@ -240,8 +240,8 @@ export default {
 .fc-event-main span i{
   float: right;
   margin-right: 10px;
-  color: #CC0000;
-  font-weight: bold;
+  color: #bfbfbf;
+  /* font-weight: bold; */
 }
 .fc-button-primary {
     background-color: white!important;
