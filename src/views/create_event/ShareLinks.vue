@@ -7,9 +7,9 @@
               <div class="code-card-title">注意</div>
               <div class="code-card-content">
                 <div class="code-card-tips">
-                  <span>请保存你的事件密钥</span>
+                  <span>请保存您的密钥</span>
                   <span>没有该密钥</span>
-                  <span>你将无法查看事件的结果</span>
+                  <span>您将无法查看结果</span>
                 </div>
                 <div class="code-card-code">
                   <span>{{ hostCode }}</span>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="links-card-contents">
                   <div class="links-card-titles">
-                    <span>查看事件结果链接</span>
+                    <span>查看结果</span>
                   </div>
                   <div class="links-card-links">
                     <span class="url" @click="result()">{{ resultLink }}</span>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="links-card-contents">
                   <div class="links-card-titles">
-                    <span>重新编辑事件链接</span>
+                    <span>重新编辑</span>
                   </div>
                   <div class="links-card-links">
                     <span class="url" @click="edit()">{{ editLink }}</span>

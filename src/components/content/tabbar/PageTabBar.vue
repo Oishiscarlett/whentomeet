@@ -4,7 +4,7 @@
         <router-link to="/">When2Meet</router-link>
       </div>
       <div class="item-wrapper">
-        <router-link to="/create">创建事件</router-link>
+        <router-link to="/create">发起活动</router-link>
         <router-link to="/EnterResults">查看结果</router-link>
         <router-link to="/faqs">帮助</router-link>
       </div>

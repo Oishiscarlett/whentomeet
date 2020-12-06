@@ -22,7 +22,7 @@
             <div class="item" >
                 <p type="text" @click="copyLink()">邀请更多人</p>
                 <p @click="eventChoose()">增加回应</p>
-                <p @click="edit()">编辑事件</p>
+                <p @click="edit()">重新编辑</p>
                 <p @click="drawer = true;openDrawer()">查看留言</p>
             </div>
         </el-card>
@@ -91,7 +91,7 @@
         </el-card>
 
         <!-- 发送重新选择提醒到指定参与者的邮箱 -->
-        <el-dialog title="发送重新选择提醒到指定参与者的邮箱" :visible.sync="dialogTableVisible3" :append-to-body="true">
+        <el-dialog title="发送邮件，提醒参与者重新选择" :visible.sync="dialogTableVisible3" :append-to-body="true">
 
           <el-form ref="sendEmailForm"  :model="sendEmailForm">
             <el-form-item label="邮箱地址（以,隔开）">
@@ -161,19 +161,19 @@
 
         <el-card class="box-card3" shadow="hover">
             <div slot="header" class="clearfix">
-                <span>生成事件结果</span>               
+                <span>生成结果</span>               
             </div>
             <div class="nameAndInfo">
-              <span>事件名称：</span><br>
+              <span>活动名称：</span><br>
               <span class="content">{{ eventName }}</span><br>
-              <span>事件描述：</span><br>
+              <span>活动描述：</span><br>
               <span class="content">{{ eventInfo }}</span>
             </div>
 
             <div class="dateAndTime">
-              <span>事件日期：</span><br>
+              <span>活动日期：</span><br>
               <span class="content">{{ eventDate }}</span><br>
-              <span>事件时间：</span><br>
+              <span>活动时间：</span><br>
               <span class="content">{{ eventTime }}</span>
             </div>
 
@@ -183,7 +183,7 @@
               <span>不能参加的人数：</span><br>
               <el-button type="text" @click="dialogTableVisible2 = true" class="content">{{ absent }} ({{ absentPro }}%)</el-button>
             </div>
-            <el-button class="btnToFinal" @click="finalResult()">点击生成事件结果</el-button>
+            <el-button class="btnToFinal" @click="finalResult()" type="primary">点击生成最终结果</el-button>
         </el-card>
 
         
@@ -555,6 +555,8 @@ export default {
                 var num = {}
                 num.id = eventapi.events[i].id;
                 num.title = eventapi.events[i].title;
+                num.backgroundColor = eventapi.events[i].backgroundColor;
+                num.borderColor = eventapi.events[i].borderColor;
                 this.titleStr.push(num);
               }
                
@@ -750,17 +752,32 @@ export default {
         
         //添加点击时标记
         for(let i = 0; i<eventapi.events.length; i++){
-          if(eventapi.events[i].title === '✔'){
+          if(eventapi.events[i].backgroundColor === '#002d70'){
             for(let k = 0; k<this.titleStr.length; k++){
               if(eventapi.events[i].id === this.titleStr[k].id){
                 eventapi.events[i].title = this.titleStr[k].title;
+                eventapi.events[i].backgroundColor = this.titleStr[k].backgroundColor;
+                eventapi.events[i].borderColor = this.titleStr[k].borderColor;
+                
               }
             }
           }
           if(eventapi.events[i].id === eventapi.idOfSelectTime){
             eventapi.events[i].title = '✔';
+            eventapi.events[i].backgroundColor = '#002d70';
+            eventapi.events[i].borderColor = '#002d70';
           }
         }
+
+        /* for(let i = 0; i<eventapi.events.length; i++){
+          if(eventapi.events[i].id === eventapi.idOfSelectTime){
+            if(eventapi.events[i].groupId === 'hostSelect'){
+              eventapi.events[i].groupId = 'inviteeSelect';
+              eventapi.events[i].backgroundColor = '#002d70';
+              eventapi.events[i].borderColor = '#002d70';
+            }
+          }
+        } */
       },
 
       // 动态调整日历的格式：实现的时候与表单进行绑定（第三期任务）

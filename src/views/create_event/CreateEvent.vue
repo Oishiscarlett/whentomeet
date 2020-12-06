@@ -68,7 +68,7 @@
                             </el-select>
                           </el-form-item>
                           <el-form-item class="change-btn">
-                            <el-button type="primary" @click="changeCalendarFormat">更改</el-button>
+                            <el-button type="primary" @click="changeCalendarFormat">更新日历</el-button>
                           </el-form-item>
                       </el-form>
                     </el-collapse-item>
@@ -76,10 +76,10 @@
               </div>
               <div class="event-form-wrapper">
                   <div class="event-form-title">
-                      <span>创建事件</span>
+                      <span>发起活动</span>
                   </div>
                   <el-form :model="eventForm" :rules="rules" ref="eventForm" label-width="100px" class="event-form">
-                      <el-form-item label="事件名称：" prop="name" class="name-box">
+                      <el-form-item label="活动名称：" prop="name" class="name-box">
                         <el-input v-model="eventForm.name"></el-input>
                       </el-form-item>
                       <el-form-item label="持续时间：" prop="duration" class="duration-box">
@@ -96,7 +96,7 @@
                         <el-input type="textarea" v-model="eventForm.desc" :rows="7"></el-input>
                       </el-form-item>
                       <el-form-item class="submit-btn">
-                        <el-button type="primary" @click="onSubmit('eventForm')">创建事件</el-button>
+                        <el-button type="primary" @click="onSubmit('eventForm')">提交</el-button>
                       </el-form-item>
                   </el-form>
               </div>
