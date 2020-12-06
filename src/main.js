@@ -9,6 +9,7 @@ import api from './api' // 导入api接口
 import VueCookies from 'vue-cookies'
 import clipboard from 'clipboard'
 import VueClipboard from 'vue-clipboard2'
+import animate from 'animate.css' //动画效果
 
 
 Vue.config.productionTip = false
@@ -20,6 +21,7 @@ Vue.use(VueCookies)
 Vue.prototype.clipboard = clipboard
 
 Vue.use(VueClipboard)
+Vue.use(animate)
 
 new Vue({
   router,

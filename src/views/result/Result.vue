@@ -916,9 +916,9 @@ export default {
 }
 
 .left_wrapper{
-    position: absolute;
-    top:220px;
-    left: -60px;
+    position: fixed;
+    top:170px;
+    left: 90px;
 }
 
 .box-card {
@@ -944,9 +944,9 @@ export default {
 } */
 
 .left_wrapper2{
-    position: absolute;
-    top:450px;
-    left: -60px;
+    position: fixed;
+    top:390px;
+    left: 90px;
 }
 
 .box-card2 {
@@ -964,7 +964,7 @@ export default {
 }
 
 .responseList{
-  height: 280px;
+  height: 250px;
   width: 200px;
 }
 
@@ -1003,9 +1003,9 @@ export default {
 }
 
 .right_wrapper{
-    position: absolute;
+    position: fixed;
     top: 220px;
-    right: -80px;
+    right: 80px;
 }
 
 .box-card3 {

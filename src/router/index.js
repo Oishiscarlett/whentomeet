@@ -21,6 +21,8 @@ const Result = () => import('../views/result/Result')
 const CopyLink = () => import('../views/result/CopyLink')
 const SendRequest = () => import('../views/result/SendRequest')
 
+const NotFound = () => import('../views/NotFound')
+
 
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
@@ -117,6 +119,13 @@ const routes = [
     path: '/:eventCode/final',
     name: 'finalresult',
     component: FinalResult
+  },
+
+  //404页面匹配规则，必须放在最后
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 
 ]
