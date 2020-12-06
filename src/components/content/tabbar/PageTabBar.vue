@@ -3,22 +3,21 @@
       <div id="web-name" slot="web-icon">
         <router-link to="/">When2Meet</router-link>
       </div>
-      <div class="page-tab-wrapper">
-        <tab-bar-item path='/create'>创建事件</tab-bar-item>
-        <tab-bar-item path='/EnterResults'>查看结果</tab-bar-item>
-        <tab-bar-item path='/faqs'>帮助</tab-bar-item>
+      <div class="item-wrapper">
+        <router-link to="/create">创建事件</router-link>
+        <router-link to="/EnterResults">查看结果</router-link>
+        <router-link to="/faqs">帮助</router-link>
       </div>
   </tab-bar>
 </template>
 
 <script>
 import TabBar from '@/components/common/tabbar/TabBar'
-import TabBarItem from '@/components/common/tabbar/TabBarItem'
+
 export default {
   name: 'PageTabBar',
   components: {
-    TabBar,
-    TabBarItem
+    TabBar
   }
 }
 </script>
@@ -30,6 +29,7 @@ export default {
   #web-name{
     line-height: 70px;
     text-align: center;
+    width: 600px;
     font-size: 30px;
     font-weight: bold;
   }
@@ -37,11 +37,19 @@ export default {
     text-decoration: none;
     color: #298FEC;
   }
-  .page-tab-wrapper {
-      width: 500px;
-      display: flex;
-      align-items: center;
-      margin-left: 400px;
-      color: #409EFF;
+
+  .item-wrapper {
+    width: 450px;
+    align-items: center;
+    margin-left: 300px;
+    color: #409EFF;
+  }
+
+  .item-wrapper a {
+    text-decoration: none;
+    color: #409EFF;
+    margin: 0 40px;
+    font-size: 20px;
+    text-align: center;
   }
 </style>

@@ -205,7 +205,9 @@ export default {
                     // 日历格式相关数据渲染与存储
                     formatapi.slotDuration = resapi.calendar.timeGap;
                     this.calendarForm.slotDuration = resapi.calendar.timeGap;
+
                     formatapi.defaultTimedEventDuration = resapi.calendar.timeGap;
+
                     let slotTime = resapi.calendar.showHours.split(',');
                     formatapi.slotMinTime = slotTime[0];
                     formatapi.slotMaxTime = slotTime[1];
@@ -218,7 +220,7 @@ export default {
                     this.calendarForm.businessHours.endTime = subDuration(highlightHour[1],resapi.calendar.timeGap);
                     if(resapi.calendar.hiddenDays[0] != null){
                         let hiddenDay = resapi.calendar.hiddenDays.split(',');
-                        formatapi.hiddenDays = [];
+                        formatapi.hiddenDays = [];
                         hiddenDay.forEach(element => {
                             this.calendarForm.hiddenDays.push(element);
                             formatapi.hiddenDays.push(Number(element));
@@ -243,7 +245,9 @@ export default {
                     
                     //将传回的数据调整成日历所需格式
                     let time = resapi.createInfo.timeUnit;
+
                     let timeStr = time.split(",");
+
                     //日历中显示发起者所选的时间
                     for (let index = 0; index < timeStr.length; index++) {
                         var nowEvent = {}
@@ -408,22 +412,29 @@ export default {
     margin: 0 60px;
     color: black;
 }
+
 .calendar-form-wrapper >>> .el-collapse-item__content {
     background-color: #E8F8FF;
 }
+
 .calendar-form {
     padding: 30px 50px;
 }
+
 .calendar-form .date {
     width: 450px;
     display: inline-block;
 }
+
 .calendar-form .date .el-form-item__content {
     margin-left: 0px!important;
+
 }
+
 .event-form-wrapper {
     padding: 30px 50px;
 }
+
 .event-form-title {
     margin-bottom: 30px;
     margin-left: 10px;
@@ -438,15 +449,19 @@ export default {
     display: inline-block;
     margin-left: 50px;
 }
+
 .duration-unit-box {
     display: inline-block;
 }
+
 .duration-unit-box >>> .el-form-item__content {
     margin-left: 20px!important;
 }
+
 .desc-box {
     width: 860px;
 }
+
 .submit-btn {
     margin-top: 50px;
     margin-left: 300px;
