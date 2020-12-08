@@ -77,6 +77,21 @@ export default {
         contentHeight: "auto",
         // 不允许用户选择已经选择过的时间点
         selectOverlap: false,
+        displayEventEnd: false,
+        // slotLabelFormat:{
+        //   hour: 'numeric',
+        //   minute: '2-digit',
+        //   omitZeroMinute: true,
+        //   meridiem: 'short',
+        //   hour12: false //设置时间为24小时
+        // },
+        // 设置事件的时间为24小时制
+        eventTimeFormat: { // like '14:30'
+          hour: '2-digit',
+          minute: '2-digit',
+          meridiem: false,
+          hour12: false //设置时间为24小时
+        },
         /***************************
         *     用户可调整的属性
         *  与调整日历格式相关功能有关
@@ -110,6 +125,7 @@ export default {
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
         slotLaneContent: this.handleLaneContent,
+        
       },
       // 存储选择的时间
       selectTime: [],
@@ -139,45 +155,7 @@ export default {
         this.$emit('getTimeUnit',this.selectTime);
       }else if(this.pages === 'select' || this.pages === 'update'){
         // 如果是填写事件页面
-        // 先判断当前时间是 inviteeSelect 或者 hostSelect
-        
-        /* if(clickInfo.event.groupId === 'hostSelect'){
-          clickInfo.event.remove();
-          clickInfo.view.calendar.addEvent({
-            id: clickInfo.event.id,
-            start: clickInfo.event.start,
-            groupId: 'inviteeSelect',
-            backgroundColor: '#003399',
-            borderColor: '#003399',
-          }),
-          // 更新父组件中的时间块
-          this.$emit('getTimeUnit',this.selectTime);
-        }else if(clickInfo.event.groupId === 'inviteeSelect'){
-          clickInfo.event.remove();
-          clickInfo.view.calendar.addEvent({
-            id: clickInfo.event.id,
-            start: clickInfo.event.start,
-            groupId: 'hostSelect',
-            backgroundColor: '#3788d8',
-            borderColor: '#3788d8',
-          })
-          // 更新父组件中的时间块
-          this.$emit('getTimeUnit',this.selectTime);
-        }else{
-          clickInfo.event.remove();
-          clickInfo.view.calendar.addEvent({
-            id: clickInfo.event.id,
-            start: clickInfo.event.start,
-            groupId: 'inviteeSelect',
-            backgroundColor: '#003399',
-            borderColor: '#003399',
-            //title: '1'
-          })
-          // 更新父组件中的时间块
-          this.$emit('getTimeUnit',this.selectTime); 
-        }*/
           this.$emit('getTimeUnitId', clickInfo.event.id);
-
       }else if(this.pages === 'result' ){
         // 若是结果页面，返回点击时间的id，根据id查找数据，渲染
         this.$emit('getTimeUnitId', clickInfo.event.id);
@@ -250,5 +228,12 @@ export default {
 }
 .fc-day-disabled {
   background-color: rgba(100,100,100,0.3)!important;
+}
+.fc-event-main{
+    text-align: center;
+    font-size: 13px;
+}
+.fc-col-header-cell {
+  font-size: 20px;
 }
 </style>

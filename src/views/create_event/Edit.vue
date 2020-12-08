@@ -10,7 +10,7 @@
           </div>
           <div class="tips-box">
               <el-alert
-                title="您在日历上选择的时间为事件的开始时间点"
+                title="您在日历上选择的时间为活动的开始时间"
                 :closable="false"
                 type="info"
                 show-icon>
@@ -68,7 +68,7 @@
                             </el-select>
                           </el-form-item>
                           <el-form-item class="change-btn">
-                            <el-button type="primary" @click="changeCalendarFormat">更改</el-button>
+                            <el-button type="primary" @click="changeCalendarFormat">更新日历</el-button>
                           </el-form-item>
                       </el-form>
                     </el-collapse-item>
@@ -76,10 +76,10 @@
               </div>
               <div class="event-form-wrapper">
                   <div class="event-form-title">
-                      <span>创建事件</span>
+                      <span>发起活动</span>
                   </div>
                   <el-form :model="eventForm" :rules="rules" ref="eventForm" label-width="100px" class="event-form">
-                      <el-form-item label="事件名称：" prop="name" class="name-box">
+                      <el-form-item label="活动名称：" prop="name" class="name-box">
                         <el-input v-model="eventForm.name"></el-input>
                       </el-form-item>
                       <el-form-item label="持续时间：" prop="duration" class="duration-box">
@@ -96,7 +96,7 @@
                         <el-input type="textarea" v-model="eventForm.desc" :rows="7"></el-input>
                       </el-form-item>
                       <el-form-item class="submit-btn">
-                        <el-button type="primary" @click="onSubmit('eventForm')">更新事件</el-button>
+                        <el-button type="primary" @click="onSubmit('eventForm')">更新</el-button>
                       </el-form-item>
                   </el-form>
               </div>
@@ -283,26 +283,51 @@ export default {
         },
         // 动态调整日历的格式
         changeCalendarFormat() {
-            // 更改日历的格式，清空选中的时间块
-            this.datasToCalendar.calendarFunction.events.splice(0,this.datasToCalendar.calendarFunction.events.length);
-            // 更新日历数据
-            let formatapi = this.datasToCalendar.calendarFormat;
-            formatapi.slotDuration = this.calendarForm.slotDuration
-            formatapi.defaultTimedEventDuration = this.calendarForm.slotDuration
-            formatapi.slotMinTime = this.calendarForm.slotMinTime
-            formatapi.slotMaxTime = addDuration(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration)
-            formatapi.businessHours.startTime = this.calendarForm.businessHours.startTime
-            formatapi.businessHours.endTime = addDuration(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
-            formatapi.hiddenDays = []
-            this.calendarForm.hiddenDays.forEach(element => {
-                formatapi.hiddenDays.push(Number(element));
-            })
-            formatapi.validRange.start = dateToString(this.calendarForm.validRange.start);
-            let end = new Date();
-            let calendarFormEnd = stringToDate(this.calendarForm.validRange.end);
-            let add = calendarFormEnd.getTime() + 86400000;
-            end.setTime(add);
-            formatapi.validRange.end = dateToString(end);
+            this.$confirm('此操作将清空所选时间, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                // 更改日历的格式，清空选中的时间块
+                this.datasToCalendar.calendarFunction.events.splice(0,this.datasToCalendar.calendarFunction.events.length);
+                
+                // 更新日历数据
+                let formatapi = this.datasToCalendar.calendarFormat;
+                formatapi.slotDuration = this.calendarForm.slotDuration
+                formatapi.defaultTimedEventDuration = this.calendarForm.slotDuration
+                formatapi.slotMinTime = this.calendarForm.slotMinTime
+                formatapi.slotMaxTime = addDuration(this.calendarForm.slotMaxTime,this.calendarForm.slotDuration)
+                formatapi.businessHours.startTime = this.calendarForm.businessHours.startTime
+                formatapi.businessHours.endTime = addDuration(this.calendarForm.businessHours.endTime,this.calendarForm.slotDuration)
+                formatapi.hiddenDays = [];
+                this.calendarForm.hiddenDays.forEach(element => {
+                    formatapi.hiddenDays.push(Number(element));
+                })
+                formatapi.validRange.start = dateToString(this.calendarForm.validRange.start);
+                let end = new Date();
+                let calendarFormEnd = stringToDate(this.calendarForm.validRange.end);
+                let add = calendarFormEnd.getTime() + 86400000;
+                end.setTime(add);
+                formatapi.validRange.end = dateToString(end);
+            }).catch(() => {
+                let formatapi = this.datasToCalendar.calendarFormat;
+                this.calendarForm.slotDuration = formatapi.slotDuration;
+                this.calendarForm.slotDuration = formatapi.defaultTimedEventDuration;
+                this.calendarForm.slotMinTime = formatapi.slotMinTime;
+                this.calendarForm.slotMaxTime = subDuration(formatapi.slotMaxTime,this.calendarForm.slotDuration)
+                this.calendarForm.businessHours.startTime = formatapi.businessHours.startTime;
+                this.calendarForm.businessHours.endTime = subDuration(formatapi.businessHours.endTime,this.calendarForm.slotDuration)
+                this.calendarForm.hiddenDays = [];
+                formatapi.hiddenDays.forEach(element => {
+                    this.calendarForm.hiddenDays.push(String(element));
+                });
+                this.calendarForm.validRange.start = formatapi.validRange.start;
+                let end = new Date();
+                let calendarFormEnd = stringToDate(formatapi.validRange.end);
+                let sub = calendarFormEnd.getTime() - 86400000;
+                end.setTime(sub);
+                this.calendarForm.validRange.end = dateToString(end);
+            });
         },
         // 重新编辑并提交事件
         onSubmit(eventForm){
@@ -409,12 +434,14 @@ export default {
     background-color: #E8F8FF;
     font-size: 30px;
     font-weight: bold;
-    margin: 0 60px;
+    padding: 0 60px;
     color: black;
+    border-bottom: 1px solid rgb(177, 177, 177);
 }
 
 .calendar-form-wrapper >>> .el-collapse-item__content {
     background-color: #E8F8FF;
+    border-bottom: 1px solid rgb(177, 177, 177);
 }
 
 .calendar-form {

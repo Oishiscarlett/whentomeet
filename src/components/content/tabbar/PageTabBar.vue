@@ -29,7 +29,7 @@ export default {
   #web-name{
     line-height: 70px;
     text-align: center;
-    width: 600px;
+    padding-right: 50px;
     font-size: 30px;
     font-weight: bold;
   }
@@ -40,6 +40,7 @@ export default {
 
   .item-wrapper {
     width: 450px;
+    padding-left: 50px;
     align-items: center;
     margin-left: 300px;
     color: #409EFF;

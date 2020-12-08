@@ -25,7 +25,7 @@ export default {
   #web-name{
     line-height: 70px;
     text-align: center;
-    width: 700px;
+    padding-right: 50px;
     font-size: 30px;
     font-weight: bold;
   }
@@ -37,6 +37,7 @@ export default {
 
   .item-wrapper {
     width: 200px;
+    padding-left: 50px;
     align-items: center;
     margin-left: 400px;
     color: #409EFF;
