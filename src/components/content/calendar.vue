@@ -233,4 +233,7 @@ export default {
     text-align: center;
     font-size: 13px;
 }
+.fc-col-header-cell {
+  font-size: 20px;
+}
 </style>
