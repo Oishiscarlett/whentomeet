@@ -441,7 +441,7 @@ export default {
                   message: '删除成功!'
               });
                 //this.$router.push({ name: 'result', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode }})
-                location. reload();
+                location.reload();
               }
             }).catch(error => {
                 console.log(error);
@@ -817,13 +817,6 @@ export default {
   position: relative;
   margin: 0 auto;
 }
-
-/* .fc-event-main :hover{
-  border: 2px solid #333333;
-} */
-/* .fc-timegrid-event-harness >>> a :active{
-  border-color: #333333;
-} */
 
 .title{
   position: absolute;
