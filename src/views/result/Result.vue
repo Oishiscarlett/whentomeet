@@ -11,6 +11,10 @@
         <div class="eventInfo">
             <p><span>{{ eventInfo }}</span></p>
         </div>
+
+        <div class="eventDuration">
+            <p><span>持续时间：{{ eventDuration }}</span></p>
+        </div>
      </div>
 
      <!-- 左侧栏 -->
@@ -31,6 +35,7 @@
               title="选定回应者的留言"
               :visible.sync="drawer"
               :direction="direction"
+              :append-to-body="true"
               >
               <el-scrollbar style="height: 100%">
                 <div class="commentList">
@@ -45,9 +50,7 @@
               </el-scrollbar>
             </el-drawer>
      </div>
-
-     
-
+       
      <!-- 左下侧栏 -->
      <div class="left_wrapper2">
        
@@ -65,7 +68,7 @@
                </el-checkbox>
                <!-- <i class="icon iconfont iconkejian" @click="drawer = true;openDrawer()"></i> -->
                <!-- <i class="icon iconfont iconbukejian" v-show="bkjIsShow" @click="changeBtn2"></i> -->
-               <span @click="dialogTableVisible3 = true"><i class="icon iconfont iconyoujian" ></i></span>
+               <span @click="dialogTableVisible3 = true;openSendEmail()"><i class="icon iconfont iconyoujian" ></i></span>
                <span @click="deleteResponse()"><i class="icon iconfont iconshanchu"></i></span>
                <div class="line"></div>
                </div>
@@ -74,13 +77,9 @@
                 <div v-for="(item,i) in responseList" @mouseenter="show(i);" @mouseleave="leave()">
                 <el-checkbox
                   class="checkedPeople" 
-                  
-                  
                   :key="i"
-                  :label="item.name"
-                  
-                 
-                 >{{item.name}} 
+                  :label="item.name"               
+                >{{item.name}} 
                  </el-checkbox>
                 </div>
               </el-checkbox-group>
@@ -94,19 +93,24 @@
         <el-dialog title="发送邮件，提醒参与者重新选择" :visible.sync="dialogTableVisible3" :append-to-body="true">
 
           <el-form ref="sendEmailForm"  :model="sendEmailForm">
-            <el-form-item label="邮箱地址（以,隔开）">
-              <el-input v-model="sendEmailForm.email.value" autocomplete="off"></el-input>
+            <el-form-item 
+                          
+                          :rules="[
+                            { required: true,message: '请输入邮箱地址',trigger: 'blur' },
+                            { type: 'email', message: '请输入正确的邮箱地址', trigger:['blur', 'change']}
+                          ]"
+                          v-for="(item,i) in sendEmailForm.email"
+                          :key="item.idCode" 
+                          :label="item.name"
+                          :prop="'email.' + i + '.value'"
+            >
+              <el-input v-model="item.value" autocomplete="off"></el-input>
             </el-form-item>
-            
-           <!--  <el-form-item>
-              <el-button type="primary" class="send" @click="sendrequest('sendEmailForm')" style="font-size:30px;">
-                发送
-              </el-button>
-            </el-form-item> -->
+          
           </el-form>
 
           <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="dialogTableVisible3 = false;sendrequest('sendEmailForm')">发 送</el-button>
+            <el-button type="primary" @click="dialogTableVisible3 = false;sendEmail('sendEmailForm')">发 送</el-button>
             <el-button  @click="dialogTableVisible3 = false">取 消</el-button>
           </span>
         </el-dialog>
@@ -138,6 +142,7 @@
     </div>
     
     <!-- 日历区 -->
+    
     <Calendar class="demo-app"
               @getTimeUnit='getTimeUnit' 
               @getTimeUnitId='getTimeUnitId'
@@ -189,28 +194,6 @@
         
      </div>
 
-     <!-- 下侧留言栏 -->
-     <!-- <div class="bottom_wrapper">
-       <el-card class="box-card_bottom" shadow="hover">
-         <div slot="header" class="clearfix">
-                <span>他们的留言</span>
-         </div>
-
-         <el-scrollbar style="height: 100%">
-           <div class="commentList">
-             <div class="comment" 
-                  v-for="(item,i) in commentList"
-                  :key="i" 
-                  :label="item.name">
-              {{item.name}}：{{ item.comment }}
-
-             </div>
-           </div>
-         </el-scrollbar>
-
-       </el-card>
-     </div> -->
-
    </div>
  </div>
 </template>
@@ -229,6 +212,7 @@ export default {
     return{ 
       eventName: "",
       eventInfo: "",
+      eventDuration: '',
       eventDate: "",
       eventTime: "",
       attend: "",
@@ -250,6 +234,8 @@ export default {
             value: ''
           }],  
       },
+
+      emails: '',//存储填写的邮箱地址，传给后端
 
       drawer: false,
       direction: 'ltr',
@@ -351,6 +337,7 @@ export default {
       /* 将以下两个函数放在mounted()时，全选无法生效 */
      /*  this.allElectionFun();
       this.DefaultFullSelection(); */
+      
     },
     methods: {
       //跳转
@@ -375,8 +362,93 @@ export default {
       },
 
       //发送提醒邮件
-      sendrequest(sendEmailForm){
+      sendEmail(sendEmailForm){
+        /* this.selectedResponse = this.selectionArr[0].idCode;
+          for (let index = 0; index < this.responseList.length; index++) {
+            for (let index2 = 1; index2 < this.selectionArr.length; index2++){
+              if(this.responseList[index].name === this.selectionArr[index2].name){
+                this.selectedResponse += ","+this.selectionArr[index2].idCode;
+              };
+            }
+          }
+        this.$api.event.sendUpdateEmail(this.$route.params.eventCode,this.selectedResponse,
+          {
+            eventCode: this.$route.params.eventCode,
+            idCode: this.selectedResponse,
+            to: this.item,value
 
+          }).then(res => {
+            if(res.data.code === 200){
+              this.$message({
+                  type: 'success',
+                  message: '发送成功!'
+              });
+            }
+          }).catch(error => {
+            console.log
+              this.$message.error('发送失败！');
+        }) */
+        this.$refs[sendEmailForm].validate((valid) => {
+          if (valid) {
+            this.emails = this.sendEmailForm.email[0].value;
+            if(this.sendEmailForm.email.length > 1){
+              for(var i = 1; i<this.sendEmailForm.email.length; i++){
+                this.emails += ","+this.sendEmailForm.email[i].value;
+              }
+            }
+
+            this.selectedResponse = this.selectionArr[0].idCode;
+            for (let index = 0; index < this.responseList.length; index++) {
+              for (let index2 = 1; index2 < this.selectionArr.length; index2++){
+                if(this.responseList[index].name === this.selectionArr[index2].name){
+                  this.selectedResponse += ","+this.selectionArr[index2].idCode;
+                };
+              }
+            }
+
+            /* console.log(this.emails);
+            console.log(this.selectedResponse); */
+            this.$api.event.sendUpdateEmail(this.$route.params.eventCode,this.selectedResponse,
+            {
+              eventCode: this.$route.params.eventCode,
+              idCode: this.selectedResponse,
+              to: this.emails
+
+            }).then(res => {
+              if(res.data.code === 200){
+                this.$message({
+                    type: 'success',
+                    message: '发送成功!'
+                });
+              }
+            }).catch(error => {
+              
+                this.$message.error('发送失败！');
+            })
+
+            //console.log(this.emails);
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+
+      //打开填写邮箱dialog
+      openSendEmail(){
+        
+        this.sendEmailForm.email = [];
+        for(var i = 0; i<this.partners.length; i++){
+          for(var index = 0; index < this.selectionArr.length;index++){
+            if(this.partners[i].name === this.selectionArr[index].name){
+              var Arr = {}
+              Arr.name = this.partners[i].name;
+              Arr.idCode = this.partners[i].idCode;
+              this.sendEmailForm.email.push(Arr);
+              
+            }
+          }
+        }
       },
 
       //打开留言板
@@ -482,12 +554,15 @@ export default {
                 startTime: highlightHours[0],
                 endTime: highlightHours[1], 
               }
-              let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
-              formatapi.hiddenDays = []
-              for(var i = 0; i<hiddenDay.length; i++){
-                if(typeof(hiddenDay[i]) == "number" ){
-                  formatapi.hiddenDays.push(Number(hiddenDay[i]));
-                }
+              if(res.data.data.calendar.hiddenDays){
+                    let hiddenDay = res.data.data.calendar.hiddenDays.split(",")
+                    
+                    formatapi.hiddenDays = []
+                    for(var i = 0; i<hiddenDay.length; i++){
+                        
+                            formatapi.hiddenDays.push(Number(hiddenDay[i]));
+                        
+                    }
               }
               //console.log(formatapi.hiddenDays);
               formatapi.validRange = {
@@ -498,6 +573,7 @@ export default {
               //事件相关渲染
               this.eventName = res.data.data.createInfo.eventName;
               this.eventInfo = res.data.data.createInfo.eventDescription;
+              this.eventDuration = res.data.data.createInfo.eventDuration;
             }
         }).catch(error => {
                 console.log(error);
@@ -848,6 +924,18 @@ export default {
   color: #333333;
 }
 
+.eventDuration {
+  position: absolute;
+  top: 80px;
+  width: 217px;
+  height: 42px;
+  font-family: "Arial Negreta", "Arial Normal", "Arial";
+  font-weight: 600;
+  font-style: normal;
+  font-size: 17px;
+  color: #333333;
+}
+
 .tips{
   position: absolute;
   top: 130px;
@@ -929,6 +1017,7 @@ export default {
     position: fixed;
     top:170px;
     left: 90px;
+    z-index: 2;
 }
 
 .box-card {
@@ -957,6 +1046,7 @@ export default {
     position: fixed;
     top:390px;
     left: 90px;
+    z-index: 2;
 }
 
 .box-card2 {
@@ -1016,6 +1106,7 @@ export default {
     position: fixed;
     top: 220px;
     right: 80px;
+    z-index: 2;
 }
 
 .box-card3 {

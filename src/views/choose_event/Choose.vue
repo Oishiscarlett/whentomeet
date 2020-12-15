@@ -224,7 +224,7 @@ export default {
                             formatapi.hiddenDays.push(Number(hiddenDay[i]));
                         
                     }
-                }
+          }
           //console.log(formatapi.hiddenDays);
           formatapi.validRange = {
             start: res.data.data.calendar.startTime,
