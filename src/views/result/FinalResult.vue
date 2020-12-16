@@ -34,7 +34,7 @@
                         <el-button type="primary">生成结果图片</el-button>
                     </span>
                     <span class="center">
-                        <el-button type="primary">导入日历</el-button>
+                        <el-button type="primary" @click="downloadToCalendar()">导入日历</el-button>
                     </span>
                     <span class="right">
                         <el-button type="primary" @click="renewFinal()">重新选择时间</el-button>
@@ -100,6 +100,21 @@ export default {
             })
     },
     methods:{
+        /* 导入日历 */
+        downloadToCalendar(){
+            this.$api.event.exportToCalendar(this.$route.params.eventCode,{
+                eventCode: this.$route.params.eventCode,
+            }).then(res => {
+              
+              if(code === 200){
+                console.log(res);
+              }
+            }).catch(error => {
+              console.log(error);
+            })
+        },
+
+        /* 重新选择时间 */
         renewFinal(){
             this.$router.push({ name: 'result', params: { eventCode: this.$route.params.eventCode, hostCode: this.$route.params.hostCode}});
         },

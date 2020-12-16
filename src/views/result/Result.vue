@@ -363,31 +363,6 @@ export default {
 
       //发送提醒邮件
       sendEmail(sendEmailForm){
-        /* this.selectedResponse = this.selectionArr[0].idCode;
-          for (let index = 0; index < this.responseList.length; index++) {
-            for (let index2 = 1; index2 < this.selectionArr.length; index2++){
-              if(this.responseList[index].name === this.selectionArr[index2].name){
-                this.selectedResponse += ","+this.selectionArr[index2].idCode;
-              };
-            }
-          }
-        this.$api.event.sendUpdateEmail(this.$route.params.eventCode,this.selectedResponse,
-          {
-            eventCode: this.$route.params.eventCode,
-            idCode: this.selectedResponse,
-            to: this.item,value
-
-          }).then(res => {
-            if(res.data.code === 200){
-              this.$message({
-                  type: 'success',
-                  message: '发送成功!'
-              });
-            }
-          }).catch(error => {
-            console.log
-              this.$message.error('发送失败！');
-        }) */
         this.$refs[sendEmailForm].validate((valid) => {
           if (valid) {
             this.emails = this.sendEmailForm.email[0].value;
@@ -410,11 +385,11 @@ export default {
             console.log(this.selectedResponse); */
             this.$api.event.sendUpdateEmail(this.$route.params.eventCode,this.selectedResponse,
             {
-              eventCode: this.$route.params.eventCode,
-              idCode: this.selectedResponse,
-              to: this.emails
-
+              /* eventCode: this.$route.params.eventCode,
+              idCode: this.selectedResponse, */
+              to: this.emails,
             }).then(res => {
+              
               if(res.data.code === 200){
                 this.$message({
                     type: 'success',
@@ -422,11 +397,12 @@ export default {
                 });
               }
             }).catch(error => {
-              
+              console.log(this.selectedResponse);
+              console.log(this.emails);
+              //console.log(res.data);
                 this.$message.error('发送失败！');
+                console.log(error);
             })
-
-            //console.log(this.emails);
           } else {
             console.log('error submit!!');
             return false;

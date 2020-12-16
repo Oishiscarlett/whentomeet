@@ -5,7 +5,7 @@ import qs from 'qs'; // 引入qs模块，用来序列化post类型的数据，�
 // create an axios instance   创建axios实例
 const instance = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
-  timeout: 5000, // request timeout  设置请求超时时间
+  timeout: 1000*60, // request timeout  设置请求超时时间
   responseType: "json",
   withCredentials: true, // 是否允许带cookie这些
   headers: {
