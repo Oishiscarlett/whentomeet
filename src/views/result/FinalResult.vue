@@ -34,12 +34,27 @@
                         <el-button type="primary">生成结果图片</el-button>
                     </span>
                     <span class="center">
-                        <el-button type="primary" @click="downloadToCalendar()">导入日历</el-button>
+                        <el-button type="primary" @click="down()">导入日历</el-button>
                     </span>
                     <span class="right">
                         <el-button type="primary" @click="renewFinal()">重新选择时间</el-button>
                     </span>
                 </div>
+
+                <!-- <el-dialog
+                    title="将活动信息导入日历"
+                    :visible.sync="dialogVisible"
+                    width="30%"
+                    >
+                    <span style="cursor:pointer" @click="down()">
+                        导入日历
+                    </span>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                    </span>
+                </el-dialog> -->
+
             </div>
         </el-card>
       </div>
@@ -69,7 +84,9 @@ export default {
                 num: '',
                 percentage: '',
                 peopleList: []
-            }
+            },
+            dialogVisible: false,
+            //link: ''
         }
     },
     mounted() {
@@ -102,15 +119,37 @@ export default {
     methods:{
         /* 导入日历 */
         downloadToCalendar(){
+            this.dialogVisible = true;
+            
+        },
+
+        down(){
             this.$api.event.exportToCalendar(this.$route.params.eventCode,{
-                eventCode: this.$route.params.eventCode,
-            }).then(res => {
-              
-              if(code === 200){
-                console.log(res);
-              }
-            }).catch(error => {
-              console.log(error);
+                eventCode:this.$route.params.eventCode
+            })
+            .then(res =>{
+                
+                const content = res.data
+                const blob = new Blob([content],{type: 'text/calendar'})//构造一个blob对象来处理数据
+                const fileName = 'when2meet.ics'
+
+                //对于<a>标签，只有 Firefox 和 Chrome（内核） 支持 download 属性
+                //IE10以上支持blob但是依然不支持download
+                if ('download' in document.createElement('a')) { //支持a标签download的浏览器
+                    const link = document.createElement('a')//创建a标签
+                    link.download = fileName//a标签添加属性
+                    link.style.display = 'none'
+                    link.href = URL.createObjectURL(blob)
+                    document.body.appendChild(link)
+                    link.click()//执行下载
+                    URL.revokeObjectURL(link.href) //释放url
+                    document.body.removeChild(link)//释放标签
+                } else { //其他浏览器
+                    navigator.msSaveBlob(blob, fileName)
+                }
+
+            }).catch((err)=>{
+                console.log(err);
             })
         },
 

@@ -105,7 +105,8 @@ const event = {
     //导入日历
     exportToCalendar(eventCode,params) {
         return axios.get(base.baseUrl + `/${eventCode}/final/export`, null, {
-            params: params
+            params: params,
+            responseType: 'blob'
         });
     }
 }

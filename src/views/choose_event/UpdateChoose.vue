@@ -235,10 +235,10 @@ export default {
           this.eventDuration = res.data.data.createInfo.eventDuration;
 
           //时间块渲染
-          if(res.data.data.colorRange.range_zero){
+          /* if(res.data.data.colorRange.range_zero){
             let rangeZeroStr = res.data.data.colorRange.range_zero.split(",");
             this.addrangeZeroBlock(rangeZeroStr);
-          }
+          } */
           
           if(res.data.data.colorRange.range_one){
             let rangeOneStr = res.data.data.colorRange.range_one.split(",");
@@ -373,7 +373,7 @@ export default {
     },
 
     //colorRange相关
-    addrangeZeroBlock(rangeZeroStr){
+    /* addrangeZeroBlock(rangeZeroStr){
       let eventapi = this.datasToCalendar.calendarFunction;
       //将时间块存入本地color数组
       for (let index = 0; index < rangeZeroStr.length; index++) {
@@ -393,7 +393,7 @@ export default {
               zero.borderColor = '#8ad0ff';
               eventapi.events.push(zero);
       }
-    },
+    }, */
 
     addrangeOneBlock(rangeOneStr){
       let eventapi = this.datasToCalendar.calendarFunction;

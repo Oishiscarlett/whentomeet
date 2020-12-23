@@ -14,7 +14,7 @@ module.exports = {
     port: 8080,
     proxy: {
       '/api': {
-        target: 'http://192.168.1.101:8888/',
+        target: 'http://sherrykeeper.vip:8888/',
         ws: true,  //开启跨域
         changeOrigin: true,
         pathRewrite: {
