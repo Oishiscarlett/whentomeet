@@ -8,7 +8,7 @@
                 <span>您可以点击下列链接修改您的选择</span>
             </p>
             <p class="link">
-                <span @click="link()">http://zk123.top:8888/{{ eventCode }}/update/{{ idCode }}</span>
+                <span @click="link()">http://zk123.top:8888/#/{{ eventCode }}/update/{{ idCode }}</span>
                <!-- <router-link to="{ name: 'update', params: { eventCode: 'ipia2cn',idCode: 'pgadf27a' }}">http://localhost:8080/{{ eventCode }}/update/{{ idCode }}</router-link> -->       
             </p>
             <!-- <p class="p1">

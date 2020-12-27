@@ -98,9 +98,9 @@ export default {
             codeChecked: false,
             eventCode: this.$route.params.eventCode,
             hostCode: this.$route.params.hostCode,
-            shareLink: 'http://zk123.top:8888/choose/' + this.$route.params.eventCode,
-            resultLink: 'http://zk123.top:8888/' + this.$route.params.eventCode + '/result/' + this.$route.params.hostCode,
-            editLink: 'http://zk123.top:8888/' + this.$route.params.eventCode + '/edit/' + this.$route.params.hostCode,
+            shareLink: 'http://zk123.top:8888/#/choose/' + this.$route.params.eventCode,
+            resultLink: 'http://zk123.top:8888/#/' + this.$route.params.eventCode + '/result/' + this.$route.params.hostCode,
+            editLink: 'http://zk123.top:8888/#/' + this.$route.params.eventCode + '/edit/' + this.$route.params.hostCode,
             codePhoneForm: {
                 codePhone: ''
             },

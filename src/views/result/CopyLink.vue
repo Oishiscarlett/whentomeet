@@ -39,7 +39,7 @@ export default {
     },
     data(){
         return{
-          eventChoose: 'http://zk123.top:8888/choose/' + this.$route.params.eventCode,
+          eventChoose: 'http://zk123.top:8888/#/choose/' + this.$route.params.eventCode,
         }
     },
     mounted(){
