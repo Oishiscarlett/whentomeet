@@ -3,7 +3,8 @@
 */
 const base = {
     // 跨域地址
-    baseUrl: "/api"
+    //
+    baseUrl: ""
 }
 
 export default base; 

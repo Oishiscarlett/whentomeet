@@ -5,7 +5,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  publicPath: '/',
+  publicPath: './',
   /* 放置生成的静态文件目录（js css img） */
   assetsDir: "static",
   devServer: {
@@ -14,8 +14,8 @@ module.exports = {
     port: 8080,
     proxy: {
       '/api': {
-        target: 'http://sherrykeeper.vip:8888/',
-        ws: true,  //开启跨域
+        target: 'http://zk123.top:8888/',
+        ws: false,  //开启跨域
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

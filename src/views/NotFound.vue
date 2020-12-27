@@ -3,8 +3,8 @@
       <div class="base">
         <img src="../assets/img/background.png" alt="" class="background">
         <div class="logo_wrapper">
-          <span class="web_name">When2Meet</span>
-          <span class="help">帮助</span>
+          <span class="web_name" @click="itemClick('home')">When2Meet</span>
+          <span class="help" @click="itemClick('faqs')">帮助</span>
           <span class="contact">联系我们</span>
         </div>
 
