@@ -2,10 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const Home = () => import('../views/Home')
-const ResetPswVerify = () => import('../views/reset_psw/PhoneVerify')
-const SetPsw = () => import('../views/reset_psw/SetPsw')
-const SetSuccess = () => import('../views/reset_psw/SetSuccess')
-const Login = () => import('../views/Login')
+
 const Faqs = () => import('../views/Faqs')
 const CreateEvent = () => import('../views/create_event/CreateEvent')
 const ShareLinks = () => import('../views/create_event/ShareLinks')
@@ -21,6 +18,7 @@ const Result = () => import('../views/result/Result')
 const CopyLink = () => import('../views/result/CopyLink')
 const SendRequest = () => import('../views/result/SendRequest')
 
+const About = () => import('../views/About')
 const NotFound = () => import('../views/NotFound')
 
 
@@ -41,26 +39,7 @@ const routes = [
     path: '/home',
     component: Home
   },
-  {
-    path: '/resetpsw',
-    redirect: '/resetpsw/verify',
-  },
-  {
-    path: '/resetpsw/verify',
-    component: ResetPswVerify
-  },
-  {
-    path: '/resetpsw/password',
-    component: SetPsw
-  },
-  {
-    path: '/resetpsw/success',
-    component: SetSuccess
-  },
-  {
-    path: '/login',
-    component: Login
-  },
+  
   {
     path: '/faqs',
     component: Faqs
@@ -119,6 +98,10 @@ const routes = [
     path: '/:eventCode/final',
     name: 'finalresult',
     component: FinalResult
+  },
+  {
+    path: '/about',
+    component: About
   },
 
   //404页面匹配规则，必须放在最后

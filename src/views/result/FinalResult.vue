@@ -30,12 +30,12 @@
                     </div>
                 </div>
                 <div class="result-button">
-                    <span class="left">
+                    <!-- <span class="left">
                         <el-button type="primary">生成结果图片</el-button>
                     </span>
                     <span class="center">
                         <el-button type="primary" @click="down()">导入日历</el-button>
-                    </span>
+                    </span> -->
                     <span class="right">
                         <el-button type="primary" @click="renewFinal()">重新选择时间</el-button>
                     </span>
@@ -118,12 +118,12 @@ export default {
     },
     methods:{
         /* 导入日历 */
-        downloadToCalendar(){
+        /* downloadToCalendar(){
             this.dialogVisible = true;
             
-        },
+        }, */
 
-        down(){
+        /* down(){
             this.$api.event.exportToCalendar(this.$route.params.eventCode,{
                 eventCode:this.$route.params.eventCode
             })
@@ -151,7 +151,7 @@ export default {
             }).catch((err)=>{
                 console.log(err);
             })
-        },
+        }, */
 
         /* 重新选择时间 */
         renewFinal(){

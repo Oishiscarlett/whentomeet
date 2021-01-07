@@ -14,10 +14,10 @@
             <!-- <p class="p1">
                 <span>您可以<span class="login" @click="itemClick('/login')">登录</span>保存您的事件</span>
             </p> -->
-            <p class="p2">
-                <!-- <span>或 -->
+            <!-- <p class="p2">
+                
                     <span class="sendToPhone" type="text" @click="dialogFormVisible = true">发送到手机</span>
-                    以保存您的事件<!-- </span> -->
+                    以保存您的事件
             </p>
 
             <el-dialog title="发送到手机" :visible.sync="dialogFormVisible">
@@ -31,7 +31,7 @@
                     <el-button @click="dialogFormVisible = false">取 消</el-button>
                     <el-button type="primary" @click="dialogFormVisible = false">发送</el-button>
                 </div>
-            </el-dialog>
+            </el-dialog> -->
         </div>
     </div>
 </template>
@@ -43,30 +43,30 @@ export default {
         PageTabBar
     },
     data(){
-        var checkPhoneNumber = (rule, value, callback) => {
+        /* var checkPhoneNumber = (rule, value, callback) => {
             const regPhone = /[0-9]{11}/;
             if (regPhone.test(value)) {
                 //合法
                 return callback();
             }
             callback(new Error("请输入正确的手机号码"));
-        };
+        }; */
         return{
             eventCode: this.$route.params.eventCode,
             idCode: this.$route.params.idCode,
             dialogFormVisible: false,
-            form: {
+            /* form: {
                 phoneNumber: '',
                 type:[],
 
-            },
+            }, */
             formLabelWidth: '140px',
-            rules: {
+            /* rules: {
                 phoneNumber: [
                     { required: true, message: "请输入手机号", trigger: "blur" },
                     { validator: checkPhoneNumber, trigger: "blur" },
                 ],
-            },
+            }, */
         }
 
     },

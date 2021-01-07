@@ -5,7 +5,7 @@
         <div class="logo_wrapper">
           <span class="web_name" @click="itemClick('home')">When2Meet</span>
           <span class="help" @click="itemClick('faqs')">帮助</span>
-          <span class="contact">联系我们</span>
+          <span class="contact" @click="itemClick('about')">联系我们</span>
         </div>
 
         <div class="title animate__animated animate__swing">404</div>

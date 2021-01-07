@@ -5,7 +5,7 @@
       </div>
       <div class="item-wrapper">
         <router-link to="/faqs">帮助</router-link>
-        <router-link to="/team">关于我们</router-link>
+        <router-link to="/about">关于我们</router-link>
       </div>
   </tab-bar>
 </template>
